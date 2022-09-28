@@ -23,6 +23,7 @@ vim.opt.fillchars:append {
 }
 vim.opt_local.scrolloff = 4
 vim.o.wrap = false
+vim.o.cursorline = true
 
 -- show trailing whitespace
 vim.o.list = true
@@ -49,30 +50,126 @@ local function keymap_fun_r(mode, key, cmd) keymap_fun(mode, key, cmd, keymap_op
 local function keymap_fun_ns(mode, key, cmd) keymap_fun(mode, key, cmd, keymap_opt_ns) end
 local function keymap_fun_rs(mode, key, cmd) keymap_fun(mode, key, cmd, keymap_opt_rs) end
 
+-- plugins
+require'paq' {
+  'savq/paq-nvim';
+  'lewis6991/impatient.nvim';
+  'nathom/filetype.nvim';
+  'rebelot/kanagawa.nvim';
+  'kevinhwang91/nvim-hclipboard';
+  'cappyzawa/trim.nvim';
+  'ggandor/leap.nvim';
+  'numtostr/comment.nvim';
+  'matze/vim-move';
+  'kylechui/nvim-surround';
+}
+
+require 'impatient'
+
+local hclipboard = require 'hclipboard'.setup {
+  -- don't copy on (c)hange & (d)elete
+  -- use x for cut (normal mode x does not copy)
+  should_bypass_cb = function(regname, ev)
+    local ret = false
+    if ev.operator == 'c' or ev.operator == 'd' then
+      if ev.regname == '' or ev.regname == regname then
+        ret = true
+      end
+    end
+    return ret
+  end
+}
+hclipboard.start()
+
+require 'trim'.setup {
+  disable = {
+    'markdown',
+  },
+  patterns = {
+    [[%s/\s\+$//e]],
+    [[%s/\($\n\s*\)\+\%$//]],
+    [[%s/\%^\n\+//]],
+  },
+}
+
+require 'Comment'.setup {
+  ignore = '^$', -- ignore whitespace
+}
+local comment_ft = require'Comment.ft'
+comment_ft({ 'nim' }, { '#%s', '#[%s]#' })
+comment_ft({ 'glsl', 'odin', 'v' }, { '//%s', '/*%s*/' })
+
+keymap_rs('n', '<c-_>', 'gcc')
+keymap_rs('i', '<c-_>', '<esc>gccgi')
+keymap_rs('v', '<c-_>', 'gc')
+
+local leap = require 'leap'
+leap.setup {}
+function LeapSearch() leap.leap { target_windows = { vim.fn.win_getid() } } end
+keymap_fun_ns('n', 'm', LeapSearch)
+keymap_fun_ns('v', 'm', LeapSearch)
+keymap_fun_ns('o', 'm', LeapSearch)
+
+require 'nvim-surround'.setup {}
+
+if not vim.g.vscode then
+  -- colorscheme
+  require 'kanagawa'.setup {
+    commentStyle = { italic = false },
+    keywordStyle = { italic = false },
+    statementStyle = { bold = false },
+    variablebuiltinStyle = { italic = false },
+  }
+  vim.o.background = 'dark'
+  vim.cmd 'colorscheme kanagawa'
+  local colors = require 'kanagawa.colors'.setup()
+
+  -- vim-move
+  keymap_ns('n', '<a-down>', '<plug>MoveLineDown')
+  keymap_ns('n', '<a-up>', '<Plug>MoveLineUp')
+  keymap_ns('v', '<a-down>', '<Plug>MoveBlockDown')
+  keymap_ns('v', '<a-up>', '<Plug>MoveBlockUp')
+end
+
+-- cut text
 keymap_ns('v', 'x', 'ygvd')
 keymap_ns('n', '<c-x>', 'yydd')
 
+-- delete word right side of the cursor
+keymap_ns('i', '<c-d>', '<c-o>dw')
+
+if not vim.g.vscode then
+  -- goto previous buffer
+  keymap_ns('n', '<leader>\'', '<c-^>')
+end
+
+-- delete current buffer
+keymap_ns('n', '<leader>d', '<cmd>bd<cr>')
+
+-- highlight current word
+keymap_ns('n', '<leader>a', '*N')
+
 if vim.g.vscode then
-  -- keymap: hover
+  -- lsp hover
   keymap_ns('n', '<c-h>', "<cmd>call VSCodeNotify('editor.action.showHover')<cr>")
 
-  -- keymap: fuzzy file search
+  -- fuzzy file search
   keymap_ns('n', '<space>', "<cmd>call VSCodeNotify('workbench.action.quickOpen')<cr>")
 
-  -- keymap: toggle terminal
+  -- toggle terminal
   keymap_ns('n', '<c-k>', "<cmd>call VSCodeNotify('workbench.action.terminal.toggleTerminal')<cr>")
 
-  -- keymap: delete current buffer
+  -- delete current buffer
   keymap_ns('n', '<leader>d', "<cmd>call VSCodeNotify('workbench.action.closeActiveEditor')<cr>")
 
-  -- keymap: goto previous buffer
-  keymap_ns('n', '<c-b>', "<cmd>call VSCodeNotify('workbench.action.openPreviousRecentlyUsedEditor')<cr>")
+  -- -- goto previous buffer
+  -- keymap_ns('n', '<leader>\'', "<cmd>call VSCodeNotify('workbench.action.openPreviousRecentlyUsedEditor')<cr>")
 
-  -- keymap: cut text
+  -- cut text
   keymap_ns('v', 'x', "ygvd")
   keymap_ns('n', '<c-x>', "<cmd>call VSCodeNotify('editor.action.clipboardCutAction')<cr>")
 
-  -- keymap: easy motion
+  -- easy motion
   keymap_ns('n', 'm', "<cmd>call VSCodeNotify('findThenJump.initiate')<cr>")
 
   -- fold action
@@ -94,12 +191,11 @@ if vim.g.vscode then
 
   keymap_ns('n', '<a-down>', "<cmd>call VSCodeNotify('editor.action.moveLinesDownAction')<cr>")
   keymap_ns('n', '<a-up>', "<cmd>call VSCodeNotify('editor.action.moveLinesUpAction')<cr>")
-  keymap_ns('v', '<a-down>', "<cmd>call VSCodeNotifyVisual('editor.action.moveLinesDownAction', 1)<cr>")
-  keymap_ns('v', '<a-up>', "<cmd>call VSCodeNotifyVisual('editor.action.moveLinesUpAction', 1)<cr>")
 
+  -- move lines
   function MoveVisualSelection(direction)
-    -- vim.pretty_print(vim.fn.line('.'))
-    -- vim.pretty_print(vim.fn.line('v'))
+    -- vim.pretty_print(vim.fn.getpos("'<"))
+    -- vim.pretty_print(vim.fn.getpos("'>"))
 
     local cursorLine = vim.fn.line('v')
     local cursorStartLine = vim.fn.line('.')
@@ -107,18 +203,10 @@ if vim.g.vscode then
     local startLine = cursorLine
     local endLine = cursorStartLine
 
-    if direction == "Up" then
-      if startLine < endLine then
-        local tmp = startLine
-        startLine = endLine
-        endLine = tmp
-      end
-    else -- == "Down"
-      if startLine > endLine then
-        local tmp = startLine
-        startLine = endLine
-        endLine = tmp
-      end
+    if direction == "Up" and startLine < endLine or direction ~= "Up" and startLine > endLine then
+      local tmp = startLine
+      startLine = endLine
+      endLine = tmp
     end
 
     -- move lines
@@ -135,9 +223,6 @@ if vim.g.vscode then
 
         -- select range
         vim.cmd("normal!" .. startLine .. "GV" .. endLine .. "G")
-        -- vim.api.nvim_command(tostring(endLine)) -- move cursor
-        -- vim.api.nvim_feedkeys("V", 'n', false) -- enter visual line mode
-        -- vim.api.nvim_command(tostring(startLine)) -- move cursor
       end
     else -- == "Down"
       if endLine < vim.api.nvim_buf_line_count(0) then
@@ -155,65 +240,4 @@ if vim.g.vscode then
 
   keymap_fun_ns('v', '<a-up>', function() MoveVisualSelection('Up') end)
   keymap_fun_ns('v', '<a-down>', function() MoveVisualSelection('Down') end)
-end
-
--- plugins
-require'paq' {
-  'savq/paq-nvim';
-  'lewis6991/impatient.nvim';
-  'nathom/filetype.nvim';
-  'rebelot/kanagawa.nvim';
-  'kevinhwang91/nvim-hclipboard';
-  'numtostr/comment.nvim';
-  'kylechui/nvim-surround';
-  'matze/vim-move';
-}
-
-require 'impatient'
-
-local hclipboard = require'hclipboard'.setup {
-  -- don't copy on (c)hange & (d)elete
-  -- use x for cut (normal mode x does not copy)
-  should_bypass_cb = function(regname, ev)
-    local ret = false
-    if ev.operator == 'c' or ev.operator == 'd' then
-      if ev.regname == '' or ev.regname == regname then
-        ret = true
-      end
-    end
-    return ret
-  end
-}
-hclipboard.start()
-
-require'Comment'.setup {
-  ignore = '^$', -- ignore whitespace
-}
-local comment_ft = require'Comment.ft'
-comment_ft({ 'nim' }, { '#%s', '#[%s]#' })
-comment_ft({ 'glsl', 'odin', 'v' }, { '//%s', '/*%s*/' })
-
-keymap_rs('n', '<c-_>', 'gcc')
-keymap_rs('i', '<c-_>', '<esc>gccgi')
-keymap_rs('v', '<c-_>', 'gc')
-
-require'nvim-surround'.setup {}
-
-if not vim.g.vscode then
-  -- colorscheme
-  require 'kanagawa'.setup {
-    commentStyle = { italic = false },
-    keywordStyle = { italic = false },
-    statementStyle = { bold = false },
-    variablebuiltinStyle = { italic = false },
-  }
-  vim.o.background = 'dark'
-  vim.cmd 'colorscheme kanagawa'
-  local colors = require 'kanagawa.colors'.setup()
-
-  -- vim-move
-  keymap_ns('n', '<a-down>', '<plug>MoveLineDown')
-  keymap_ns('n', '<a-up>', '<Plug>MoveLineUp')
-  keymap_ns('v', '<a-down>', '<Plug>MoveBlockDown')
-  keymap_ns('v', '<a-up>', '<Plug>MoveBlockUp')
 end
