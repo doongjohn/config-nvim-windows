@@ -6,17 +6,18 @@ return {
     require 'filetype'.setup {
       overrides = {
         extensions = {
-          sh = 'sh',
-          bash = 'bash',
+          make = 'make',
+          asm = 'nasm',
           c = 'c',
-          cc = 'cpp',
           h = 'cpp', -- this is unfortunate
+          cc = 'cpp',
+          hpp = 'cpp',
           nim = 'nim',
           nims = 'nims',
           nimble = 'nimble',
-          make = 'make',
-          hpp = 'cpp',
-          asm = 'nasm',
+          rkt = 'racket',
+          sh = 'sh',
+          bash = 'bash',
           html = 'html',
         },
         literal = {

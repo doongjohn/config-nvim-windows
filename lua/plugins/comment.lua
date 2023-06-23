@@ -1,12 +1,8 @@
+require 'utils'
 return {
   -- comment toggle
   'numtostr/comment.nvim',
   event = 'BufEnter',
-  keys = {
-    { '<c-/>', 'gcc', mode = 'n' },
-    { '<c-/>', '<esc>gccgi', mode = 'i' },
-    { '<c-/>', 'gcgv', mode = 'v' },
-  },
   config = function()
     require 'Comment'.setup {
       ignore = '^$', -- ignore whitespace
@@ -21,5 +17,9 @@ return {
     comment_ft(
       { 'glsl', 'odin', 'v' },
       { '//%s', '/*%s*/' })
+
+    keymap_rs('n', '<c-/>', 'gcc')
+    keymap_rs('i', '<c-/>', '<esc>gccgi')
+    keymap_rs('v', '<c-/>', 'gcgv')
   end
 }

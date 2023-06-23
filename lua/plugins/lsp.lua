@@ -130,5 +130,11 @@ return {
         navic_attach(client, bufnr)
       end,
     }
+
+    lsp.racket_langserver.setup {
+      on_attach = function(client, bufnr)
+        navic_attach(client, bufnr)
+      end,
+    }
   end
 }
