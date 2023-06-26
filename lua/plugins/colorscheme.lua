@@ -21,11 +21,10 @@ return {
       overrides = function(colors)
         local theme = colors.theme
         local palette = colors.palette
-
         return {
           -- popup menu
           Pmenu = { fg = theme.ui.shade0, bg = theme.ui.bg_p1 },
-          PmenuSel = { fg = "NONE", bg = theme.ui.bg_p2 },
+          PmenuSel = { fg = 'NONE', bg = theme.ui.bg_p2 },
           PmenuSbar = { bg = theme.ui.bg_m1 },
           PmenuThumb = { bg = theme.ui.bg_p2 },
           -- telescope
@@ -48,6 +47,7 @@ return {
     -- set colorscheme in lua: https://github.com/neovim/neovim/issues/18201
     vim.o.background = 'dark'
     vim.cmd.colorscheme('kanagawa-wave')
+
     local palette = require 'kanagawa.colors'.setup().palette
 
     -- extra colors

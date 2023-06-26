@@ -46,6 +46,13 @@ return {
         vim.bo.expandtab = false
       end
     })
+    vim.api.nvim_create_autocmd('FileType', {
+      group = 'FtInit',
+      pattern = { 'oil' },
+      callback = function()
+        vim.opt_local.cursorline = true
+      end
+    })
 
     vim.api.nvim_create_autocmd('BufEnter', {
       group = 'FtInit',
@@ -59,6 +66,35 @@ return {
       pattern = { '*.vifm', 'vifmrc' },
       callback = function()
         vim.opt.syntax = 'vim'
+      end
+    })
+
+    -- setup winbar
+    local winbar_filetype_exclude = {
+      'qf',
+      'prompt',
+      'terminal',
+      'lazy',
+      'oil',
+      'neo-tree',
+      'neo-tree-popup',
+      'toggleterm',
+      'fzf',
+      'Telescope',
+      'TelescopePrompt',
+      'TelescopeResults',
+      'Trouble',
+    }
+    vim.api.nvim_create_autocmd('FileType', {
+      group = 'FtInit',
+      pattern = { '*' },
+      callback = function()
+        if not vim.tbl_contains(winbar_filetype_exclude, vim.bo.filetype) then
+          vim.opt_local.winbar =
+            [[%#TabLineSel# %t%{&modified ? " *" : ""} ]] ..
+            [[%#Comment#]]
+            -- [[%#Comment# %{%v:lua.require'nvim-navic'.get_location()%}]]
+        end
       end
     })
   end

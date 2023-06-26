@@ -4,7 +4,7 @@ return {
   dependencies = {
     'nvim-lua/plenary.nvim',
     'muniftanjim/nui.nvim',
-    'kyazdani42/nvim-web-devicons',
+    'nvim-tree/nvim-web-devicons',
   },
   keys = {
     { '<leader>e', '<cmd>Neotree show current<cr>' },
