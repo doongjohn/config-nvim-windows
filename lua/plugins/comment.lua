@@ -12,6 +12,9 @@ return {
       { 'nasm', 'asm' },
       { ';%s', '/*%s*/' })
     comment_ft(
+      { 'racket' },
+      { ';;%s', '#|%s|#' })
+    comment_ft(
       { 'nim' },
       { '#%s', '#[%s]#' })
     comment_ft(
