@@ -15,11 +15,12 @@ return {
       { 'racket' },
       { ';;%s', '#|%s|#' })
     comment_ft(
-      { 'nim' },
+      { 'nim', 'nims' },
       { '#%s', '#[%s]#' })
     comment_ft(
       { 'glsl', 'odin', 'v' },
       { '//%s', '/*%s*/' })
+
 
     keymap_rs('n', '<c-/>', 'gcc')
     keymap_rs('i', '<c-/>', '<esc>gccgi')

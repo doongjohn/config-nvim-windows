@@ -51,8 +51,9 @@ return {
       cmd = {
         'clangd',
         '--background-index',
-        '--clang-tidy',
+        '--completion-style=detailed',
         '--header-insertion=never',
+        '--clang-tidy',
       },
       on_attach = function(client, bufnr)
         navic_attach(client, bufnr)
@@ -126,6 +127,13 @@ return {
     }
 
     lsp.lua_ls.setup {
+      settings = {
+        Lua = {
+          telemetry = {
+            enable = false,
+          },
+        },
+      },
       on_attach = function(client, bufnr)
         navic_attach(client, bufnr)
       end,

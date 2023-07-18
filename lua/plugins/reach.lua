@@ -8,9 +8,7 @@ return {
       end
     }
   },
-  config = function()
-    require 'reach'.setup {
-      notifications = true,
-    }
-  end
+  opts = {
+    notifications = true
+  },
 }

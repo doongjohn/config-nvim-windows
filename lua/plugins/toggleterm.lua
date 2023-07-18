@@ -1,8 +1,10 @@
-require 'utils'
 return {
   -- toggleterm
   'akinsho/toggleterm.nvim',
   cmd = { 'ToggleTerm', 'TermExec' },
+  opts = {
+    shade_terminals = false,
+  },
   init = function()
     local function toggleTerm()
       if vim.api.nvim_win_get_config(0).relative ~= '' then
@@ -14,14 +16,7 @@ return {
       vim.cmd 'ToggleTerm direction=horizontal'
     end
 
-    keymap_s('n', '<c-k>', toggleTerm)
-    keymap_s('t', '<c-k>', toggleTerm)
+    vim.keymap.set('n', '<c-k>', toggleTerm, { noremap = true, silent = true })
+    vim.keymap.set('t', '<c-k>', toggleTerm, { noremap = true, silent = true })
   end,
-  config = function()
-    local toggleterm = require 'toggleterm'
-    toggleterm.setup {
-      shade_terminals = false,
-      shell = 'nu',
-    }
-  end
 }

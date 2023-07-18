@@ -21,25 +21,23 @@ return {
     { 'zN', 'zN:IndentBlanklineRefresh<cr>' },
     { 'zi', 'zi:IndentBlanklineRefresh<cr>' },
   },
-  config = function()
-    require 'indent_blankline'.setup {
-      show_trailing_blankline_indent = false,
-      max_indent_increase = 1,
-      filetype_exclude = {
-        'man',
-        'help',
-        'prompt',
-        'terminal',
-        'lspinfo',
-        'lazy',
-        'oil',
-        'neo-tree',
-        'neo-tree-popup',
-        'toggleterm',
-        'TelescopePrompt',
-        'TelescopeResult',
-        'Trouble',
-      },
-    }
-  end
+  opts = {
+    show_trailing_blankline_indent = false,
+    max_indent_increase = 1,
+    filetype_exclude = {
+      'man',
+      'help',
+      'prompt',
+      'terminal',
+      'lspinfo',
+      'lazy',
+      'oil',
+      'neo-tree',
+      'neo-tree-popup',
+      'toggleterm',
+      'TelescopePrompt',
+      'TelescopeResult',
+      'Trouble',
+    },
+  },
 }
