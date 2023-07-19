@@ -91,6 +91,5 @@ return {
     vim.api.nvim_set_hl(0, '@variable.builtin', { fg = palette.waveRed })
     vim.api.nvim_set_hl(0, '@lsp.type.comment', { link = '@comment' })
     vim.api.nvim_set_hl(0, '@lsp.type.keyword', { link = '@keyword' })
-    vim.api.nvim_set_hl(0, '@lsp.mod.namespace', { link = 'Constant' })
   end
 }
