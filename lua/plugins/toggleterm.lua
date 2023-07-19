@@ -3,6 +3,7 @@ return {
   'akinsho/toggleterm.nvim',
   cmd = { 'ToggleTerm', 'TermExec' },
   opts = {
+    shell = 'nu',
     shade_terminals = false,
   },
   init = function()
