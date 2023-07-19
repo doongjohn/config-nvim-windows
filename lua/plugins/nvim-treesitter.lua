@@ -7,11 +7,19 @@ return {
     require 'nvim-treesitter.configs'.setup {
       sync_install = false,
       ensure_installed = {
-        'c', 'cpp', 'llvm',
-        'rust', 'zig', 'odin',
+        'c', 'cpp',
+        'llvm',
+        'rust',
+        'zig',
+        'odin',
         'go', 'gomod', 'gosum', 'gowork',
-        'c_sharp', 'ocaml',
-        'commonlisp', 'racket',
+        'c_sharp',
+        'ocaml',
+        'commonlisp',
+        'racket',
+        'regex',
+        -- build
+        'make', 'cmake', 'ninja',
         -- shader
         'wgsl', 'glsl', 'hlsl',
         -- web dev
@@ -35,9 +43,6 @@ return {
         'git_rebase',
         'git_config',
         'gitattributes',
-        -- other
-        'make', 'cmake', 'ninja',
-        'regex', 'comment',
       },
       ignore_install = {
         -- 'somelanguage'
