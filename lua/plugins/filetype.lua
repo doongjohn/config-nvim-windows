@@ -15,6 +15,7 @@ return {
           nims = 'nims',
           nimble = 'nimble',
           cr = 'crystal',
+          rkt = 'racket',
           make = 'make',
           hpp = 'cpp',
           asm = 'nasm',
@@ -91,9 +92,7 @@ return {
       callback = function()
         if not vim.tbl_contains(winbar_filetype_exclude, vim.bo.filetype) then
           vim.opt_local.winbar =
-            [[%#TabLineSel# %t%{&modified ? " *" : ""} ]] ..
-            [[%#Comment#]]
-            -- [[%#Comment# %{%v:lua.require'nvim-navic'.get_location()%}]]
+            [[%#TabLineSel# %t%{&modified ? " *" : ""} %#Comment#]]
         end
       end
     })
