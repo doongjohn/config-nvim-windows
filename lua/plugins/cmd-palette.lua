@@ -38,6 +38,10 @@ return {
 
       -- editor
       {
+        label = '[editor] zen mode',
+        cmd = 'ZenMode'
+      },
+      {
         label = '[editor] command history',
         cmd = 'Telescope command_history'
       },
