@@ -118,23 +118,26 @@ return {
       -- cmake
       {
         label = '[cmake] setup',
-        cmd = "<cmd>" ..
-              "terminal cmake-setup && " ..
-              "cmake -S . -B build -G 'Ninja Multi-Config' && " ..
-              "if test ! -e ./compile_commands.json; ln -s ./build/compile_commands.json ./compile_commands.json; end" ..
-              "<cr>i"
+        callback = function()
+          vim.cmd(
+            "terminal cmake-setup && " ..
+            "cmake -S . -B build -G 'Ninja Multi-Config' && " ..
+            "if test ! -e ./compile_commands.json; ln -s ./build/compile_commands.json ./compile_commands.json; end"
+          )
+          vim.cmd('startinsert')
+        end
       },
       {
         label = '[cmake] generate',
-        cmd = "<cmd>!cmake -S . -B build -G 'Ninja Multi-Config'<cr>"
+        cmd = "!cmake -S . -B build -G 'Ninja Multi-Config'"
       },
       {
         label = '[cmake] build debug',
-        cmd = '<cmd>TermExec cmd="cmake --build build -v --config Debug" go_back=0<cr>',
+        cmd = 'TermExec cmd="cmake --build build -v --config Debug" go_back=0',
       },
       {
         label = '[cmake] build release',
-        cmd = '<cmd>TermExec cmd="cmake --build build -v --config Release" go_back=0<cr>',
+        cmd = 'TermExec cmd="cmake --build build -v --config Release" go_back=0',
       },
     }
   end
