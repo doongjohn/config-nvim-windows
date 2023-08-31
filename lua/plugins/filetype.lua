@@ -92,7 +92,8 @@ return {
       callback = function()
         if not vim.tbl_contains(winbar_filetype_exclude, vim.bo.filetype) then
           vim.opt_local.winbar =
-            [[%#TabLineSel# %t%{&modified ? " *" : ""} %#Comment#]]
+            [[%#TabLineSel# %t%{&modified ? " *" : ""} ]] ..
+            [[%#Comment# %{%v:lua.require'nvim-navic'.get_location()%}]]
         end
       end
     })

@@ -4,8 +4,8 @@ return {
   event = { "BufReadPre", "BufNewFile" },
   dependencies = {
     'j-hui/fidget.nvim',
-    -- 'smiteshp/nvim-navic',
-    -- 'smiteshp/nvim-navbuddy',
+    'smiteshp/nvim-navic',
+    'smiteshp/nvim-navbuddy',
     'folke/neodev.nvim',
   },
   init = function()
@@ -32,13 +32,13 @@ return {
     lsp_defaults.capabilities = vim.tbl_deep_extend('force', lsp_defaults.capabilities, capabilities)
 
     -- lsp breadcrumbs
-    -- local navic = require 'nvim-navic'
-    -- local navbuddy = require 'nvim-navbuddy'
+    local navic = require 'nvim-navic'
+    local navbuddy = require 'nvim-navbuddy'
     local navic_attach = function (client, bufnr)
-      -- if client.server_capabilities.documentSymbolProvider then
-      --   navic.attach(client, bufnr)
-      --   navbuddy.attach(client, bufnr)
-      -- end
+      if client.server_capabilities.documentSymbolProvider then
+        navic.attach(client, bufnr)
+        navbuddy.attach(client, bufnr)
+      end
     end
 
     lsp.neocmake.setup {
