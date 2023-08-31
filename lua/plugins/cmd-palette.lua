@@ -76,12 +76,12 @@ return {
         cmd = 'Neogit'
       },
       {
-        label = '[git] diffview current file',
-        cmd = 'DiffviewOpen --selected-file'
+        label = '[git] diffview open',
+        cmd = 'DiffviewOpen'
       },
       {
         label = '[git] diffview file history',
-        cmd = 'DiffviewFileHistory'
+        cmd = 'DiffviewFileHistory %'
       },
 
       -- lsp
