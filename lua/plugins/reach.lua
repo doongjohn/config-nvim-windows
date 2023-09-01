@@ -3,7 +3,7 @@ return {
   'toppair/reach.nvim',
   keys = {
     {
-      '<leader><space>', function()
+      '<leader>]', function()
         require 'reach'.buffers({ show_current = true })
       end
     }
