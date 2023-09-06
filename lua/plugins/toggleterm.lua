@@ -18,6 +18,6 @@ return {
     end
 
     vim.keymap.set('n', '<c-k>', toggleTerm, { noremap = true, silent = true })
-    vim.keymap.set('t', '<c-k>', toggleTerm, { noremap = true, silent = true })
+    vim.keymap.set('t', '<c-k>', function() vim.cmd 'ToggleTermToggleAll' end, { noremap = true, silent = true })
   end,
 }
