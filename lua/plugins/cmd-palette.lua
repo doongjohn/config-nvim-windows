@@ -133,7 +133,7 @@ return {
       },
       {
         label = '[cmake] generate',
-        cmd = "!cmake -S . -B build -G 'Ninja Multi-Config'"
+        cmd = "!cmake -S . -B build -G \"Ninja Multi-Config\""
       },
       {
         label = '[cmake] build debug',
