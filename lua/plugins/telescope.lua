@@ -49,7 +49,8 @@ return {
           '--column',
           '--hidden',
           '--trim',
-          "-g '!build'",
+          '-o',
+          '-g=!build',
         },
         mappings = {
           i = {

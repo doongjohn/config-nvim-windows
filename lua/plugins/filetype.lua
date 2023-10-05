@@ -11,6 +11,7 @@ return {
           c = 'c',
           cc = 'cpp',
           h = 'cpp', -- this is unfortunate
+          d = 'd',
           nim = 'nim',
           nims = 'nims',
           nimble = 'nimble',
@@ -85,6 +86,7 @@ return {
       'TelescopePrompt',
       'TelescopeResults',
       'Trouble',
+      'rgflow',
     }
     vim.api.nvim_create_autocmd('FileType', {
       group = 'FtInit',

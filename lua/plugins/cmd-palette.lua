@@ -73,6 +73,12 @@ return {
           vim.cmd('vimgrep /' .. pattern .. '/ % | copen')
         end
       },
+      {
+        label = '[search] ripgrep',
+        callback = function()
+          require('rgflow').open_blank('')
+        end
+      },
 
       -- git
       {
