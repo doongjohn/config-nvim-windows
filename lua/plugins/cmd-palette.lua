@@ -113,12 +113,14 @@ return {
         cmd = 'Telescope lsp_references'
       },
       {
-        label = '[lsp] workspace symbols',
-        cmd = 'Telescope lsp_workspace_symbols'
-      },
-      {
         label = '[lsp] document symbols',
         cmd = 'Navbuddy'
+      },
+      {
+        label = '[lsp] line diagnostics',
+        callback = function()
+          vim.diagnostic.open_float({ scope = "line" })
+        end
       },
       {
         label = '[lsp] code action',
