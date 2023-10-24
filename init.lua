@@ -12,6 +12,7 @@ vim.o.syntax = 'on'
 vim.o.number = true
 vim.o.signcolumn = 'yes:1'
 vim.o.showmode = false
+vim.o.sidescrolloff = 8
 vim.o.splitright = true
 vim.o.splitbelow = true
 vim.o.laststatus = 3
