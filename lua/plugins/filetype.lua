@@ -35,7 +35,7 @@ return {
 
     vim.api.nvim_create_autocmd('FileType', {
       group = 'FtInit',
-      pattern = { 'gitconfig', 'markdown', 'fish', 'python', 'go', 'zig', 'odin' },
+      pattern = { 'gitconfig', 'markdown', 'fish', 'python', 'cs', 'go', 'zig', 'odin' },
       callback = function()
         vim.bo.tabstop = 4
         vim.bo.shiftwidth = 4
