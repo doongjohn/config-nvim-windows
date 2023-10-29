@@ -31,8 +31,23 @@ return {
       },
     }
 
-    vim.api.nvim_create_augroup('FtInit', {})
+    -- set syntax
+    vim.api.nvim_create_autocmd('BufEnter', {
+      group = 'FtInit',
+      pattern = { '*.nims', '*.nimble' },
+      callback = function()
+        vim.opt.syntax = 'nim'
+      end
+    })
+    vim.api.nvim_create_autocmd('BufEnter', {
+      group = 'FtInit',
+      pattern = { '*.vifm', 'vifmrc' },
+      callback = function()
+        vim.opt.syntax = 'vim'
+      end
+    })
 
+    -- settings per filetype
     vim.api.nvim_create_autocmd('FileType', {
       group = 'FtInit',
       pattern = { 'gitconfig', 'markdown', 'fish', 'python', 'cs', 'go', 'zig', 'odin' },
@@ -53,21 +68,6 @@ return {
       pattern = { 'oil' },
       callback = function()
         vim.opt_local.cursorline = true
-      end
-    })
-
-    vim.api.nvim_create_autocmd('BufEnter', {
-      group = 'FtInit',
-      pattern = { '*.nims', '*.nimble' },
-      callback = function()
-        vim.opt.syntax = 'nim'
-      end
-    })
-    vim.api.nvim_create_autocmd('BufEnter', {
-      group = 'FtInit',
-      pattern = { '*.vifm', 'vifmrc' },
-      callback = function()
-        vim.opt.syntax = 'vim'
       end
     })
 

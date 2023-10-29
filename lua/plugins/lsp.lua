@@ -1,7 +1,7 @@
 return {
   -- lsp
   'neovim/nvim-lspconfig',
-  event = { "BufReadPre", "BufNewFile" },
+  event = { 'BufReadPre', 'BufNewFile' },
   dependencies = {
     'j-hui/fidget.nvim',
     'smiteshp/nvim-navic',

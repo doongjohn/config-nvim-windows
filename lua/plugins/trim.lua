@@ -1,7 +1,7 @@
 return {
   -- trim trailing whitespace
   'cappyzawa/trim.nvim',
-  event = 'BufEnter',
+  event = { 'BufReadPre', 'BufNewFile' },
   opts = {
     ft_blocklist = {
       'markdown',

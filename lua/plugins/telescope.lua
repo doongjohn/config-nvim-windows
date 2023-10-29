@@ -87,6 +87,7 @@ return {
             '-E=libs',
             '-E=out',
             '-E=build',
+            '-E=build_*',
             '-E=target',
             '-E=dist',
             '-E=node_modules',

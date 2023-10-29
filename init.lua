@@ -52,6 +52,9 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+-- augroups
+vim.api.nvim_create_augroup('FtInit', {})
+
 -- plugins
 require 'lazy'.setup({
   import = 'plugins'
@@ -90,6 +93,9 @@ keymap_s('i', '<c-d>', '<c-o>dw')
 -- cut text
 keymap_s('v', 'x', 'ygvd')
 keymap_s('n', '<c-x>', 'yydd')
+-- paste yanked
+keymap_s('n', '<leader>p', '"0p')
+keymap_s('v', '<leader>p', '"0p')
 -- indent using tab
 keymap_s('v', '<tab>', '>gv')
 keymap_s('v', '<s-tab>', '<gv')

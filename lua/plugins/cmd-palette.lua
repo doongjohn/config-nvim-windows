@@ -42,6 +42,10 @@ return {
         cmd = 'ZenMode'
       },
       {
+        label = '[editor] registers',
+        cmd = 'Telescope registers'
+      },
+      {
         label = '[editor] command history',
         cmd = 'Telescope command_history'
       },

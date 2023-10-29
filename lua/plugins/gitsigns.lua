@@ -1,7 +1,7 @@
 return {
   -- git sign
   'lewis6991/gitsigns.nvim',
-  event = 'VeryLazy',
+  event = { 'BufReadPre', 'BufNewFile' },
   cmd = { 'Gitsigns' },
   opts = {
     signs = {
