@@ -40,6 +40,27 @@ return {
           preview_cutoff = 120,
         },
         path_display = { 'truncate' },
+        file_ignore_patterns = {
+          '.objs',
+          '.deps',
+          '.cache',
+          '.git',
+          '.github',
+          'cache',
+          'vendor',
+          'dep',
+          'deps',
+          'lib',
+          'libs',
+          'out',
+          'build',
+          'build_*',
+          'target',
+          'dist',
+          'node_modules',
+          'zig-cache',
+          'zig-out',
+        },
         vimgrep_arguments = {
           'rg',
           '--color=never',
@@ -49,8 +70,6 @@ return {
           '--column',
           '--hidden',
           '--trim',
-          '-o',
-          '-g=!build',
         },
         mappings = {
           i = {
@@ -63,8 +82,6 @@ return {
           find_command = {
             'fd', '-tf', '-u',
             '--strip-cwd-prefix',
-
-            -- exclude files
             '-E=*.a',
             '-E=*.o',
             '-E=*.so',
@@ -72,27 +89,6 @@ return {
             '-E=*.lib',
             '-E=*.dll',
             '-E=*.exe',
-
-            -- exclude folders
-            '-E=.objs',
-            '-E=.deps',
-            '-E=.cache',
-            '-E=.git',
-            '-E=.github',
-            '-E=cache',
-            '-E=vendor',
-            '-E=dep',
-            '-E=deps',
-            '-E=lib',
-            '-E=libs',
-            '-E=out',
-            '-E=build',
-            '-E=build_*',
-            '-E=target',
-            '-E=dist',
-            '-E=node_modules',
-            '-E=zig-cache',
-            '-E=zig-out',
           },
           hidden = true
         }
