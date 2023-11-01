@@ -1,5 +1,4 @@
--- disable default filetype script
-vim.g.did_load_filetypes = 1
+require 'utils'
 
 vim.o.clipboard = 'unnamed'
 
@@ -38,7 +37,72 @@ vim.o.tabstop = 2
 vim.o.shiftwidth = 2
 vim.o.expandtab = true
 
--- bootstrap lazy.nvim
+-- filetypes
+vim.filetype.add {
+  extension = {
+    make = 'make',
+    asm = 'nasm',
+    h = 'cpp', -- this is unfortunate
+    hpp = 'cpp',
+    d = 'd',
+    nim = 'nim',
+    nims = 'nims',
+    nimble = 'nimble',
+    asd = 'lisp',
+    rkt = 'racket',
+    cr = 'crystal',
+  },
+  filename = {
+    ['go.mod'] = 'gomod',
+    ['go.sum'] = 'gosum',
+  },
+}
+
+-- augroups
+vim.api.nvim_create_augroup('doongjohn:BufEnter', {})
+vim.api.nvim_create_augroup('doongjohn:FileType', {})
+
+-- set syntax
+vim.api.nvim_create_autocmd('BufEnter', {
+  group = 'doongjohn:BufEnter',
+  pattern = { '*.nims', '*.nimble' },
+  callback = function()
+    vim.opt.syntax = 'nim'
+  end
+})
+vim.api.nvim_create_autocmd('BufEnter', {
+  group = 'doongjohn:BufEnter',
+  pattern = { '*.vifm', 'vifmrc' },
+  callback = function()
+    vim.opt.syntax = 'vim'
+  end
+})
+
+-- settings per filetype
+vim.api.nvim_create_autocmd('FileType', {
+  group = 'doongjohn:FileType',
+  pattern = { 'gitconfig', 'markdown', 'fish', 'python', 'cs', 'go', 'zig', 'odin' },
+  callback = function()
+    vim.bo.tabstop = 4
+    vim.bo.shiftwidth = 4
+  end
+})
+vim.api.nvim_create_autocmd('FileType', {
+  group = 'doongjohn:FileType',
+  pattern = { 'gitconfig', 'make', 'odin' },
+  callback = function()
+    vim.bo.expandtab = false
+  end
+})
+vim.api.nvim_create_autocmd('FileType', {
+  group = 'doongjohn:FileType',
+  pattern = { 'oil' },
+  callback = function()
+    vim.opt_local.cursorline = true
+  end
+})
+
+-- plugins
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
@@ -51,11 +115,6 @@ if not vim.loop.fs_stat(lazypath) then
   })
 end
 vim.opt.rtp:prepend(lazypath)
-
--- augroups
-vim.api.nvim_create_augroup('FtInit', {})
-
--- plugins
 require 'lazy'.setup({
   import = 'plugins'
 }, {
@@ -79,7 +138,35 @@ require 'lazy'.setup({
   },
 })
 
-require 'utils'
+-- setup winbar
+local winbar_filetype_exclude = {
+  'qf',
+  'prompt',
+  'terminal',
+  'lazy',
+  'oil',
+  'neo-tree',
+  'neo-tree-popup',
+  'toggleterm',
+  'fzf',
+  'Telescope',
+  'TelescopePrompt',
+  'TelescopeResults',
+  'Trouble',
+  'rgflow',
+}
+vim.api.nvim_create_autocmd('FileType', {
+  group = 'doongjohn:FileType',
+  pattern = { '*' },
+  callback = function()
+    if not vim.tbl_contains(winbar_filetype_exclude, vim.bo.filetype) then
+      vim.opt_local.winbar =
+        [[%#TabLineSel# %t%{&modified ? " *" : ""} ]] ..
+        [[%#Comment# %{%v:lua.require'nvim-navic'.get_location()%}]]
+    end
+  end
+})
+
 
 -- esc
 keymap('v', '<c-l>', '<esc>')
