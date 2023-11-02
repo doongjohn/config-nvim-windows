@@ -177,8 +177,6 @@ keymap_s('n', '<leader>\'', '<c-^>')
 keymap_s('n', '<leader>a', '*N')
 -- delete word right side of the cursor
 keymap_s('i', '<c-d>', '<c-o>dw')
--- cut text
-keymap_s('n', '<c-x>', 'yydd')
 -- paste yanked
 keymap_s('n', '<leader>p', '"0p')
 keymap_s('v', '<leader>p', '"0p')
