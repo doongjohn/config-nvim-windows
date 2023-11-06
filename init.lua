@@ -183,10 +183,11 @@ vim.api.nvim_create_autocmd('FileType', {
       vim.opt_local.winbar =
         [[%#TabLineSel# %t%{&modified ? " *" : ""} ]] ..
         [[%#Comment# %{%v:lua.require'nvim-navic'.get_location()%}]]
+    else
+      vim.opt_local.winbar = ''
     end
   end
 })
-
 
 -- esc
 keymap('v', '<c-l>', '<esc>')
