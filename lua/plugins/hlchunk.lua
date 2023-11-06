@@ -1,20 +1,29 @@
 return {
   'shellRaining/hlchunk.nvim',
   event = { 'UIEnter' },
-  opts = {
-    indent = {
-      style = {
-        '#3b3b4d',
+  config = function()
+    local excludes = require 'hlchunk.utils.filetype'.exclude_filetypes
+    excludes.oil_preview = true
+
+    local opts = {
+      chunk = {
+        enable = false,
+        exclude_filetypes = excludes
       },
-    },
-    line_num = {
-      enable = false,
-    },
-    chunk = {
-      enable = false,
-    },
-    blank = {
-      enable = false,
-    },
-  },
+      indent = {
+        style = {
+          '#3b3b4d',
+        },
+      },
+      line_num = {
+        enable = false,
+      },
+      blank = {
+        enable = false,
+      },
+    }
+
+    ---@diagnostic disable-next-line: missing-fields
+    require 'hlchunk'.setup(opts)
+  end
 }

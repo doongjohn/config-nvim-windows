@@ -145,6 +145,7 @@ local winbar_filetype_exclude = {
   'terminal',
   'lazy',
   'oil',
+  'oil_preview',
   'neo-tree',
   'neo-tree-popup',
   'toggleterm',
