@@ -46,7 +46,6 @@ return {
           '%.cache',
           '%.git',
           '%.github',
-          'cache',
           'vendor',
           'dep',
           'deps',
