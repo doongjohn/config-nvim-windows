@@ -156,10 +156,29 @@ local winbar_filetype_exclude = {
   'Trouble',
   'rgflow',
 }
+vim.api.nvim_create_autocmd('BufEnter', {
+  group = 'doongjohn:BufEnter',
+  pattern = { '*' },
+  callback = function()
+    if vim.api.nvim_win_get_config(0).relative ~= '' then
+      return
+    end
+    if vim.api.nvim_buf_get_name(0):len() == 0 then
+      vim.opt_local.winbar =
+        [[%#TabLineSel# [No Name]%{&modified ? " *" : ""} %#Comment#]]
+    end
+  end
+})
 vim.api.nvim_create_autocmd('FileType', {
   group = 'doongjohn:FileType',
   pattern = { '*' },
   callback = function()
+    if vim.startswith(vim.api.nvim_buf_get_name(0), 'oil') then
+      vim.opt_local.winbar =
+        [[%#TabLineSel# oil%{&modified ? " *" : ""} ]] ..
+        [[%#Comment# %{%luaeval("vim.api.nvim_buf_get_name(0):sub(7,-1)")%}]]
+      return
+    end
     if not vim.tbl_contains(winbar_filetype_exclude, vim.bo.filetype) then
       vim.opt_local.winbar =
         [[%#TabLineSel# %t%{&modified ? " *" : ""} ]] ..
