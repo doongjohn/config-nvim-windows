@@ -24,6 +24,7 @@ return {
     vim.fn.sign_define('DiagnosticSignHint', { text = '', texthl = 'DiagnosticSignHint', linehl = '', numhl = 'DiagnosticHint' })
   end,
   config = function()
+    -- nvim lua config support
     require 'neodev'.setup {}
 
     local lsp = require 'lspconfig'
@@ -31,15 +32,27 @@ return {
     local capabilities = require 'cmp_nvim_lsp'.default_capabilities()
     lsp_defaults.capabilities = vim.tbl_deep_extend('force', lsp_defaults.capabilities, capabilities)
 
+    local lsp_notify_loaded = false
+
+    vim.api.nvim_create_autocmd('LspAttach', {
+      group = vim.api.nvim_create_augroup('UserLspConfig', {}),
+      callback = function(ev)
+        print('LspAttach')
+
+        -- lsp progress
+        if not lsp_notify_loaded then
+          require 'lsp-notify'.setup {
+            notify = require 'notify'
+          }
+          lsp_notify_loaded = true
+        end
+      end,
+    })
+
     local navic = require 'nvim-navic'
     local navbuddy = require 'nvim-navbuddy'
 
     local on_attach = function (client, bufnr)
-      -- lsp progress
-      require 'lsp-notify'.setup {
-        notify = require 'notify'
-      }
-
       -- lsp breadcrumbs
       if client.server_capabilities.documentSymbolProvider then
         navic.attach(client, bufnr)
