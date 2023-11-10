@@ -144,6 +144,7 @@ local winbar_filetype_exclude = {
   'prompt',
   'terminal',
   'lazy',
+  'notify',
   'oil',
   'oil_preview',
   'neo-tree',
