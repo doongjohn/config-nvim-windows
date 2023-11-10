@@ -31,10 +31,16 @@ return {
     local capabilities = require 'cmp_nvim_lsp'.default_capabilities()
     lsp_defaults.capabilities = vim.tbl_deep_extend('force', lsp_defaults.capabilities, capabilities)
 
-    -- lsp breadcrumbs
     local navic = require 'nvim-navic'
     local navbuddy = require 'nvim-navbuddy'
-    local navic_attach = function (client, bufnr)
+
+    local on_attach = function (client, bufnr)
+      -- lsp progress
+      require 'lsp-notify'.setup {
+        notify = require 'notify'
+      }
+
+      -- lsp breadcrumbs
       if client.server_capabilities.documentSymbolProvider then
         navic.attach(client, bufnr)
         navbuddy.attach(client, bufnr)
@@ -42,9 +48,7 @@ return {
     end
 
     lsp.neocmake.setup {
-      on_attach = function(client, bufnr)
-        navic_attach(client, bufnr)
-      end,
+      on_attach = on_attach,
     }
 
     lsp.clangd.setup {
@@ -54,21 +58,17 @@ return {
         '--header-insertion=never',
         '--clang-tidy',
       },
-      on_attach = function(client, bufnr)
-        navic_attach(client, bufnr)
-      end,
+      on_attach = on_attach,
     }
 
     lsp.rust_analyzer.setup {
-      on_attach = function(client, bufnr)
-        navic_attach(client, bufnr)
-      end,
+      on_attach = on_attach,
     }
 
     lsp.gopls.setup {
       cmd = { 'gopls', 'serve' },
       on_attach = function (client, bufnr)
-        navic_attach(client, bufnr)
+        on_attach(client, bufnr)
 
         -- Generate a synthetic semanticTokensProvider (https://github.com/golang/go/issues/54531).
         if client.name == 'gopls' and not client.server_capabilities.semanticTokensProvider then
@@ -95,28 +95,20 @@ return {
     }
 
     lsp.emmet_ls.setup {
-      on_attach = function(client, bufnr)
-        navic_attach(client, bufnr)
-      end,
+      on_attach = on_attach,
     }
 
     lsp.cssls.setup {
-      on_attach = function(client, bufnr)
-        navic_attach(client, bufnr)
-      end,
+      on_attach = on_attach,
     }
 
     lsp.tsserver.setup {
-      on_attach = function(client, bufnr)
-        navic_attach(client, bufnr)
-      end,
+      on_attach = on_attach,
       single_file_support = true,
     }
 
     lsp.astro.setup {
-      on_attach = function(client, bufnr)
-        navic_attach(client, bufnr)
-      end,
+      on_attach = on_attach,
       init_options = {
         typescript = {
           -- -- fd -H tsserver
@@ -133,15 +125,11 @@ return {
           },
         },
       },
-      on_attach = function(client, bufnr)
-        navic_attach(client, bufnr)
-      end,
+      on_attach = on_attach,
     }
 
     lsp.racket_langserver.setup {
-      on_attach = function(client, bufnr)
-        navic_attach(client, bufnr)
-      end,
+      on_attach = on_attach,
     }
   end
 }
