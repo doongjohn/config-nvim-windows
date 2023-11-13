@@ -37,8 +37,6 @@ return {
     vim.api.nvim_create_autocmd('LspAttach', {
       group = vim.api.nvim_create_augroup('UserLspConfig', {}),
       callback = function(ev)
-        print('LspAttach')
-
         -- lsp progress
         if not lsp_notify_loaded then
           require 'lsp-notify'.setup {
