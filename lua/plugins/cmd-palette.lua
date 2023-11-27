@@ -28,12 +28,12 @@ return {
         cmd = 'cd ~/AppData/Local/nvim/'
       },
       {
-        label = '[file] switch cpp ↔ header',
-        cmd = 'SwitchSourceAndHeader'
+        label = '[file] switch source ↔ header',
+        cmd = 'ClangdSwitchSourceHeader'
       },
       {
-        label = '[file] switch cpp ↔ header (v-split)',
-        cmd = 'vs | SwitchSourceAndHeader'
+        label = '[file] switch source ↔ header (v-split)',
+        cmd = 'vs | ClangdSwitchSourceHeader'
       },
 
       -- editor
@@ -121,7 +121,7 @@ return {
       {
         label = '[lsp] inlay hint toggle',
         callback = function()
-          vim.lsp.inlay_hint(0, nil)
+          vim.lsp.inlay_hint.enable(0, not vim.lsp.inlay_hint.get({ bufnr = 0 })[1])
         end
       },
       {
