@@ -149,8 +149,7 @@ return {
         callback = function()
           vim.cmd(
             "terminal cmake-setup && " ..
-            "cmake -S . -B build -G 'Ninja Multi-Config' && " ..
-            "if test ! -e ./compile_commands.json; ln -s ./build/compile_commands.json ./compile_commands.json; end"
+            "cmake -S . -B build -G \"Ninja Multi-Config\""
           )
           vim.cmd('startinsert')
         end

@@ -215,10 +215,10 @@ keymap_s('v', '<a-k>', ":move '<-2<cr>gv-gv")
 keymap_s('v', '<a-down>', ":move '>+1<cr>gv-gv")
 keymap_s('v', '<a-up>', ":move '<-2<cr>gv-gv")
 -- lsp functions
-keymap_s('n', '<c-h>', '<cmd>lua vim.lsp.buf.hover()<cr>')
-keymap_s('i', '<c-h>', '<cmd>lua vim.lsp.buf.hover()<cr>')
-keymap_s('n', '<f2>', '<cmd>lua vim.lsp.buf.rename()<cr>')
-keymap_s('n', '<f12>', '<cmd>lua vim.lsp.buf.definition()<cr>')
+keymap_s('n', '<c-h>', vim.lsp.buf.hover)
+keymap_s('i', '<c-h>', vim.lsp.buf.hover)
+keymap_s('n', '<f2>', vim.lsp.buf.rename)
+keymap_s('n', '<f12>', vim.lsp.buf.definition)
 
 -- multi-line normal command
 keymap_s('v', '<leader>z', function()

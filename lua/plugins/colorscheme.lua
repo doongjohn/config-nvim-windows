@@ -92,6 +92,5 @@ return {
     -- semantic highlighting: https://gist.github.com/swarn/fb37d9eefe1bc616c2a7e476c0bc0316
     vim.api.nvim_set_hl(0, '@lsp.type.comment', { link = '@comment' })
     vim.api.nvim_set_hl(0, '@lsp.type.keyword', { link = '@keyword' })
-
   end
 }

@@ -4,6 +4,7 @@ return {
   'numtostr/comment.nvim',
   event = 'BufEnter',
   config = function()
+    ---@diagnostic disable-next-line: missing-fields
     require 'Comment'.setup {
       ignore = '^$', -- ignore whitespace
     }
@@ -20,7 +21,6 @@ return {
     comment_ft(
       { 'glsl', 'odin', 'v' },
       { '//%s', '/*%s*/' })
-
 
     keymap_rs('n', '<c-/>', 'gcc')
     keymap_rs('i', '<c-/>', '<esc>gccgi')
