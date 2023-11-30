@@ -24,7 +24,7 @@ return {
       Object = ' ',
       Enum = " ",
       EnumMember = " ",
-      Struct = " ",
+      Struct = "󰠲 ",
       Class = "󰠱 ",
       Interface = " ",
       Field = " ",
