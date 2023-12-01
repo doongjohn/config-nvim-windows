@@ -77,22 +77,16 @@ return {
       -- search
       {
         label = '[search] all files',
-        callback = function()
-          local pattern = vim.fn.input('pattern: ')
-          vim.cmd('vimgrep /' .. pattern .. '/ ./** | copen')
-        end
+        callback = require 'spectre'.open
       },
       {
         label = '[search] current file',
-        callback = function()
-          local pattern = vim.fn.input('pattern: ')
-          vim.cmd('vimgrep /' .. pattern .. '/ % | copen')
-        end
+        callback = require 'spectre'.open_file_search
       },
       {
         label = '[search] ripgrep',
         callback = function()
-          require('rgflow').open_blank('')
+          require 'rgflow'.open_blank('')
         end
       },
 
