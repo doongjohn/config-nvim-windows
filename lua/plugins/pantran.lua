@@ -6,6 +6,6 @@ return {
     { '<leader>r', 'y<cmd>Pantran source=auto target=ko<cr>p', mode = 'v' },
   },
   opts = {
-    default_engine = "google",
+    default_engine = 'google',
   },
 }

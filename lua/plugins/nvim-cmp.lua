@@ -1,3 +1,4 @@
+---@diagnostic disable: missing-fields
 return {
   -- auto completion
   'hrsh7th/nvim-cmp',
@@ -13,31 +14,31 @@ return {
   config = function()
     local cmp = require 'cmp'
     local cmp_icons = {
-      File = "󰈙",
-      Folder = "󰉋",
-      Text = "",
-      Snippet = "󰆐",
-      Module = "",
-      Keyword = "󰌋",
-      Operator = "󰆕",
-      Unit = "",
-      Color = "󰏘",
-      Value = "󰎠",
-      Variable = "󰂡",
-      Constant = "󰏿",
-      Reference = "",
-      Function = "󰊕",
-      Enum = "",
-      EnumMember = "",
-      Struct = "",
-      Class = "󰠱",
-      Interface = "",
-      Field = "",
-      Property = "󰜢",
-      Constructor = "󰛄",
-      Method = "󰆧",
-      Event = "",
-      TypeParameter = "󰅲",
+      File = '󰈙',
+      Folder = '󰉋',
+      Text = '',
+      Snippet = '󰆐',
+      Module = '󱇙',
+      Keyword = '󰌋',
+      Operator = '󰆕',
+      Unit = '',
+      Color = '󰏘',
+      Value = '󰎠',
+      Variable = '󰂡',
+      Constant = '󰏿',
+      Reference = '',
+      Function = '󰊕',
+      Enum = '',
+      EnumMember = '',
+      Struct = '󰠲',
+      Class = '󰠱',
+      Interface = '',
+      Field = '',
+      Property = '󰜢',
+      Constructor = '󰛄',
+      Method = '󰆧',
+      Event = '',
+      TypeParameter = '',
     }
 
     cmp.setup {
@@ -47,7 +48,7 @@ return {
         end
       },
       formatting = {
-        fields = { "kind", "abbr", "menu" },
+        fields = { 'kind', 'abbr', 'menu' },
         format = function(_, vim_item)
           vim_item.menu = vim_item.kind
           vim_item.kind = cmp_icons[vim_item.kind]

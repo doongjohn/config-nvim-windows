@@ -129,13 +129,13 @@ return {
         cmd = 'Telescope lsp_references'
       },
       {
-        label = '[lsp] document symbols',
-        cmd = 'Navbuddy'
+        label = '[lsp] outline',
+        cmd = 'Outline'
       },
       {
         label = '[lsp] line diagnostics',
         callback = function()
-          vim.diagnostic.open_float({ scope = "line" })
+          vim.diagnostic.open_float({ scope = 'line' })
         end
       },
       {
@@ -148,15 +148,15 @@ return {
         label = '[cmake] setup',
         callback = function()
           vim.cmd(
-            "terminal cmake-setup && " ..
-            "cmake -S . -B build -G \"Ninja Multi-Config\""
+            'terminal cmake-setup && ' ..
+            'cmake -S . -B build -G "Ninja Multi-Config"'
           )
           vim.cmd('startinsert')
         end
       },
       {
         label = '[cmake] generate',
-        cmd = "!cmake -S . -B build -G \"Ninja Multi-Config\""
+        cmd = '!cmake -S . -B build -G "Ninja Multi-Config"'
       },
       {
         label = '[cmake] build debug',

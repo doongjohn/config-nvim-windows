@@ -145,17 +145,19 @@ local winbar_filetype_exclude = {
   'terminal',
   'lazy',
   'notify',
+  'toggleterm',
   'oil',
   'oil_preview',
   'neo-tree',
   'neo-tree-popup',
-  'toggleterm',
+  'Outline',
+  'OutlineHelp',
+  'Trouble',
+  'rgflow',
   'fzf',
   'Telescope',
   'TelescopePrompt',
   'TelescopeResults',
-  'Trouble',
-  'rgflow',
 }
 vim.api.nvim_create_autocmd('BufEnter', {
   group = 'doongjohn:BufEnter',
@@ -166,7 +168,7 @@ vim.api.nvim_create_autocmd('BufEnter', {
     end
     if vim.api.nvim_buf_get_name(0):len() == 0 then
       vim.opt_local.winbar =
-        [[%#TabLineSel# [No Name]%{&modified ? " *" : ""} %#Comment#]]
+      [[%#TabLineSel# [No Name]%{&modified ? " *" : ""} %#Comment#]]
     end
   end
 })
@@ -175,15 +177,18 @@ vim.api.nvim_create_autocmd('FileType', {
   pattern = { '*' },
   callback = function()
     if vim.startswith(vim.api.nvim_buf_get_name(0), 'oil') then
+      -- oil
       vim.opt_local.winbar =
-        [[%#TabLineSel# oil%{&modified ? " *" : ""} ]] ..
-        [[%#Comment# %{%luaeval("vim.api.nvim_buf_get_name(0):sub(7,-1)")%}]]
-      return
-    end
-    if not vim.tbl_contains(winbar_filetype_exclude, vim.bo.filetype) then
+          [[%#TabLineSel# oil%{&modified ? " *" : ""} %#Comment# ]] ..
+          [[%{%luaeval("vim.api.nvim_buf_get_name(0):sub(7,-1)")%}]]
+    elseif vim.bo.filetype == 'Outline' then
+      -- outline
+      vim.opt_local.winbar = [[%#TabLineSel# outline%{&modified ? " *" : ""} %#Comment#]]
+    elseif not vim.tbl_contains(winbar_filetype_exclude, vim.bo.filetype) then
+      -- code
       vim.opt_local.winbar =
-        [[%#TabLineSel# %t%{&modified ? " *" : ""} ]] ..
-        [[%#Comment# %{%v:lua.require'nvim-navic'.get_location()%}]]
+          [[%#TabLineSel# %t%{&modified ? " *" : ""} %#Comment# ]] ..
+          [[%{%v:lua.require'nvim-navic'.get_location()%}]]
     else
       vim.opt_local.winbar = ''
     end

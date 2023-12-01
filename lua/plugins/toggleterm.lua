@@ -14,7 +14,7 @@ return {
         if vim.api.nvim_win_get_config(0).relative ~= '' then
           return
         end
-        if vim.bo.filetype == 'fzf' then
+        if vim.bo.filetype == 'fzf' or vim.bo.filetype == 'Outline' then
           return
         end
 

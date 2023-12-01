@@ -5,7 +5,6 @@ return {
   dependencies = {
     'mrded/nvim-lsp-notify',
     'smiteshp/nvim-navic',
-    'smiteshp/nvim-navbuddy',
     'folke/neodev.nvim',
   },
   init = function()
@@ -48,13 +47,11 @@ return {
     })
 
     local navic = require 'nvim-navic'
-    local navbuddy = require 'nvim-navbuddy'
 
     local on_attach = function (client, bufnr)
       -- lsp breadcrumbs
       if client.server_capabilities.documentSymbolProvider then
         navic.attach(client, bufnr)
-        navbuddy.attach(client, bufnr)
       end
     end
 

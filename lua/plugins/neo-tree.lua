@@ -27,7 +27,7 @@ return {
       icon = {
         folder_closed = '',
         folder_open = '',
-        folder_empty = "",
+        folder_empty = '',
         default = '',
       },
       name = {
@@ -38,16 +38,16 @@ return {
         highlight = 'NeoTreeDimText', -- if you remove this the status will be colorful
         symbols = {
           -- Change type
-          added     = "",
-          modified  = "",
-          deleted   = "",
-          renamed   = "",
+          added     = '',
+          modified  = '',
+          deleted   = '',
+          renamed   = '',
           -- Status type
-          untracked = "?",
-          ignored   = "󰔌",
-          unstaged  = "",
-          staged    = "",
-          conflict  = "",
+          untracked = '?',
+          ignored   = '󰔌',
+          unstaged  = '',
+          staged    = '',
+          conflict  = '',
         },
       },
     },

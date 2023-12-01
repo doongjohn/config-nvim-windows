@@ -3,7 +3,9 @@ return {
   event = { 'UIEnter' },
   config = function()
     local excludes = require 'hlchunk.utils.filetype'.exclude_filetypes
-    excludes.oil_preview = true
+    excludes['oil_preview'] = true
+    excludes['neo-tree-popup'] = true
+    excludes['OutlineHelp'] = true
 
     local opts = {
       chunk = {
