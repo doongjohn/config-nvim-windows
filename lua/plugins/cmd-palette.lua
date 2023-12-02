@@ -1,21 +1,35 @@
 return {
   'koenverburg/cmd-palette.nvim',
+  lazy = false,
   dependencies = {
     'stevearc/dressing.nvim',
   },
-  keys = {
-    { '<c-p>', '<cmd>CmdPalette<cr>' },
-  },
   config = function()
-    require 'cmd-palette'.setup {
+    local opts = {
       -- plugin
       {
-        label = '[plugin] update',
-        cmd = 'Lazy update'
-      },
-      {
-        label = '[plugin] clean',
-        cmd = 'Lazy clean'
+        label = '[plugin] lazy',
+        callback = function()
+          require 'cmd-palette'.setup({
+            {
+              label = '[lazy] sync',
+              cmd = 'Lazy sync'
+            },
+            {
+              label = '[lazy] update',
+              cmd = 'Lazy update'
+            },
+            {
+              label = '[lazy] clean',
+              cmd = 'Lazy clean'
+            },
+            {
+              label = '[lazy] profile',
+              cmd = 'Lazy profile'
+            },
+          })
+          vim.cmd('CmdPalette')
+        end
       },
 
       -- file
@@ -157,5 +171,10 @@ return {
         cmd = 'TermExec cmd="cmake --build build -v --config Release" go_back=0',
       },
     }
+
+    vim.keymap.set('n', '<c-p>', function()
+      require 'cmd-palette'.setup(opts)
+      vim.cmd('CmdPalette')
+    end, { silent = true })
   end
 }
