@@ -50,10 +50,6 @@ return {
         end
       },
       {
-        label = '[editor] zen mode',
-        cmd = 'ZenMode'
-      },
-      {
         label = '[editor] registers',
         cmd = 'Telescope registers'
       },
