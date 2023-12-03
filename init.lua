@@ -223,7 +223,6 @@ keymap_s('v', '<a-up>', ":move '<-2<cr>gv-gv")
 keymap_s('n', '<c-h>', vim.lsp.buf.hover)
 keymap_s('i', '<c-h>', vim.lsp.buf.hover)
 keymap_s('n', '<f2>', vim.lsp.buf.rename)
-keymap_s('n', '<f12>', vim.lsp.buf.definition)
 
 -- multi-line normal command
 keymap_s('v', '<leader>z', function()

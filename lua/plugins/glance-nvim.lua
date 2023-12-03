@@ -1,10 +1,8 @@
 return {
   'dnlhc/glance.nvim',
+  cmd = { 'Glance' },
   keys = {
-    { '<leader>lr', '<cmd>Glance references<cr>' },
-    { '<leader>ld', '<cmd>Glance definitions<cr>' },
-    { '<leader>ly', '<cmd>Glance type_definitions<cr>' },
-    { '<leader>lm', '<cmd>Glance implementations<cr>' },
+    { '<f12>', '<cmd>Glance definitions<cr>' },
   },
   opts = {},
 }
