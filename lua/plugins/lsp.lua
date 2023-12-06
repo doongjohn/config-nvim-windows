@@ -17,10 +17,14 @@ return {
     })
 
     -- disable diagnostic icon in the sign column
-    vim.fn.sign_define('DiagnosticSignError', { text = '', texthl = 'DiagnosticSignError', linehl = '', numhl = 'DiagnosticError' })
-    vim.fn.sign_define('DiagnosticSignWarn', { text = '', texthl = 'DiagnosticSignWarn', linehl = '', numhl = 'DiagnosticWarn' })
-    vim.fn.sign_define('DiagnosticSignInfo', { text = '', texthl = 'DiagnosticSignInfo', linehl = '', numhl = 'DiagnosticInfo' })
-    vim.fn.sign_define('DiagnosticSignHint', { text = '', texthl = 'DiagnosticSignHint', linehl = '', numhl = 'DiagnosticHint' })
+    vim.fn.sign_define('DiagnosticSignError',
+      { text = '', texthl = 'DiagnosticSignError', linehl = '', numhl = 'DiagnosticError' })
+    vim.fn.sign_define('DiagnosticSignWarn',
+      { text = '', texthl = 'DiagnosticSignWarn', linehl = '', numhl = 'DiagnosticWarn' })
+    vim.fn.sign_define('DiagnosticSignInfo',
+      { text = '', texthl = 'DiagnosticSignInfo', linehl = '', numhl = 'DiagnosticInfo' })
+    vim.fn.sign_define('DiagnosticSignHint',
+      { text = '', texthl = 'DiagnosticSignHint', linehl = '', numhl = 'DiagnosticHint' })
   end,
   config = function()
     -- nvim lua config support
@@ -48,7 +52,7 @@ return {
 
     local navic = require 'nvim-navic'
 
-    local on_attach = function (client, bufnr)
+    local on_attach = function(client, bufnr)
       -- lsp breadcrumbs
       if client.server_capabilities.documentSymbolProvider then
         navic.attach(client, bufnr)
@@ -71,11 +75,18 @@ return {
 
     lsp.rust_analyzer.setup {
       on_attach = on_attach,
+      settings = {
+        ['rust-analyzer'] = {
+          diagnostics = {
+            enable = false,
+          }
+        }
+      }
     }
 
     lsp.gopls.setup {
       cmd = { 'gopls', 'serve' },
-      on_attach = function (client, bufnr)
+      on_attach = function(client, bufnr)
         on_attach(client, bufnr)
 
         -- Generate a synthetic semanticTokensProvider (https://github.com/golang/go/issues/54531).
