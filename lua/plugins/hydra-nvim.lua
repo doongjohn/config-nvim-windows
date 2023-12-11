@@ -19,16 +19,18 @@ return {
       mode = 'n',
       body = '<c-w>',
       heads = {
-        { 'h', '<c-w>h' },
-        { 'j', '<c-w>j' },
-        { 'k', '<c-w>k' },
-        { 'l', '<c-w>l', { desc = 'navigate 󱣱' } },
+        { '<c-h>', '<c-w>h' },
+        { '<c-j>', '<c-w>j' },
+        { '<c-k>', '<c-w>k' },
+        { '<c-l>', '<c-w>l', { desc = 'navigate' } },
         { '-', '<c-w><' },
         { '=', '<c-w>>', { desc = 'resize 󰤼' } },
         { '_', '<c-w>-' },
         { '+', '<c-w>+', { desc = 'resize 󰤻' } },
         { 'e', '<c-w>=', { desc = 'equal size' } },
-        { 'q', '<c-w>q', { desc = 'close window' } },
+        { 'd', '<cmd>Bdelete<cr>', { desc = 'delete buffer' } },
+        { 'c', '<c-w>q', { desc = 'close window' } },
+        { 'q', nil, { exit = true, nowait = true, desc = 'exit' } },
       }
     })
   end
