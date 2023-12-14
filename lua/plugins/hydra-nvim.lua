@@ -1,5 +1,5 @@
 return {
-  'anuvyklack/hydra.nvim',
+  'nvim-island/hydra.nvim',
   lazy = false,
   config = function()
     local hydra = require 'hydra'
@@ -14,15 +14,12 @@ return {
         { 'L', 'zL', { desc = 'half screen ' } },
       }
     })
+
     hydra({
       name = 'Window',
       mode = 'n',
       body = '<c-w>',
       heads = {
-        { '<c-h>', '<c-w>h' },
-        { '<c-j>', '<c-w>j' },
-        { '<c-k>', '<c-w>k' },
-        { '<c-l>', '<c-w>l', { desc = 'navigate' } },
         { '-', '<c-w><' },
         { '=', '<c-w>>', { desc = 'resize 󰤼' } },
         { '_', '<c-w>-' },

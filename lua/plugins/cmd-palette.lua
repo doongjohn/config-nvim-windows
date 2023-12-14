@@ -49,6 +49,10 @@ return {
         label = '[file] switch source ↔ header (v-split)',
         cmd = 'vs | ClangdSwitchSourceHeader'
       },
+      {
+        label = '[file] yank all',
+        cmd = '%y'
+      },
 
       -- editor
       {
@@ -149,10 +153,6 @@ return {
         callback = function()
           vim.diagnostic.open_float({ scope = 'line' })
         end
-      },
-      {
-        label = '[lsp] code action',
-        callback = vim.lsp.buf.code_action
       },
 
       -- cmake

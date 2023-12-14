@@ -35,26 +35,11 @@ return {
     local capabilities = require 'cmp_nvim_lsp'.default_capabilities()
     lsp_defaults.capabilities = vim.tbl_deep_extend('force', lsp_defaults.capabilities, capabilities)
 
-    local lsp_notify_loaded = false
-
-    vim.api.nvim_create_autocmd('LspAttach', {
-      group = vim.api.nvim_create_augroup('UserLspConfig', {}),
-      callback = function(ev)
-        -- lsp progress
-        if not lsp_notify_loaded then
-          require 'lsp-notify'.setup {
-            notify = require 'notify'
-          }
-          lsp_notify_loaded = true
-        end
-      end,
-    })
-
     local navic = require 'nvim-navic'
 
     local on_attach = function(client, bufnr)
-      -- lsp breadcrumbs
       if client.server_capabilities.documentSymbolProvider then
+        -- lsp breadcrumbs
         navic.attach(client, bufnr)
       end
     end

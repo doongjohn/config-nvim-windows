@@ -60,6 +60,7 @@ vim.filetype.add {
 
 -- augroups
 vim.api.nvim_create_augroup('doongjohn:BufEnter', {})
+vim.api.nvim_create_augroup('doongjohn:BufWinEnter', {})
 vim.api.nvim_create_augroup('doongjohn:FileType', {})
 
 -- set syntax
@@ -146,18 +147,19 @@ local winbar_filetype_exclude = {
   'lazy',
   'notify',
   'toggleterm',
-  'oil',
-  'oil_preview',
-  'neo-tree',
-  'neo-tree-popup',
-  'Outline',
-  'OutlineHelp',
-  'Trouble',
-  'rgflow',
   'fzf',
   'Telescope',
   'TelescopePrompt',
   'TelescopeResults',
+  'oil',
+  'oil_preview',
+  'neo-tree',
+  'neo-tree-popup',
+  'Trouble',
+  'Outline',
+  'OutlineHelp',
+  'rgflow',
+  'dap-float',
 }
 vim.api.nvim_create_autocmd('BufEnter', {
   group = 'doongjohn:BufEnter',
@@ -223,6 +225,7 @@ keymap_s('v', '<a-up>', ":move '<-2<cr>gv-gv")
 keymap_s('n', '<c-h>', vim.lsp.buf.hover)
 keymap_s('i', '<c-h>', vim.lsp.buf.hover)
 keymap_s('n', '<f2>', vim.lsp.buf.rename)
+keymap_s('n', '<leader>c', vim.lsp.buf.code_action)
 
 -- multi-line normal command
 keymap_s('v', '<leader>z', function()
