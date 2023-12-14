@@ -20,6 +20,9 @@ return {
       mode = 'n',
       body = '<c-w>',
       heads = {
+        { 'p', function()
+          require 'nvim-window'.pick()
+        end, { desc = 'pick' }},
         { '-', '<c-w><' },
         { '=', '<c-w>>', { desc = 'resize 󰤼' } },
         { '_', '<c-w>-' },
