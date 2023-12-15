@@ -4,12 +4,14 @@ return {
   'hrsh7th/nvim-cmp',
   event = 'InsertEnter',
   dependencies = {
-    'dcampos/nvim-snippy',
-    'dcampos/cmp-snippy',
+    'hrsh7th/cmp-buffer',
+    'hrsh7th/cmp-path',
+    'hrsh7th/cmp-cmdline',
     'hrsh7th/cmp-nvim-lsp',
     'hrsh7th/cmp-nvim-lsp-signature-help',
-    'hrsh7th/cmp-buffer',
-    'hrsh7th/cmp-cmdline',
+    'rcarriga/cmp-dap',
+    'dcampos/nvim-snippy',
+    'dcampos/cmp-snippy',
   },
   config = function()
     local cmp = require 'cmp'
@@ -42,6 +44,10 @@ return {
     }
 
     cmp.setup {
+      enabled = function()
+        return vim.api.nvim_get_option_value('buftype', { buf = 0 }) ~= 'prompt'
+            or require 'cmp_dap'.is_dap_buffer()
+      end,
       snippet = {
         expand = function(args)
           require 'snippy'.expand_snippet(args.body)
@@ -76,6 +82,21 @@ return {
       sources = {
         { name = 'buffer' }
       }
+    })
+
+    cmp.setup.cmdline(':', {
+      mapping = cmp.mapping.preset.cmdline(),
+      sources = cmp.config.sources({
+        { name = 'path' }
+      }, {
+        { name = 'cmdline' }
+      })
+    })
+
+    cmp.setup.filetype({ 'dap-repl', 'dapui_watches', 'dapui_hover' }, {
+      sources = {
+        { name = 'dap' },
+      },
     })
   end
 }

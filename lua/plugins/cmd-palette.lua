@@ -155,6 +155,20 @@ return {
         end
       },
 
+      -- dap
+      {
+        label = '[dap] clear breakpoints',
+        callback = function()
+          require 'dap'.clear_breakpoints()
+        end
+      },
+      {
+        label = '[dap] focus frame',
+        callback = function()
+          require 'dap'.focus_frame()
+        end
+      },
+
       -- cmake
       {
         label = '[cmake] setup',
