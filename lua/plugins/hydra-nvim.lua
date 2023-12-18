@@ -29,7 +29,7 @@ return {
         { '_', '<c-w>-' },
         { '+', '<c-w>+', { desc = 'resize 󰤻' } },
         { 'e', '<c-w>=', { desc = 'equal size' } },
-        { 'd', '<cmd>Bdelete<cr>', { desc = 'delete buffer' } },
+        { 'b', '<cmd>Bdelete<cr>', { desc = 'delete buffer' } },
         { 'c', '<c-w>q', { desc = 'close window' } },
         { 'q', nil, { exit = true, nowait = true, desc = 'exit' } },
       }
