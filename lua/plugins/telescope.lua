@@ -12,6 +12,7 @@ return {
   },
   keys = {
     { '<space>', '<cmd>Telescope find_files<cr>' },
+    { '<leader>ff', ':Telescope current_buffer_fuzzy_find<cr>' },
   },
   config = function()
     local telescope = require 'telescope'
