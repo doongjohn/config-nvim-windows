@@ -1,5 +1,5 @@
 return {
-  'nvim-island/hydra.nvim',
+  'nvimtools/hydra.nvim',
   lazy = false,
   config = function()
     local hydra = require 'hydra'
