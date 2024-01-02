@@ -59,18 +59,45 @@ return {
     }
 
     lsp.rust_analyzer.setup {
-      on_attach = on_attach,
       settings = {
         ['rust-analyzer'] = {
           diagnostics = {
             enable = false,
           }
         }
-      }
+      },
+      on_attach = on_attach,
     }
+    vim.api.nvim_create_autocmd("LspTokenUpdate", {
+      group = 'doongjohn:LspTokenUpdate',
+      callback = function(args)
+        local token = args.data.token
+        if
+          token.type == "variable"
+          and token.modifiers.static
+        then
+          -- to fix clashing highlights
+          -- - @lsp.typemod.variable.defaultLibrary.rust links to Special priority: 127
+          -- - @lsp.typemod.variable.static.rust links to Constant priority: 127
+          -- https://neovim.io/doc/user/lsp.html#lsp-semantic_tokens
+          vim.lsp.semantic_tokens.highlight_token(token, args.buf, args.data.client_id, "Constant")
+        end
+      end,
+    })
 
     lsp.gopls.setup {
       cmd = { 'gopls', 'serve' },
+      settings = {
+        -- https://github.com/golang/tools/blob/master/gopls/doc/vim.md#neovim-config
+        gopls = {
+          analyses = {
+            unusedparams = true,
+          },
+          gofumpt = true,
+          semanticTokens = true,
+          staticcheck = true,
+        }
+      },
       on_attach = function(client, bufnr)
         on_attach(client, bufnr)
 
@@ -85,17 +112,6 @@ return {
           }
         end
       end,
-      settings = {
-        -- https://github.com/golang/tools/blob/master/gopls/doc/vim.md#neovim-config
-        gopls = {
-          analyses = {
-            unusedparams = true,
-          },
-          gofumpt = true,
-          semanticTokens = true,
-          staticcheck = true,
-        }
-      },
     }
 
     lsp.emmet_ls.setup {
@@ -112,13 +128,13 @@ return {
     }
 
     lsp.astro.setup {
-      on_attach = on_attach,
       init_options = {
         typescript = {
           -- -- fd -H tsserver
           -- serverPath = '/home/doongjohn/.local/share/pnpm/global/5/.pnpm/typescript@4.9.5/node_modules/typescript/lib/tsserverlibrary.js',
         },
       },
+      on_attach = on_attach,
     }
 
     lsp.lua_ls.setup {

@@ -62,6 +62,7 @@ vim.filetype.add {
 vim.api.nvim_create_augroup('doongjohn:BufEnter', {})
 vim.api.nvim_create_augroup('doongjohn:BufWinEnter', {})
 vim.api.nvim_create_augroup('doongjohn:FileType', {})
+vim.api.nvim_create_augroup('doongjohn:LspTokenUpdate', {})
 
 -- set syntax
 vim.api.nvim_create_autocmd('BufEnter', {
