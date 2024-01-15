@@ -58,6 +58,7 @@ return {
     local palette = require 'kanagawa.colors'.setup().palette
 
     -- treesitter
+    vim.api.nvim_set_hl(0, '@special', { link = 'Special' })
     vim.api.nvim_set_hl(0, '@namespace', { link = 'Constant' })
     vim.api.nvim_set_hl(0, '@parameter', { fg = palette.oldWhite })
     vim.api.nvim_set_hl(0, '@variable.builtin', { fg = palette.waveRed })
