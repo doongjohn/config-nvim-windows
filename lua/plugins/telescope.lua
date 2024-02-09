@@ -89,6 +89,7 @@ return {
             '-E=*.lib',
             '-E=*.dll',
             '-E=*.exe',
+            '-E=*.pdb',
           },
           hidden = true
         }

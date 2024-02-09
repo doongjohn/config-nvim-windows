@@ -114,6 +114,10 @@ return {
       end,
     }
 
+    lsp.zls.setup {
+      on_attach = on_attach,
+    }
+
     lsp.emmet_ls.setup {
       on_attach = on_attach,
     }
