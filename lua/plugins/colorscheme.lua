@@ -25,11 +25,13 @@ return {
         return {
           WinSeparator = { fg = palette.sumiInk4 },
           FloatBorder = { bg = palette.sumiInk0, fg = palette.sumiInk0 },
+
           -- popup menu
           Pmenu = { fg = theme.ui.shade0, bg = theme.ui.bg_p1 },
           PmenuSel = { fg = 'NONE', bg = theme.ui.bg_p2 },
           PmenuSbar = { bg = theme.ui.bg_m1 },
           PmenuThumb = { bg = theme.ui.bg_p2 },
+
           -- telescope
           TelescopeNormal = { bg = palette.sumiInk0 },
           TelescopeTitle = { bg = palette.sumiInk5, fg = palette.dragonBlue, bold = true },
@@ -43,8 +45,10 @@ return {
           TelescopePreviewNormal = { bg = theme.ui.bg_dim },
           TelescopePreviewBorder = { bg = theme.ui.bg_dim, fg = theme.ui.bg_dim },
           TelescopeSelection = { bg = palette.sumiInk5 },
+
           -- neotree
           NeoTreeNormal = { bg = palette.sumiInk0, fg = palette.fujiWhite },
+
           -- navbuddy
           NavbuddyName = { fg = palette.fujiWhite },
         }
@@ -66,6 +70,5 @@ return {
     vim.api.nvim_set_hl(0, '@lsp.type.comment', { link = '@comment' })
     vim.api.nvim_set_hl(0, '@lsp.type.keyword', { link = '@keyword' })
     vim.api.nvim_set_hl(0, '@lsp.typemod.method.readonly.cpp', { link = '@function.method' })
-
   end
 }
