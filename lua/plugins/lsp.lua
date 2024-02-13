@@ -118,6 +118,14 @@ return {
       on_attach = on_attach,
     }
 
+    lsp.ols.setup {
+      on_attach = on_attach,
+    }
+
+    lsp.nushell.setup {
+      on_attach = on_attach,
+    }
+
     lsp.emmet_ls.setup {
       on_attach = on_attach,
     }
