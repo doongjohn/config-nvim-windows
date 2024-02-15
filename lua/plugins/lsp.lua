@@ -3,7 +3,6 @@ return {
   'neovim/nvim-lspconfig',
   event = { 'BufReadPre', 'BufNewFile' },
   dependencies = {
-    'mrded/nvim-lsp-notify',
     'smiteshp/nvim-navic',
     'folke/neodev.nvim',
   },
