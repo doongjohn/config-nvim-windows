@@ -5,7 +5,9 @@ return {
   event = 'BufEnter',
   config = function()
     local leap = require 'leap'
-    leap.setup {}
+    leap.setup {
+      highlight_unlabeled_phase_one_targets = true,
+    }
 
     leap.opts.highlight_unlabeled_phase_one_targets = true
     vim.api.nvim_set_hl(0, 'LeapBackdrop', { link = 'Comment' })
