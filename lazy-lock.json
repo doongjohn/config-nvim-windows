@@ -35,7 +35,7 @@
   "nvim-snippy": { "branch": "master", "commit": "6295b6cb30725c343a8986096c9f04b0e7646c52" },
   "nvim-spectre": { "branch": "master", "commit": "3712ff0cdf4f9f877d9ca708d835a877d9a0abaf" },
   "nvim-surround": { "branch": "main", "commit": "84a26afce16cffa7e3322cfa80a42cddf60616eb" },
-  "nvim-treesitter": { "branch": "master", "commit": "488bec03254207b1dd071be8cb1fb78434b6e777" },
+  "nvim-treesitter": { "branch": "master", "commit": "b781fd058224f67df7469b8f376c42a8d85e11db" },
   "nvim-web-devicons": { "branch": "master", "commit": "75df79feb02d5e0ec114e447453775d4d291ea03" },
   "nvim-window": { "branch": "main", "commit": "e7f5d60eeec8ff37af7be4c9a99f65edf67fc574" },
   "oil.nvim": { "branch": "master", "commit": "18dfd2458dc741fea683357a17aaa95870b25a3c" },
@@ -48,6 +48,7 @@
   "telescope.nvim": { "branch": "master", "commit": "7472420f8734c710bd7009081cef9b97f08a3821" },
   "tint.nvim": { "branch": "master", "commit": "862835626941d263466754b9c8e2ce2cb004f5ac" },
   "toggleterm.nvim": { "branch": "main", "commit": "193786e0371e3286d3bc9aa0079da1cd41beaa62" },
+  "tree-sitter-nu": { "branch": "main", "commit": "c5b7816043992b1cdc1462a889bc74dc08576fa6" },
   "trim.nvim": { "branch": "master", "commit": "00541dd6f131b615c1d45959476969001b4f05fa" },
   "trouble.nvim": { "branch": "main", "commit": "f1168feada93c0154ede4d1fe9183bf69bac54ea" },
   "vim-visual-multi": { "branch": "master", "commit": "fe1ec7e430013b83c8c2dee85ae496251b71e253" }

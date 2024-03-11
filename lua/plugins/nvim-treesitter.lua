@@ -3,23 +3,32 @@ return {
   'nvim-treesitter/nvim-treesitter',
   build = ':TSUpdate',
   event = { 'BufReadPost', 'BufNewFile' },
+  dependencies = {
+    'liadoz/nvim-dap-repl-highlights',
+    'nushell/tree-sitter-nu',
+  },
   config = function()
+    require 'nvim-dap-repl-highlights'.setup()
+
     ---@diagnostic disable-next-line: missing-fields
     require 'nvim-treesitter.configs'.setup {
       sync_install = false,
       ensure_installed = {
-        'c', 'cpp',
-        'rust',
-        'zig',
-        'odin',
-        'go', 'gomod', 'gosum', 'gowork',
-        'c_sharp',
-        'ocaml',
-        'commonlisp',
-        'racket',
-        'regex',
-        -- build
+        -- shell
+        'bash', 'fish', 'nu',
+        -- build script
         'make', 'cmake', 'ninja',
+        -- misc
+        'regex', 'dap_repl',
+        -- compiled lanuages
+        'c', 'cpp', 'c_sharp',
+        'rust', 'zig', 'odin',
+        'go', 'gomod', 'gosum', 'gowork',
+        'nim', 'nim_format_string',
+        'ocaml', 'commonlisp', 'racket',
+        -- scripting lanuages
+        'python', 'ruby', 'julia',
+        'lua', 'fennel', 'vim',
         -- shader
         'wgsl', 'glsl', 'hlsl',
         -- web dev
@@ -27,21 +36,17 @@ return {
         'javascript', 'jsdoc',
         'typescript', 'tsx',
         'astro', 'svelte', 'vue',
-        -- scripting
-        'bash', 'fish',
-        'python', 'julia', 'ruby',
-        'lua', 'fennel', 'vim',
-        -- markup / data
+        -- markup
         'markdown', 'latex', 'rst',
+        -- data
         'json', 'jsonc',
-        'yaml', 'toml', 'ini',
+        'ini', 'toml', 'yaml',
         -- git
         'diff',
-        'gitignore',
-        'gitcommit',
         'gitcommit',
         'git_rebase',
         'git_config',
+        'gitignore',
         'gitattributes',
       },
       ignore_install = {
@@ -66,17 +71,6 @@ return {
           'javascript',
         },
       }
-    }
-
-    local parser_config = require 'nvim-treesitter.parsers'.get_parser_configs()
-
-    parser_config.nu = {
-      install_info = {
-        url = "https://github.com/nushell/tree-sitter-nu",
-        files = { "src/parser.c" },
-        branch = "main",
-      },
-      filetype = "nu",
     }
   end
 }
