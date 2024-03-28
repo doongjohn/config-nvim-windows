@@ -16,26 +16,25 @@ return {
       ensure_installed = {
         -- shell
         'bash', 'fish', 'nu',
-        -- build script
+        -- tool
         'make', 'cmake', 'ninja',
-        -- misc
-        'regex', 'dap_repl',
-        -- compiled lanuages
+        'regex', 'dap_repl', 'vim',
+        -- compiled lanuage
         'c', 'cpp', 'c_sharp',
         'rust', 'zig', 'odin',
         'go', 'gomod', 'gosum', 'gowork',
         'nim', 'nim_format_string',
-        'ocaml', 'commonlisp', 'racket',
-        -- scripting lanuages
+        'commonlisp',
+        -- scripting lanuage
         'python', 'ruby', 'julia',
-        'lua', 'fennel', 'vim',
-        -- shader
-        'wgsl', 'glsl', 'hlsl',
+        'lua', 'fennel',
         -- web dev
         'html', 'css', 'scss',
         'javascript', 'jsdoc',
         'typescript', 'tsx',
         'astro', 'svelte', 'vue',
+        -- shader
+        'wgsl', 'glsl', 'hlsl',
         -- markup
         'markdown', 'latex', 'rst',
         -- data
