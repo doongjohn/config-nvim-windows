@@ -159,7 +159,7 @@ return {
       on_attach = on_attach,
     }
 
-    lsp.racket_langserver.setup {
+    lsp.glsl_analyzer.setup {
       on_attach = on_attach,
     }
   end

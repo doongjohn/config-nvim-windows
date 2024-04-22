@@ -129,7 +129,7 @@ return {
       {
         label = '[lsp] inlay hint toggle',
         callback = function()
-          vim.lsp.inlay_hint.enable(0, not vim.lsp.inlay_hint.get({ bufnr = 0 })[1])
+          vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
         end
       },
       {
