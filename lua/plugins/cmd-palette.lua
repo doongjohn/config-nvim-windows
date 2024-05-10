@@ -129,7 +129,7 @@ return {
       {
         label = '[lsp] inlay hint toggle',
         callback = function()
-          vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+          vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({}))
         end
       },
       {
@@ -167,30 +167,6 @@ return {
         callback = function()
           require 'dap'.focus_frame()
         end
-      },
-
-      -- cmake
-      {
-        label = '[cmake] setup',
-        callback = function()
-          vim.cmd(
-            'terminal cmake-setup && ' ..
-            'cmake -S . -B build -G "Ninja Multi-Config"'
-          )
-          vim.cmd('startinsert')
-        end
-      },
-      {
-        label = '[cmake] generate',
-        cmd = '!cmake -S . -B build -G "Ninja Multi-Config"'
-      },
-      {
-        label = '[cmake] build debug',
-        cmd = 'TermExec cmd="cmake --build build -v --config Debug" go_back=0',
-      },
-      {
-        label = '[cmake] build release',
-        cmd = 'TermExec cmd="cmake --build build -v --config Release" go_back=0',
       },
     }
 
