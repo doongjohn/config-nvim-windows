@@ -149,6 +149,7 @@ local winbar_filetype_exclude = {
   'terminal',
   'lazy',
   'notify',
+  'buffer_manager',
   'toggleterm',
   'fzf',
   'Telescope',
