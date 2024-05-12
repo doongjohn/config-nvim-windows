@@ -105,6 +105,22 @@ vim.api.nvim_create_autocmd('FileType', {
   end
 })
 
+-- comment string per filetype
+vim.api.nvim_create_autocmd('FileType', {
+  group = 'doongjohn:FileType',
+  pattern = { 'c', 'cpp' },
+  callback = function()
+    vim.bo.commentstring = '// %s';
+  end
+})
+vim.api.nvim_create_autocmd('FileType', {
+  group = 'doongjohn:FileType',
+  pattern = { 'nim', 'nims', 'nimble' },
+  callback = function()
+    vim.bo.commentstring = '# %s';
+  end
+})
+
 -- setup lazy nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
@@ -151,18 +167,17 @@ local winbar_filetype_exclude = {
   'prompt',
   'terminal',
   'lazy',
-  'notify',
-  'buffer_manager',
+  'Trouble',
   'toggleterm',
-  'fzf',
-  'Telescope',
-  'TelescopePrompt',
-  'TelescopeResults',
   'oil',
   'oil_preview',
   'neo-tree',
   'neo-tree-popup',
-  'Trouble',
+  'buffer_manager',
+  'fzf',
+  'Telescope',
+  'TelescopePrompt',
+  'TelescopeResults',
   'Outline',
   'OutlineHelp',
   'rgflow',
