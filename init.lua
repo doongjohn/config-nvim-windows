@@ -1,6 +1,7 @@
 require 'utils'
 
-vim.o.clipboard = 'unnamed'
+-- clipboard
+vim.o.clipboard = 'unnamedplus'
 
 -- enable mouse input
 vim.o.mouse = 'a'
@@ -104,7 +105,7 @@ vim.api.nvim_create_autocmd('FileType', {
   end
 })
 
--- plugins
+-- setup lazy nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
   vim.fn.system({
@@ -117,6 +118,8 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
   })
 end
 vim.opt.rtp:prepend(lazypath)
+
+-- plugins
 require 'lazy'.setup({
   import = 'plugins'
 }, {
@@ -173,8 +176,7 @@ vim.api.nvim_create_autocmd('BufEnter', {
       return
     end
     if vim.api.nvim_buf_get_name(0):len() == 0 then
-      vim.opt_local.winbar =
-      [[%#TabLineSel# [No Name]%{&modified ? " *" : ""} %#Comment#]]
+      vim.opt_local.winbar = [[%#TabLineSel# [No Name]%{&modified ? " *" : ""} %#Comment#]]
     end
   end
 })
@@ -236,16 +238,12 @@ keymap_s('n', '<leader>c', vim.lsp.buf.code_action)
 -- multi-line normal command
 keymap_s('v', '<leader>z', function()
   local input = vim.fn.input('normal cmd:')
-  if input == '' then
-    return
-  end
+  if input == '' then return end
 
-  -- get selection range
+  -- get selected lines
   vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<esc>', true, false, true), 'x', false)
   local top = vim.api.nvim_buf_get_mark(0, '<')[1]
   local bot = vim.api.nvim_buf_get_mark(0, '>')[1]
-
-  -- get selected lines
   local selected_lines = vim.api.nvim_buf_get_lines(0, top - 1, bot, false)
 
   -- create hidden buffer
