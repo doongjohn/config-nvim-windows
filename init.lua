@@ -50,7 +50,6 @@ vim.filetype.add {
     nims = 'nims',
     nimble = 'nimble',
     asd = 'lisp',
-    rkt = 'racket',
     cr = 'crystal',
   },
   filename = {
@@ -65,7 +64,7 @@ vim.api.nvim_create_augroup('doongjohn:BufWinEnter', {})
 vim.api.nvim_create_augroup('doongjohn:FileType', {})
 vim.api.nvim_create_augroup('doongjohn:LspTokenUpdate', {})
 
--- set syntax
+-- syntax per filetype
 vim.api.nvim_create_autocmd('BufEnter', {
   group = 'doongjohn:BufEnter',
   pattern = { '*.nims', '*.nimble' },
@@ -81,7 +80,7 @@ vim.api.nvim_create_autocmd('BufEnter', {
   end
 })
 
--- settings per filetype
+-- options per filetype
 vim.api.nvim_create_autocmd('FileType', {
   group = 'doongjohn:FileType',
   pattern = { 'gitconfig', 'markdown', 'fish', 'python', 'cs', 'go', 'zig', 'odin', 'glsl' },
