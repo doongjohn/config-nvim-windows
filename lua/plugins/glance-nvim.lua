@@ -4,5 +4,11 @@ return {
   keys = {
     { '<f12>', '<cmd>Glance definitions<cr>' },
   },
-  opts = {},
+  opts = {
+    preview_win_opts = {
+      cursorline = true,
+      number = true,
+      wrap = false,
+    },
+  },
 }
