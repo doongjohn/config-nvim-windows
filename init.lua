@@ -28,10 +28,8 @@ vim.opt.fillchars:append {
   eob       = ' ',
 }
 vim.o.wrap = false
-
--- show trailing whitespace
 vim.o.list = true
-vim.o.listchars = 'trail:·,tab:  '
+vim.o.listchars = 'trail:·,tab:│ '
 
 -- use 2 spaces for indentation
 vim.o.tabstop = 2
