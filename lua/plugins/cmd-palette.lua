@@ -38,20 +38,12 @@ return {
         cmd = 'Telescope oldfiles'
       },
       {
-        label = '[file] cd → nvim config',
-        cmd = 'cd ~/AppData/Local/nvim/'
-      },
-      {
-        label = '[file] switch source ↔ header',
-        cmd = 'ClangdSwitchSourceHeader'
-      },
-      {
-        label = '[file] switch source ↔ header (v-split)',
-        cmd = 'vs | ClangdSwitchSourceHeader'
-      },
-      {
         label = '[file] yank all',
         cmd = '%y'
+      },
+      {
+        label = '[file] cd → nvim config',
+        cmd = 'cd ~/AppData/Local/nvim/'
       },
 
       -- editor
@@ -153,6 +145,30 @@ return {
         callback = function()
           vim.diagnostic.open_float({ scope = 'line' })
         end
+      },
+      {
+        label = '[lsp] c, cpp switch source ↔ header',
+        callback = function()
+          for _, v in pairs(vim.lsp.get_clients({ bufnr = 0 })) do
+            if v.config.name == 'clangd' then
+              vim.cmd('ClangdSwitchSourceHeader')
+              break
+            end
+          end
+          print('[lsp] c, cpp switch source ↔ header: clangd not active')
+        end,
+      },
+      {
+        label = '[lsp] c, cpp switch source ↔ header (v-split)',
+        callback = function()
+          for _, v in pairs(vim.lsp.get_clients({ bufnr = 0 })) do
+            if v.config.name == 'clangd' then
+              vim.cmd('vs | ClangdSwitchSourceHeader')
+              break
+            end
+          end
+          print('[lsp] c, cpp switch source ↔ header (v-split): clangd not active')
+        end,
       },
 
       -- dap

@@ -6,7 +6,7 @@ return {
     { '<leader>w', function() require 'nvim-window'.pick() end },
   },
   opts = {
-    normal_hl = 'DiagnosticLineNrInfo',
+    normal_hl = 'CursorLine',
     hint_hl = 'Bold',
     border = 'none'
   },
