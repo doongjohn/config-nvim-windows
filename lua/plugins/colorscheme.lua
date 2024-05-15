@@ -4,8 +4,7 @@ return {
   lazy = false,
   priority = 1000,
   config = function()
-    local kanagawa = require 'kanagawa'
-    kanagawa.setup {
+    require 'kanagawa'.setup {
       commentStyle = { bold = false, italic = false },
       keywordStyle = { bold = false, italic = false },
       statementStyle = { bold = false, italic = false },
@@ -28,9 +27,19 @@ return {
 
           -- popup menu
           Pmenu = { fg = theme.ui.shade0, bg = theme.ui.bg_p1 },
-          PmenuSel = { fg = 'NONE', bg = theme.ui.bg_p2 },
+          PmenuSel = { fg = 'none', bg = theme.ui.bg_p2 },
           PmenuSbar = { bg = theme.ui.bg_m1 },
           PmenuThumb = { bg = theme.ui.bg_p2 },
+
+          -- treesitter
+          ['@module'] = { link = '@keyword.import' },
+          ['@field'] = { link = '@variable.member' },
+          ['@variable.parameter'] = { fg = palette.oldWhite },
+
+          -- semantic highlighting: https://gist.github.com/swarn/fb37d9eefe1bc616c2a7e476c0bc0316
+          ['@lsp.type.comment'] = { link = '@comment' },
+          ['@lsp.type.keyword'] = { link = '@keyword' },
+          ['@lsp.typemod.method.readonly.cpp'] = { link = '@function.method' },
 
           -- telescope
           TelescopeNormal = { bg = palette.sumiInk0 },
@@ -45,30 +54,11 @@ return {
           TelescopePreviewNormal = { bg = theme.ui.bg_dim },
           TelescopePreviewBorder = { bg = theme.ui.bg_dim, fg = theme.ui.bg_dim },
           TelescopeSelection = { bg = palette.sumiInk5 },
-
-          -- neotree
-          NeoTreeNormal = { bg = palette.sumiInk0, fg = palette.fujiWhite },
-
-          -- navbuddy
-          NavbuddyName = { fg = palette.fujiWhite },
         }
       end,
     }
 
-    -- set colorscheme in lua: https://github.com/neovim/neovim/issues/18201
     vim.o.background = 'dark'
     vim.cmd.colorscheme('kanagawa-wave')
-
-    local palette = require 'kanagawa.colors'.setup().palette
-
-    -- treesitter
-    vim.api.nvim_set_hl(0, '@module', { link = '@keyword.import' })
-    vim.api.nvim_set_hl(0, '@field', { link = '@variable.member' })
-    vim.api.nvim_set_hl(0, '@variable.parameter', { fg = palette.oldWhite })
-
-    -- semantic highlighting: https://gist.github.com/swarn/fb37d9eefe1bc616c2a7e476c0bc0316
-    vim.api.nvim_set_hl(0, '@lsp.type.comment', { link = '@comment' })
-    vim.api.nvim_set_hl(0, '@lsp.type.keyword', { link = '@keyword' })
-    vim.api.nvim_set_hl(0, '@lsp.typemod.method.readonly.cpp', { link = '@function.method' })
   end
 }

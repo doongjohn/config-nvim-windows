@@ -81,7 +81,7 @@ vim.api.nvim_create_autocmd('BufEnter', {
 -- options per filetype
 vim.api.nvim_create_autocmd('FileType', {
   group = 'doongjohn:FileType',
-  pattern = { 'gitconfig', 'markdown', 'fish', 'python', 'cs', 'go', 'zig', 'odin', 'glsl' },
+  pattern = { 'gitconfig', 'markdown', 'fish', 'nu', 'python', 'cs', 'go', 'zig', 'odin', 'glsl' },
   callback = function()
     vim.bo.tabstop = 4
     vim.bo.shiftwidth = 4
