@@ -65,14 +65,20 @@ vim.api.nvim_create_augroup('doongjohn:LspTokenUpdate', {})
 -- syntax per filetype
 vim.api.nvim_create_autocmd('BufEnter', {
   group = 'doongjohn:BufEnter',
-  pattern = { '*.nims', '*.nimble' },
+  pattern = {
+    '*.nims',
+    '*.nimble',
+  },
   callback = function()
     vim.opt.syntax = 'nim'
   end
 })
 vim.api.nvim_create_autocmd('BufEnter', {
   group = 'doongjohn:BufEnter',
-  pattern = { '*.vifm', 'vifmrc' },
+  pattern = {
+    '*.vifm',
+    'vifmrc',
+  },
   callback = function()
     vim.opt.syntax = 'vim'
   end
@@ -81,7 +87,29 @@ vim.api.nvim_create_autocmd('BufEnter', {
 -- options per filetype
 vim.api.nvim_create_autocmd('FileType', {
   group = 'doongjohn:FileType',
-  pattern = { 'gitconfig', 'markdown', 'fish', 'nu', 'python', 'cs', 'go', 'zig', 'odin', 'glsl' },
+  pattern = {
+    'gitconfig',
+    'make',
+    'go',
+    'odin',
+  },
+  callback = function()
+    vim.bo.tabstop = 4
+    vim.bo.shiftwidth = 4
+    vim.bo.expandtab = false
+  end
+})
+vim.api.nvim_create_autocmd('FileType', {
+  group = 'doongjohn:FileType',
+  pattern = {
+    'markdown',
+    'fish',
+    'nu',
+    'python',
+    'cs',
+    'zig',
+    'glsl',
+  },
   callback = function()
     vim.bo.tabstop = 4
     vim.bo.shiftwidth = 4
@@ -89,14 +117,9 @@ vim.api.nvim_create_autocmd('FileType', {
 })
 vim.api.nvim_create_autocmd('FileType', {
   group = 'doongjohn:FileType',
-  pattern = { 'gitconfig', 'make', 'odin' },
-  callback = function()
-    vim.bo.expandtab = false
-  end
-})
-vim.api.nvim_create_autocmd('FileType', {
-  group = 'doongjohn:FileType',
-  pattern = { 'oil' },
+  pattern = {
+    'oil',
+  },
   callback = function()
     vim.opt_local.cursorline = true
   end
