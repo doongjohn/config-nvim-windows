@@ -244,7 +244,7 @@ vim.api.nvim_create_autocmd('FileType', {
 -- esc
 keymap('v', '<c-l>', '<esc>')
 keymap('i', '<c-l>', '<esc>')
--- goto previous buffer
+-- goto alternate-file
 keymap_s('n', '<leader>\'', '<c-^>')
 -- highlight current word
 keymap_s('n', '<leader>a', '*N')
@@ -266,10 +266,6 @@ keymap_s('v', '<a-k>', ":move '<-2<cr>gv-gv")
 keymap_s('v', '<a-down>', ":move '>+1<cr>gv-gv")
 keymap_s('v', '<a-up>', ":move '<-2<cr>gv-gv")
 -- lsp functions
-keymap_s('n', '<s-k>', vim.lsp.buf.hover)
-keymap_s('n', '<c-h>', function()
-  vim.diagnostic.open_float({ scope = 'line' })
-end)
 keymap_s('n', '<f2>', vim.lsp.buf.rename)
 keymap_s('n', '<leader>c', vim.lsp.buf.code_action)
 
