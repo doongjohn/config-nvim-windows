@@ -117,9 +117,7 @@ vim.api.nvim_create_autocmd('FileType', {
 })
 vim.api.nvim_create_autocmd('FileType', {
   group = 'doongjohn:FileType',
-  pattern = {
-    'oil',
-  },
+  pattern = { 'oil' },
   callback = function()
     vim.opt_local.cursorline = true
   end
@@ -128,14 +126,21 @@ vim.api.nvim_create_autocmd('FileType', {
 -- comment string per filetype
 vim.api.nvim_create_autocmd('FileType', {
   group = 'doongjohn:FileType',
-  pattern = { 'c', 'cpp' },
+  pattern = {
+    'c',
+    'cpp',
+  },
   callback = function()
     vim.bo.commentstring = '// %s';
   end
 })
 vim.api.nvim_create_autocmd('FileType', {
   group = 'doongjohn:FileType',
-  pattern = { 'nim', 'nims', 'nimble' },
+  pattern = {
+    'nim',
+    'nims',
+    'nimble',
+  },
   callback = function()
     vim.bo.commentstring = '# %s';
   end
