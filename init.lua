@@ -29,7 +29,8 @@ vim.opt.fillchars:append {
 }
 vim.o.wrap = false
 vim.o.list = true
-vim.o.listchars = 'trail:·,tab:│ '
+vim.opt.listchars:append('trail:·')
+vim.opt.listchars:append('tab:  ')
 
 -- use 2 spaces for indentation
 vim.o.tabstop = 2
