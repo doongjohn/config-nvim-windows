@@ -5,6 +5,7 @@ return {
   priority = 1000,
   config = function()
     require 'kanagawa'.setup {
+      compile = true,
       commentStyle = { bold = false, italic = false },
       keywordStyle = { bold = false, italic = false },
       statementStyle = { bold = false, italic = false },
