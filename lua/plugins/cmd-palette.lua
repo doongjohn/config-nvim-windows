@@ -189,6 +189,6 @@ return {
     vim.keymap.set('n', '<c-p>', function()
       require 'cmd-palette'.setup(opts)
       vim.cmd('CmdPalette')
-    end, { silent = true })
+    end)
   end
 }

@@ -22,8 +22,8 @@ return {
           vim.cmd 'ToggleTerm direction=horizontal'
         end
 
-        vim.keymap.set('n', '<c-k>', toggleTerm, { noremap = true, silent = true, buffer = true })
-        vim.keymap.set('t', '<c-k>', toggleTerm, { noremap = true, silent = true, buffer = true })
+        vim.keymap.set('n', '<c-k>', toggleTerm, { buffer = true })
+        vim.keymap.set('t', '<c-k>', toggleTerm, { buffer = true })
       end
     })
   end

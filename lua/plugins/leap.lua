@@ -1,4 +1,3 @@
-require 'utils'
 return {
   -- fast cursor movement
   'ggandor/leap.nvim',
@@ -37,8 +36,8 @@ return {
       leap.leap { target_windows = get_target_windows() }
     end
 
-    keymap_s('n', 'm', leapSearch)
-    keymap_s('v', 'm', leapSearch)
-    keymap_s('o', 'm', leapSearch)
+    vim.keymap.set('n', 'm', leapSearch)
+    vim.keymap.set('v', 'm', leapSearch)
+    vim.keymap.set('o', 'm', leapSearch)
   end
 }

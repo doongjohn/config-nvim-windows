@@ -1,5 +1,3 @@
-require 'utils'
-
 -- clipboard
 vim.o.clipboard = 'unnamedplus'
 
@@ -248,35 +246,35 @@ vim.api.nvim_create_autocmd('FileType', {
 })
 
 -- esc
-keymap('v', '<c-l>', '<esc>')
-keymap('i', '<c-l>', '<esc>')
+vim.keymap.set('v', '<c-l>', '<esc>')
+vim.keymap.set('i', '<c-l>', '<esc>')
 -- goto alternate-file
-keymap_s('n', '<leader>\'', '<c-^>')
+vim.keymap.set('n', '<leader>\'', '<c-^>', { silent = true })
 -- highlight current word
-keymap_s('n', '<leader>a', '*N')
+vim.keymap.set('n', '<leader>a', '*N', { silent = true })
 -- delete word right side of the cursor
-keymap_s('i', '<c-d>', '<c-o>dw')
+vim.keymap.set('i', '<c-d>', '<c-o>dw', { silent = true })
 -- paste yanked
-keymap_s('n', '<leader>p', '"0p')
-keymap_s('v', '<leader>p', '"0p')
+vim.keymap.set('n', '<leader>p', '"0p', { silent = true })
+vim.keymap.set('v', '<leader>p', '"0p', { silent = true })
 -- indent using tab
-keymap_s('v', '<tab>', '>gv')
-keymap_s('v', '<s-tab>', '<gv')
+vim.keymap.set('v', '<tab>', '>gv', { silent = true })
+vim.keymap.set('v', '<s-tab>', '<gv', { silent = true })
 -- move text up down
-keymap_s('n', '<a-j>', "v:move '>+1<cr>")
-keymap_s('n', '<a-k>', "v:move '<-2<cr>")
-keymap_s('n', '<a-down>', "v:move '>+1<cr>")
-keymap_s('n', '<a-up>', "v:move '<-2<cr>")
-keymap_s('v', '<a-j>', ":move '>+1<cr>gv-gv")
-keymap_s('v', '<a-k>', ":move '<-2<cr>gv-gv")
-keymap_s('v', '<a-down>', ":move '>+1<cr>gv-gv")
-keymap_s('v', '<a-up>', ":move '<-2<cr>gv-gv")
+vim.keymap.set('n', '<a-j>', "v:move '>+1<cr>", { silent = true })
+vim.keymap.set('n', '<a-k>', "v:move '<-2<cr>", { silent = true })
+vim.keymap.set('n', '<a-down>', "v:move '>+1<cr>", { silent = true })
+vim.keymap.set('n', '<a-up>', "v:move '<-2<cr>", { silent = true })
+vim.keymap.set('v', '<a-j>', ":move '>+1<cr>gv-gv", { silent = true })
+vim.keymap.set('v', '<a-k>', ":move '<-2<cr>gv-gv", { silent = true })
+vim.keymap.set('v', '<a-down>', ":move '>+1<cr>gv-gv", { silent = true })
+vim.keymap.set('v', '<a-up>', ":move '<-2<cr>gv-gv", { silent = true })
 -- lsp functions
-keymap_s('n', '<f2>', vim.lsp.buf.rename)
-keymap_s('n', '<leader>c', vim.lsp.buf.code_action)
+vim.keymap.set('n', '<f2>', vim.lsp.buf.rename)
+vim.keymap.set('n', '<leader>c', vim.lsp.buf.code_action)
 
 -- multi-line normal command
-keymap_s('v', '<leader>z', function()
+vim.keymap.set('v', '<leader>z', function()
   local input = vim.fn.input('normal cmd:')
   if input == '' then return end
 
