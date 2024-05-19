@@ -12,7 +12,7 @@ return {
   },
   keys = {
     { '<space>', '<cmd>Telescope find_files<cr>' },
-    { '<leader>ff', ':Telescope current_buffer_fuzzy_find<cr>' },
+    { '<leader>ff', '<cmd>Telescope current_buffer_fuzzy_find<cr>' },
   },
   config = function()
     local telescope = require 'telescope'
@@ -41,26 +41,6 @@ return {
           preview_cutoff = 120,
         },
         path_display = { 'truncate' },
-        file_ignore_patterns = {
-          '%.objs[\\/]',
-          '%.deps[\\/]',
-          '%.cache[\\/]',
-          '%.git[\\/]',
-          '%.github[\\/]',
-          'vendor[\\/]',
-          'dep[\\/]',
-          'deps[\\/]',
-          'lib[\\/]',
-          'libs[\\/]',
-          'out[\\/]',
-          'build[\\/]',
-          'build_.*[\\/]',
-          'target[\\/]',
-          'dist[\\/]',
-          'node_modules[\\/]',
-          'zig%-cache[\\/]',
-          'zig%-out[\\/]',
-        },
         vimgrep_arguments = {
           'rg',
           '--color=never',
@@ -82,6 +62,8 @@ return {
           find_command = {
             'fd', '-tf', '-u',
             '--strip-cwd-prefix',
+
+            -- exclude files
             '-E=*.a',
             '-E=*.o',
             '-E=*.so',
@@ -90,6 +72,26 @@ return {
             '-E=*.dll',
             '-E=*.exe',
             '-E=*.pdb',
+
+            -- exclude folders
+            '-E=.objs/',
+            '-E=.deps/',
+            '-E=.cache/',
+            '-E=.git/',
+            '-E=.github/',
+            '-E=vendor/',
+            '-E=dep/',
+            '-E=deps/',
+            '-E=lib/',
+            '-E=libs/',
+            '-E=out/',
+            '-E=build/',
+            '-E=build_*/',
+            '-E=target/',
+            '-E=dist/',
+            '-E=node_modules/',
+            '-E=zig-cache/',
+            '-E=zig-out/',
           },
           hidden = true
         }
