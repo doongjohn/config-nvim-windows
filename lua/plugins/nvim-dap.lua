@@ -11,10 +11,15 @@ return {
       path_sep = '\\'
     end
 
+    local program_args = {}
+
     dap.adapters.lldb = {
-      type = 'executable',
-      command = vim.fn.exepath('lldb-vscode'),
-      name = 'lldb'
+      type = 'server',
+      port = '${port}',
+      executable = {
+        command = vim.fn.exepath('codelldb'),
+        args = { '--port', '${port}' },
+      },
     }
 
     local lldb_config = {
@@ -27,15 +32,59 @@ return {
           default = '.' .. path_sep,
           completion = 'file',
         })
-        return vim.fn.getcwd() .. path:sub(2)
+        path = vim.fn.getcwd() .. path:sub(2)
+
+        program_args = {}
+        local args_str = vim.fn.input('args: ', '', 'file')
+        for substring in args_str:gmatch("%S+") do
+          table.insert(program_args, substring)
+        end
+
+        return (path and path ~= "") and path or dap.ABORT
       end,
       cwd = '${workspaceFolder}',
-      stopOnEntry = false,
-      args = {},
-      runInTerminal = true,
+      args = function()
+        return program_args
+      end,
     }
 
-    dap.configurations.c = { lldb_config }
-    dap.configurations.cpp = { lldb_config }
+    -- this only works with gdb version > 14
+    -- dap.adapters.gdb = {
+    --   type = 'executable',
+    --   command = vim.fn.exepath('gdb'),
+    --   args = { '-i', 'dap' },
+    -- }
+    --
+    -- local gdb_config = {
+    --   name = 'gdb',
+    --   type = 'gdb',
+    --   request = 'launch',
+    --   program = function()
+    --     local path = vim.fn.input({
+    --       prompt = 'executable path: ',
+    --       default = '.' .. path_sep,
+    --       completion = 'file',
+    --     })
+    --     return vim.fn.getcwd() .. path:sub(2)
+    --   end,
+    --   cwd = '${workspaceFolder}',
+    --   args = function()
+    --     local args_str = vim.fn.input('args: ', '', 'file')
+    --     local args = {}
+    --     for substring in args_str:gmatch("%S+") do
+    --       table.insert(args, substring)
+    --     end
+    --     return args
+    --   end,
+    -- }
+
+    dap.configurations.c = {
+      lldb_config,
+      -- gdb_config,
+    }
+    dap.configurations.cpp = {
+      lldb_config,
+      -- gdb_config,
+    }
   end
 }
