@@ -4,14 +4,16 @@ return {
   event = 'BufEnter',
   dependencies = {
     'nvim-lua/plenary.nvim',
-    'debugloop/telescope-undo.nvim',
     {
       'nvim-telescope/telescope-fzf-native.nvim',
-      build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build',
+      build =
+      'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build',
     },
+    'natecraddock/telescope-zf-native.nvim',
+    'debugloop/telescope-undo.nvim',
   },
   keys = {
-    { '<space>', '<cmd>Telescope find_files<cr>' },
+    { '<space>',    '<cmd>Telescope find_files<cr>' },
     { '<leader>ff', '<cmd>Telescope current_buffer_fuzzy_find<cr>' },
   },
   config = function()
@@ -99,13 +101,25 @@ return {
       extensions = {
         fzf = {
           fuzzy = true,
+          override_file_sorter = false,
           override_generic_sorter = true,
-          override_file_sorter = true,
-          case_mode = 'ignore_case',
+        },
+        ['zf-native'] = {
+          file = {
+            enable = true,
+            highlight_results = true,
+            match_filename = true,
+            initial_sort = nil,
+            smart_case = true,
+          },
+          generic = {
+            enable = false,
+          },
         },
       }
     }
     telescope.load_extension 'fzf'
+    telescope.load_extension 'zf-native'
     telescope.load_extension 'undo'
   end
 }

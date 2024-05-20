@@ -193,6 +193,7 @@ local winbar_filetype_exclude = {
   'qf',
   'prompt',
   'terminal',
+  'checkhealth',
   'lazy',
   'Trouble',
   'toggleterm',
@@ -226,7 +227,9 @@ vim.api.nvim_create_autocmd('FileType', {
   group = 'doongjohn:FileType',
   pattern = { '*' },
   callback = function()
-    if vim.startswith(vim.api.nvim_buf_get_name(0), 'oil') then
+    if vim.tbl_contains(winbar_filetype_exclude, vim.bo.filetype) then
+      vim.opt_local.winbar = ''
+    elseif vim.startswith(vim.api.nvim_buf_get_name(0), 'oil') then
       -- oil
       vim.opt_local.winbar =
           [[%#TabLineSel# oil%{&modified ? " *" : ""} %#Comment# ]] ..
@@ -234,13 +237,11 @@ vim.api.nvim_create_autocmd('FileType', {
     elseif vim.bo.filetype == 'Outline' then
       -- outline
       vim.opt_local.winbar = [[%#TabLineSel# outline%{&modified ? " *" : ""} %#Comment#]]
-    elseif not vim.tbl_contains(winbar_filetype_exclude, vim.bo.filetype) then
+    else
       -- code
       vim.opt_local.winbar =
           [[%#TabLineSel# %t%{&modified ? " *" : ""} %#Comment# ]] ..
           [[%{%v:lua.require'nvim-navic'.get_location()%}]]
-    else
-      vim.opt_local.winbar = ''
     end
   end
 })
