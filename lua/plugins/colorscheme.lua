@@ -37,11 +37,6 @@ return {
           ['@field'] = { link = '@variable.member' },
           ['@variable.parameter'] = { fg = palette.oldWhite },
 
-          -- semantic highlighting: https://gist.github.com/swarn/fb37d9eefe1bc616c2a7e476c0bc0316
-          ['@lsp.type.comment'] = { link = '@comment' },
-          ['@lsp.type.keyword'] = { link = '@keyword' },
-          ['@lsp.typemod.method.readonly.cpp'] = { link = '@function.method' },
-
           -- telescope
           TelescopeNormal = { bg = palette.sumiInk0 },
           TelescopeTitle = { bg = palette.sumiInk5, fg = palette.dragonBlue, bold = true },
@@ -61,5 +56,11 @@ return {
 
     vim.o.background = 'dark'
     vim.cmd.colorscheme('kanagawa-wave')
+
+    -- semantic highlighting: https://gist.github.com/swarn/fb37d9eefe1bc616c2a7e476c0bc0316
+    vim.api.nvim_set_hl(0, '@lsp.type.comment', { link = '@comment' })
+    vim.api.nvim_set_hl(0, '@lsp.type.keyword', { link = '@keyword' })
+    vim.api.nvim_set_hl(0, '@lsp.type.variable', { link = '@variable' })
+    vim.api.nvim_set_hl(0, '@lsp.typemod.method.readonly.cpp', { link = '@function.method' })
   end
 }
