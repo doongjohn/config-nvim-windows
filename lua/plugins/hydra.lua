@@ -42,7 +42,6 @@ return {
         invoke_on_body = true,
         hint = {
           type = 'window',
-          position = 'top',
         },
       },
       mode = 'n',
