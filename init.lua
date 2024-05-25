@@ -5,7 +5,6 @@ vim.o.clipboard = 'unnamedplus'
 vim.o.mouse = 'a'
 
 -- ui settings
-vim.o.termguicolors = true
 vim.o.syntax = 'on'
 vim.o.number = true
 vim.o.signcolumn = 'yes:1'

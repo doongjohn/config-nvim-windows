@@ -67,22 +67,6 @@ return {
       },
       on_attach = on_attach,
     }
-    vim.api.nvim_create_autocmd("LspTokenUpdate", {
-      group = 'doongjohn:LspTokenUpdate',
-      callback = function(args)
-        local token = args.data.token
-        if
-          token.type == "variable"
-          and token.modifiers.static
-        then
-          -- to fix clashing highlights
-          -- - @lsp.typemod.variable.defaultLibrary.rust links to Special priority: 127
-          -- - @lsp.typemod.variable.static.rust links to Constant priority: 127
-          -- https://neovim.io/doc/user/lsp.html#lsp-semantic_tokens
-          vim.lsp.semantic_tokens.highlight_token(token, args.buf, args.data.client_id, "Constant")
-        end
-      end,
-    })
 
     lsp.gopls.setup {
       cmd = { 'gopls', 'serve' },
