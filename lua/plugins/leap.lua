@@ -17,7 +17,7 @@ return {
 
     local function leapSearch()
       leap.leap {
-        target_windows = require('leap.user').get_focusable_windows()
+        target_windows = require 'leap.user'.get_focusable_windows()
       }
     end
 
