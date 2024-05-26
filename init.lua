@@ -217,7 +217,9 @@ vim.api.nvim_create_autocmd('BufEnter', {
     if vim.api.nvim_win_get_config(0).relative ~= '' then
       return
     end
-    if vim.api.nvim_buf_get_name(0):len() == 0 then
+    if vim.tbl_contains(winbar_filetype_exclude, vim.bo.filetype) then
+      vim.opt_local.winbar = ''
+    elseif vim.api.nvim_buf_get_name(0):len() == 0 then
       vim.opt_local.winbar = [[%#TabLineSel# [No Name]%{&modified ? " *" : ""} %#Comment#]]
     end
   end
