@@ -95,6 +95,10 @@ return {
           require 'rgflow'.open_blank('')
         end
       },
+      {
+        label = '[search] document symbols',
+        cmd = 'Telescope lsp_document_symbols'
+      },
 
       -- git
       {
