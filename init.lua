@@ -1,18 +1,22 @@
--- clipboard
 vim.o.clipboard = 'unnamedplus'
-
--- enable mouse input
+vim.o.jumpoptions = 'stack,view'
 vim.o.mouse = 'a'
-
--- ui settings
+vim.o.wrap = false
+vim.o.sidescrolloff = 10
 vim.o.syntax = 'on'
 vim.o.number = true
-vim.o.signcolumn = 'yes:1'
 vim.o.showmode = false
-vim.o.sidescrolloff = 8
+vim.o.laststatus = 3
+vim.o.signcolumn = 'yes:1'
+
+-- show whitespace
+vim.o.list = true
+vim.opt.listchars:append('trail:·')
+vim.opt.listchars:append('tab:  ')
+
+-- split options
 vim.o.splitright = true
 vim.o.splitbelow = true
-vim.o.laststatus = 3
 vim.o.splitkeep = 'screen'
 vim.opt.fillchars:append {
   horiz     = '━',
@@ -24,10 +28,6 @@ vim.opt.fillchars:append {
   verthoriz = '╋',
   eob       = ' ',
 }
-vim.o.wrap = false
-vim.o.list = true
-vim.opt.listchars:append('trail:·')
-vim.opt.listchars:append('tab:  ')
 
 -- use 2 spaces for indentation
 vim.o.tabstop = 2
