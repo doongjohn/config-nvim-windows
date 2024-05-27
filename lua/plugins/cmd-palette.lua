@@ -203,19 +203,18 @@ return {
           }
 
           local get_targets = {
-            bash = function(folder) return { '-c', [[fd -I -t=d '.+\.dir$' ]] .. folder } end,
-            fish = function(folder) return { '-c', [[fd -I -t=d '.+\.dir$' ]] .. folder } end,
-            nu = function(folder) return { '-c', [[fd -I -t=d '.+\.dir$' ]] .. folder } end,
-            cmd = function(folder) return { '/c', [[fd -I -t=d .+\.dir$ ]] .. folder } end,
+            bash = function(folder) return { '-c', 'cd ' .. folder .. [[ && fd -I -t=d -d=1 '.+\.dir$']] } end,
+            fish = function(folder) return { '-c', 'cd ' .. folder .. [[; fd -I -t=d -d=1 '.+\.dir$']] } end,
+            nu = function(folder) return { '-c', 'cd ' .. folder .. [[; fd -I -t=d -d=1 '.+\.dir$']] } end,
+            cmd = function(folder) return { '/c', 'cd ' .. folder .. [[ && fd -I -t=d -d=1 .+\.dir$]] } end,
           }
 
           local function select_target_and_build(folder)
             local targets = {}
             local stdout = vim.uv.new_pipe()
             local stderr = vim.uv.new_pipe()
-
             local options = {
-              args = get_targets[shell](folder),
+              args = get_targets[shell](vim.fs.joinpath(folder, 'CMakeFiles')),
               stdio = { nil, stdout, stderr },
             }
 
@@ -229,12 +228,13 @@ return {
               if handle then
                 handle:close()
               end
-
               if code == 0 then
                 vim.ui.select(targets, {
                   prompt = 'Select a target to build',
                 }, function(choice)
-                  vim.cmd('TermExec go_back=0 cmd="cmake --build ' .. folder .. ' --target ' .. choice .. '"')
+                  if choice then
+                    vim.cmd('TermExec go_back=0 cmd="cmake --build ' .. folder .. ' --target ' .. choice .. '"')
+                  end
                 end)
               else
                 print("exit code: " .. code)
@@ -244,7 +244,7 @@ return {
             vim.uv.read_start(stdout, function(_, data)
               if data then
                 for line in data:gmatch("[^\r\n]+") do
-                  table.insert(targets, vim.fs.basename(line:sub(1, -5 - 1)))
+                  table.insert(targets, vim.fs.basename(line:sub(1, -5 - 1))) -- remove `.dir\n`
                 end
               end
             end)
@@ -258,7 +258,6 @@ return {
             local folders = {}
             local stdout = vim.uv.new_pipe()
             local stderr = vim.uv.new_pipe()
-
             local options = {
               args = get_build_folders[shell](),
               stdio = { nil, stdout, stderr },
@@ -274,12 +273,13 @@ return {
               if handle then
                 handle:close()
               end
-
               if code == 0 then
                 vim.ui.select(folders, {
                   prompt = 'Select a build folder',
                 }, function(choice)
-                  select_target_and_build(choice)
+                  if choice then
+                    select_target_and_build(choice)
+                  end
                 end)
               else
                 print("exit code: " .. code)
@@ -289,6 +289,7 @@ return {
             vim.uv.read_start(stdout, function(_, data)
               if data then
                 for line in data:gmatch("[^\r\n]+") do
+                  print(line)
                   table.insert(folders, vim.fs.dirname(line))
                 end
               end
