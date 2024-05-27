@@ -6,10 +6,8 @@ return {
   config = function()
     local dap = require 'dap'
 
-    local path_sep = '/'
-    if vim.fn.has('win64') == 1 or vim.fn.has('win32') == 1 then
-      path_sep = '\\'
-    end
+    local is_windows = vim.fn.has('win64') == 1 or vim.fn.has('win32') == 1
+    local path_sep = is_windows and '\\' or '/'
 
     local program_args = {}
 
@@ -17,13 +15,14 @@ return {
       type = 'server',
       port = '${port}',
       executable = {
-        command = vim.fn.exepath('codelldb'),
+        command = vim.fn.exepath('lldb-dap'),
         args = { '--port', '${port}' },
+        detached = is_windows and false or true,
       },
     }
 
     local lldb_config = {
-      name = 'lldb',
+      name = 'Debug C/C++ (lldb)',
       type = 'lldb',
       request = 'launch',
       program = function()
@@ -42,10 +41,10 @@ return {
 
         return (path and path ~= "") and path or dap.ABORT
       end,
-      cwd = '${workspaceFolder}',
       args = function()
         return program_args
       end,
+      cwd = '${workspaceFolder}',
     }
 
     -- this only works with gdb version > 14
@@ -56,7 +55,7 @@ return {
     -- }
     --
     -- local gdb_config = {
-    --   name = 'gdb',
+    --   name = 'Debug C/C++ (gdb)',
     --   type = 'gdb',
     --   request = 'launch',
     --   program = function()
@@ -65,26 +64,23 @@ return {
     --       default = '.' .. path_sep,
     --       completion = 'file',
     --     })
-    --     return vim.fn.getcwd() .. path:sub(2)
+    --     path = vim.fn.getcwd() .. path:sub(2)
+    --
+    --     program_args = {}
+    --     local args_str = vim.fn.input('args: ', '', 'file')
+    --     for substring in args_str:gmatch("%S+") do
+    --       table.insert(program_args, substring)
+    --     end
+    --
+    --     return (path and path ~= "") and path or dap.ABORT
+    --   end,
+    --   args = function()
+    --     return program_args
     --   end,
     --   cwd = '${workspaceFolder}',
-    --   args = function()
-    --     local args_str = vim.fn.input('args: ', '', 'file')
-    --     local args = {}
-    --     for substring in args_str:gmatch("%S+") do
-    --       table.insert(args, substring)
-    --     end
-    --     return args
-    --   end,
     -- }
 
-    dap.configurations.c = {
-      lldb_config,
-      -- gdb_config,
-    }
-    dap.configurations.cpp = {
-      lldb_config,
-      -- gdb_config,
-    }
+    dap.configurations.c = { lldb_config }
+    dap.configurations.cpp = { lldb_config }
   end
 }
