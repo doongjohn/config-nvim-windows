@@ -214,13 +214,8 @@ vim.api.nvim_create_autocmd('BufEnter', {
   group = 'doongjohn:BufEnter',
   pattern = { '*' },
   callback = function()
-    if vim.api.nvim_win_get_config(0).relative ~= '' then
-      return
-    end
-    if vim.tbl_contains(winbar_filetype_exclude, vim.bo.filetype) then
-      vim.opt_local.winbar = ''
-    elseif vim.api.nvim_buf_get_name(0):len() == 0 then
-      vim.opt_local.winbar = [[%#TabLineSel# [No Name]%{&modified ? " *" : ""} %#Comment#]]
+    if vim.bo.filetype == 'Outline' then
+      vim.opt_local.winbar = [[%#TabLineSel# outline%{&modified ? " *" : ""} %#Comment#]]
     end
   end
 })
@@ -228,18 +223,11 @@ vim.api.nvim_create_autocmd('FileType', {
   group = 'doongjohn:FileType',
   pattern = { '*' },
   callback = function()
-    if vim.tbl_contains(winbar_filetype_exclude, vim.bo.filetype) then
-      vim.opt_local.winbar = ''
-    elseif vim.startswith(vim.api.nvim_buf_get_name(0), 'oil') then
-      -- oil
+    if vim.startswith(vim.api.nvim_buf_get_name(0), 'oil') then
       vim.opt_local.winbar =
           [[%#TabLineSel# oil%{&modified ? " *" : ""} %#Comment# ]] ..
           [[%{%luaeval("vim.api.nvim_buf_get_name(0):sub(7,-1)")%}]]
-    elseif vim.bo.filetype == 'Outline' then
-      -- outline
-      vim.opt_local.winbar = [[%#TabLineSel# outline%{&modified ? " *" : ""} %#Comment#]]
-    else
-      -- code
+    elseif not vim.tbl_contains(winbar_filetype_exclude, vim.bo.filetype) then
       vim.opt_local.winbar =
           [[%#TabLineSel# %t%{&modified ? " *" : ""} %#Comment# ]] ..
           [[%{%v:lua.require'nvim-navic'.get_location()%}]]
