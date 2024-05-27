@@ -188,6 +188,120 @@ return {
           require 'dap'.focus_frame()
         end
       },
+
+      -- cmake
+      {
+        label = '[cmake] build',
+        callback = function()
+          local shell = vim.fs.basename(vim.o.shell):gsub("%..*$", "")
+
+          local get_build_folders = {
+            bash = function() return { '-c', [[fd -I -t=f 'CMakeCache\.txt']] } end,
+            fish = function() return { '-c', [[fd -I -t=f 'CMakeCache\.txt']] } end,
+            nu = function() return { '-c', [[fd -I -t=f 'CMakeCache\.txt']] } end,
+            cmd = function() return { '/c', [[fd -I -t=f CMakeCache\.txt]] } end,
+          }
+
+          local get_targets = {
+            bash = function(folder) return { '-c', [[fd -I -t=d '.+\.dir$' ]] .. folder } end,
+            fish = function(folder) return { '-c', [[fd -I -t=d '.+\.dir$' ]] .. folder } end,
+            nu = function(folder) return { '-c', [[fd -I -t=d '.+\.dir$' ]] .. folder } end,
+            cmd = function(folder) return { '/c', [[fd -I -t=d .+\.dir$ ]] .. folder } end,
+          }
+
+          local function select_target_and_build(folder)
+            local targets = {}
+            local stdout = vim.uv.new_pipe()
+            local stderr = vim.uv.new_pipe()
+
+            local options = {
+              args = get_targets[shell](folder),
+              stdio = { nil, stdout, stderr },
+            }
+
+            ---@type uv_process_t|nil
+            local handle = nil
+            handle, _ = vim.uv.spawn(vim.o.shell, options, function(code, _)
+              stdout:read_stop()
+              stderr:read_stop()
+              stdout:close()
+              stderr:close()
+              if handle then
+                handle:close()
+              end
+
+              if code == 0 then
+                vim.ui.select(targets, {
+                  prompt = 'Select a target to build',
+                }, function(choice)
+                  vim.cmd('TermExec go_back=0 cmd="cmake --build ' .. folder .. ' --target ' .. choice .. '"')
+                end)
+              else
+                print("exit code: " .. code)
+              end
+            end)
+
+            vim.uv.read_start(stdout, function(_, data)
+              if data then
+                for line in data:gmatch("[^\r\n]+") do
+                  table.insert(targets, vim.fs.basename(line:sub(1, -5 - 1)))
+                end
+              end
+            end)
+
+            vim.uv.read_start(stderr, function(_, data)
+              if data then print(data) end
+            end)
+          end
+
+          local function select_build_folder()
+            local folders = {}
+            local stdout = vim.uv.new_pipe()
+            local stderr = vim.uv.new_pipe()
+
+            local options = {
+              args = get_build_folders[shell](),
+              stdio = { nil, stdout, stderr },
+            }
+
+            ---@type uv_process_t|nil
+            local handle = nil
+            handle, _ = vim.uv.spawn(vim.o.shell, options, function(code, _)
+              stdout:read_stop()
+              stderr:read_stop()
+              stdout:close()
+              stderr:close()
+              if handle then
+                handle:close()
+              end
+
+              if code == 0 then
+                vim.ui.select(folders, {
+                  prompt = 'Select a build folder',
+                }, function(choice)
+                  select_target_and_build(choice)
+                end)
+              else
+                print("exit code: " .. code)
+              end
+            end)
+
+            vim.uv.read_start(stdout, function(_, data)
+              if data then
+                for line in data:gmatch("[^\r\n]+") do
+                  table.insert(folders, vim.fs.dirname(line))
+                end
+              end
+            end)
+
+            vim.uv.read_start(stderr, function(_, data)
+              if data then print(data) end
+            end)
+          end
+
+          select_build_folder()
+        end
+      },
     }
 
     vim.keymap.set('n', '<c-p>', function()
