@@ -5,7 +5,7 @@ return {
     local hydra = require 'hydra'
 
     hydra({
-      name = 'Side scroll',
+      name = 'side scroll',
       mode = 'n',
       body = 'z',
       heads = {
@@ -17,7 +17,7 @@ return {
     })
 
     hydra({
-      name = 'Window',
+      name = 'window',
       mode = 'n',
       body = '<c-w>',
       heads = {
@@ -31,6 +31,28 @@ return {
         { 'e', '<c-w>=', { desc = 'equal size' } },
         { 'b', '<cmd>Bdelete<cr>', { desc = 'delete buffer' } },
         { 'q', '<c-w>q', { desc = 'quit window' } },
+      }
+    })
+
+    hydra({
+      name = 'git',
+      config = {
+        color = 'pink',
+        timeout = false,
+        invoke_on_body = true,
+        hint = {
+          type = 'window',
+          offset = -1,
+        },
+      },
+      mode = 'n',
+      body = '<leader>g',
+      heads = {
+        { 'n', '<cmd>Gitsigns next_hunk<cr>',    { desc = 'next hunk' } },
+        { 'N', '<cmd>Gitsigns prev_hunk<cr>',    { desc = 'prev hunk' } },
+        { 'p', '<cmd>Gitsigns preview_hunk<cr>', { desc = 'preview hunk' } },
+        { 'r', '<cmd>Gitsigns reset_hunk<cr>',   { desc = 'reset hunk' } },
+        { 'q', nil,                              { desc = 'exit', exit = true, nowait = true } },
       }
     })
 
@@ -58,7 +80,7 @@ return {
         { 'o',     require 'dap'.step_over,         { desc = 'step-out' } },
         { 'i',     require 'dap.ui.widgets'.hover,  { desc = 'inspect' } },
         { 't',     require 'dap'.terminate,         { desc = 'terminate' } },
-        { 'q',     nil,                             { exit = true, nowait = true, desc = 'exit' } },
+        { 'q',     nil,                             { desc = 'exit', exit = true, nowait = true } },
       }
     })
   end
