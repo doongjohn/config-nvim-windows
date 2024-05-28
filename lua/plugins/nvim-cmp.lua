@@ -1,4 +1,3 @@
----@diagnostic disable: missing-fields
 return {
   -- auto completion
   'hrsh7th/nvim-cmp',
@@ -9,13 +8,12 @@ return {
     'hrsh7th/cmp-cmdline',
     'hrsh7th/cmp-nvim-lsp',
     'hrsh7th/cmp-nvim-lsp-signature-help',
-    'rcarriga/cmp-dap',
     'dcampos/nvim-snippy',
     'dcampos/cmp-snippy',
+    'rcarriga/cmp-dap',
   },
   config = function()
-    local cmp = require 'cmp'
-    local cmp_icons = {
+    local icons = {
       File = '󰈙',
       Folder = '󰉋',
       Text = '',
@@ -43,6 +41,7 @@ return {
       TypeParameter = '',
     }
 
+    local cmp = require 'cmp'
     cmp.setup {
       enabled = function()
         return vim.api.nvim_get_option_value('buftype', { buf = 0 }) ~= 'prompt'
@@ -57,9 +56,10 @@ return {
         fields = { 'kind', 'abbr', 'menu' },
         format = function(_, vim_item)
           vim_item.menu = vim_item.kind
-          vim_item.kind = cmp_icons[vim_item.kind]
+          vim_item.kind = icons[vim_item.kind]
           return vim_item
         end,
+        expandable_indicator = true,
       },
       mapping = cmp.mapping.preset.insert {
         ['<c-b>'] = cmp.mapping.scroll_docs(-4),

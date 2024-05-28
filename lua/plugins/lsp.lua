@@ -34,11 +34,11 @@ return {
     local capabilities = require 'cmp_nvim_lsp'.default_capabilities()
     lsp_defaults.capabilities = vim.tbl_deep_extend('force', lsp_defaults.capabilities, capabilities)
 
+    -- lsp breadcrumbs
     local navic = require 'nvim-navic'
 
     local on_attach = function(client, bufnr)
       if client.server_capabilities.documentSymbolProvider then
-        -- lsp breadcrumbs
         navic.attach(client, bufnr)
       end
     end
