@@ -25,13 +25,12 @@ return {
           require 'nvim-window'.pick()
         end, { desc = 'pick' } },
         { '-', '<c-w><' },
-        { '=', '<c-w>>', { desc = 'resize 󰤼' } },
+        { '=', '<c-w>>', { desc = '󰤼 resize' } },
         { '_', '<c-w>-' },
-        { '+', '<c-w>+', { desc = 'resize 󰤻' } },
+        { '+', '<c-w>+', { desc = '󰤻 resize' } },
         { 'e', '<c-w>=', { desc = 'equal size' } },
         { 'b', '<cmd>Bdelete<cr>', { desc = 'delete buffer' } },
-        { 'c', '<c-w>q', { desc = 'close window' } },
-        { 'q', nil, { exit = true, nowait = true, desc = 'exit' } },
+        { 'q', '<c-w>q', { desc = 'quit window' } },
       }
     })
 
@@ -42,6 +41,7 @@ return {
         invoke_on_body = true,
         hint = {
           type = 'window',
+          offset = -1,
         },
       },
       mode = 'n',
