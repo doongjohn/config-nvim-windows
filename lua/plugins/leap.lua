@@ -16,9 +16,7 @@ return {
     })
 
     local function leapSearch()
-      leap.leap {
-        target_windows = require 'leap.user'.get_focusable_windows()
-      }
+      leap.leap { target_windows = require 'leap.user'.get_focusable_windows() }
     end
 
     vim.keymap.set('n', 'm', leapSearch)
