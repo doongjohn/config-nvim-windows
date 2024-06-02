@@ -4,7 +4,6 @@ return {
   event = { 'BufReadPre', 'BufNewFile' },
   dependencies = {
     'smiteshp/nvim-navic',
-    'folke/neodev.nvim',
   },
   init = function()
     vim.diagnostic.config({
@@ -26,9 +25,6 @@ return {
       { text = '', texthl = 'DiagnosticSignHint', linehl = '', numhl = 'DiagnosticHint' })
   end,
   config = function()
-    -- nvim lua config support
-    require 'neodev'.setup {}
-
     local lsp = require 'lspconfig'
     local lsp_defaults = lsp.util.default_config
     local capabilities = require 'cmp_nvim_lsp'.default_capabilities()
