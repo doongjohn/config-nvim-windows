@@ -133,14 +133,6 @@ return {
         cmd = 'Glance references'
       },
       {
-        label = '[lsp] type definitions',
-        cmd = 'Glance type_definitions'
-      },
-      {
-        label = '[lsp] implementations',
-        cmd = 'Glance implementations'
-      },
-      {
         label = '[lsp] outline',
         cmd = 'Outline'
       },

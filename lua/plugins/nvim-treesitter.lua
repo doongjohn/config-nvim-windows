@@ -62,7 +62,6 @@ return {
       indent = {
         enable = true,
         disable = {
-          'cpp',
           'zig',
           'odin',
           'lua',
