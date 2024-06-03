@@ -5,7 +5,6 @@ return {
     'nvim-neotest/nvim-nio',
   },
   config = function()
-    ---@diagnostic disable-next-line: missing-fields
-    require 'dapui'.setup {}
+    require 'dapui'.setup()
   end
 }
