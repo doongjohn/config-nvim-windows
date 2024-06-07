@@ -18,7 +18,7 @@ return {
         'bash', 'fish', 'nu',
         -- tool
         'make', 'cmake', 'ninja',
-        'regex', 'dap_repl', 'vim',
+        'regex', 'dap_repl', 'vim', 'vimdoc',
         -- compiled lanuage
         'c', 'cpp', 'c_sharp',
         'rust', 'zig', 'odin',

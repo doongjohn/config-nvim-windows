@@ -1,6 +1,6 @@
 return {
   'nvimtools/hydra.nvim',
-  lazy = false,
+  event = 'VeryLazy',
   config = function()
     local hydra = require 'hydra'
 
