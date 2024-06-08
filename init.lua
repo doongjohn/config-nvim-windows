@@ -85,6 +85,13 @@ vim.api.nvim_create_autocmd('BufEnter', {
 -- options per filetype
 vim.api.nvim_create_autocmd('FileType', {
   group = 'doongjohn:FileType',
+  pattern = { 'toggleterm' },
+  callback = function()
+    vim.opt_local.signcolumn = 'no'
+  end
+})
+vim.api.nvim_create_autocmd('FileType', {
+  group = 'doongjohn:FileType',
   pattern = {
     'gitconfig',
     'make',
