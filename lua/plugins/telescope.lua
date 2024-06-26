@@ -62,7 +62,8 @@ return {
       pickers = {
         find_files = {
           find_command = {
-            'fd', '-tf', '-u',
+            'fd', '-tf', '-H',
+            '--no-require-git',
             '--strip-cwd-prefix',
 
             -- exclude files
