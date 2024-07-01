@@ -1,8 +1,8 @@
 return {
-  'mangelozzi/rgflow.nvim',
+  'magicduck/grug-far.nvim',
   opts = {
-    cmd_flags =
-      '--no-heading --smart-case -.ni'
+    extraRgArgs =
+      '--no-heading -.ni'
       .. ' -g !.objs'
       .. ' -g !.deps'
       .. ' -g !.cache'
@@ -22,8 +22,5 @@ return {
       .. ' -g !node_modules'
       .. ' -g !zig-cache'
       .. ' -g !zig-out',
-    default_trigger_mappings = false,
-    default_ui_mappings = true,
-    default_quickfix_mappings = true,
-  }
+  },
 }

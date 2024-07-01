@@ -54,6 +54,9 @@ vim.filetype.add {
   },
 }
 
+-- local leader
+vim.g.maplocalleader = ','
+
 -- augroups
 vim.api.nvim_create_augroup('doongjohn:BufEnter', {})
 vim.api.nvim_create_augroup('doongjohn:BufWinEnter', {})

@@ -83,11 +83,15 @@ return {
       -- search
       {
         label = '[search] all files',
-        callback = require 'spectre'.open
+        callback = function()
+          require 'grug-far'.grug_far()
+        end
       },
       {
         label = '[search] current file',
-        callback = require 'spectre'.open_file_search
+        callback = function()
+          require 'grug-far'.grug_far({ prefills = { flags = vim.fn.expand("%") } })
+        end
       },
       {
         label = '[search] ripgrep',
