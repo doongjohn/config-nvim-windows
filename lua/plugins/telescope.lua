@@ -92,7 +92,7 @@ return {
             '-E=target/',
             '-E=dist/',
             '-E=node_modules/',
-            '-E=zig-cache/',
+            '-E=.zig-cache/',
             '-E=zig-out/',
           },
           hidden = true

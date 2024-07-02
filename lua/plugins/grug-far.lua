@@ -20,7 +20,7 @@ return {
       .. ' -g !target'
       .. ' -g !dist'
       .. ' -g !node_modules'
-      .. ' -g !zig-cache'
+      .. ' -g !.zig-cache'
       .. ' -g !zig-out',
   },
 }
