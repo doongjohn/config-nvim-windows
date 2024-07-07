@@ -9,7 +9,6 @@ return {
       build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release',
     },
     'natecraddock/telescope-zf-native.nvim',
-    'debugloop/telescope-undo.nvim',
   },
   keys = {
     { '<space>',    '<cmd>Telescope find_files<cr>' },
@@ -120,6 +119,5 @@ return {
     }
     telescope.load_extension 'fzf'
     telescope.load_extension 'zf-native'
-    telescope.load_extension 'undo'
   end
 }
