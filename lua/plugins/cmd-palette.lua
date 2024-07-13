@@ -94,12 +94,6 @@ return {
         end
       },
       {
-        label = '[search] ripgrep',
-        callback = function()
-          require 'rgflow'.open_blank('')
-        end
-      },
-      {
         label = '[search] document symbols',
         cmd = 'Telescope lsp_document_symbols'
       },

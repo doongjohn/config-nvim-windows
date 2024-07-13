@@ -61,7 +61,7 @@ return {
         find_files = {
           find_command = {
             'fd', '-tf', '-H',
-            '--no-require-git',
+            '--no-ignore-vcs',
             '--strip-cwd-prefix',
 
             -- exclude files
