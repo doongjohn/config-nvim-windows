@@ -54,9 +54,9 @@ return {
           local buf = vim.api.nvim_create_buf(false, true)
           vim.api.nvim_buf_call(buf, function()
             vim.cmd("put =execute('messages')")
+            vim.cmd("norm gg2ddG")
           end)
           vim.api.nvim_win_set_buf(0, buf)
-          vim.cmd('exe "norm G"')
         end
       },
       {
