@@ -211,6 +211,7 @@ local winbar_filetype_exclude = {
   'toggleterm',
   'NeogitStatus',
   'grug-far-help',
+  'grug-far-history',
   'fzf',
   'Telescope',
   'TelescopePrompt',
