@@ -9,10 +9,9 @@ return {
       highlight_ignore_patterns = { 'WinSeparator', 'Status.*' },
       window_ignore_function = function(winid)
         local ft = vim.bo.filetype
-        if ft:find('Neogit') ~= nil then
-          return true
-        end
-        if ft:find('Diffview') ~= nil then
+        if ft == 'grug-far'
+            or ft:find('Neogit') ~= nil
+            or ft:find('Diffview') ~= nil then
           return true
         end
 
