@@ -1,7 +1,7 @@
 return {
   -- dim inactive window
   'levouh/tint.nvim',
-  lazy = false,
+  event = 'BufEnter',
   config = function()
     require 'tint'.setup {
       tint = -40,
