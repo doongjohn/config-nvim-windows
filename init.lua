@@ -204,37 +204,21 @@ local winbar_filetype_exclude = {
   'checkhealth',
   'lazy',
   'oil',
-  'oil_preview',
   'neo-tree',
-  'neo-tree-popup',
   'buffer_manager',
   'toggleterm',
-  'NeogitStatus',
-  'grug-far-help',
-  'grug-far-history',
-  'fzf',
-  'Telescope',
-  'TelescopePrompt',
-  'TelescopeResults',
   'Outline',
-  'OutlineHelp',
   'Trouble',
-  'dap-float',
+  'NeogitStatus',
 }
-vim.api.nvim_create_autocmd('BufEnter', {
-  group = 'doongjohn:BufEnter',
-  pattern = { '*' },
-  callback = function()
-    if vim.bo.filetype == 'Outline' then
-      vim.opt_local.winbar = [[%#TabLineSel# outline%{&modified ? " *" : ""} %#Comment#]]
-    end
-  end
-})
 vim.api.nvim_create_autocmd('FileType', {
   group = 'doongjohn:FileType',
   pattern = { '*' },
   callback = function()
-    if vim.startswith(vim.api.nvim_buf_get_name(0), 'oil') then
+    if vim.api.nvim_win_get_config(0).relative ~= "" then
+      -- ignore floating window
+      return
+    elseif vim.startswith(vim.api.nvim_buf_get_name(0), 'oil') then
       vim.opt_local.winbar =
           [[%#TabLineSel# oil%{&modified ? " *" : ""} %#Comment# ]] ..
           [[%{%luaeval("vim.api.nvim_buf_get_name(0):sub(7,-1)")%}]]
@@ -242,6 +226,15 @@ vim.api.nvim_create_autocmd('FileType', {
       vim.opt_local.winbar =
           [[%#TabLineSel# %t%{&modified ? " *" : ""} %#Comment# ]] ..
           [[%{%v:lua.require'nvim-navic'.get_location()%}]]
+    end
+  end
+})
+vim.api.nvim_create_autocmd('BufEnter', {
+  group = 'doongjohn:BufEnter',
+  pattern = { '*' },
+  callback = function()
+    if vim.bo.filetype == 'Outline' then
+      vim.opt_local.winbar = [[%#TabLineSel# outline%{&modified ? " *" : ""} %#Comment#]]
     end
   end
 })
@@ -273,36 +266,3 @@ vim.keymap.set('v', '<a-up>', ":move '<-2<cr>gv-gv", { silent = true })
 -- lsp functions
 vim.keymap.set('n', '<f2>', vim.lsp.buf.rename)
 vim.keymap.set('n', '<leader>c', vim.lsp.buf.code_action)
-
--- multi-line normal command
-vim.keymap.set('v', '<leader>z', function()
-  local input = vim.fn.input('normal cmd:')
-  if input == '' then return end
-
-  -- get selected lines
-  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<esc>', true, false, true), 'x', false)
-  local top = vim.api.nvim_buf_get_mark(0, '<')[1]
-  local bot = vim.api.nvim_buf_get_mark(0, '>')[1]
-  local selected_lines = vim.api.nvim_buf_get_lines(0, top - 1, bot, false)
-
-  -- create hidden buffer
-  local hidden_buf = vim.api.nvim_create_buf(false, true)
-  vim.api.nvim_buf_call(hidden_buf, function()
-    -- iterate over lines and run normal command
-    for i, line in ipairs(selected_lines) do
-      if i == 1 then
-        vim.api.nvim_buf_set_lines(hidden_buf, 0, 1, false, { line })
-      else
-        local line_count = vim.api.nvim_buf_line_count(hidden_buf)
-        vim.api.nvim_buf_set_lines(hidden_buf, line_count, line_count, false, { line })
-      end
-      vim.cmd([[exe "norm G0]] .. input .. [[\<esc>"]])
-    end
-  end)
-
-  -- replace text
-  vim.api.nvim_buf_set_lines(0, top - 1, bot, false, vim.api.nvim_buf_get_lines(hidden_buf, 0, -1, false))
-
-  -- delete hidden buffer
-  vim.api.nvim_buf_delete(hidden_buf, { force = true })
-end)
