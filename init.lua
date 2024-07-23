@@ -278,6 +278,6 @@ if vim.g.neovide then
   vim.g.neovide_cursor_animation_length = 0.05
   vim.g.neovide_cursor_trail_size = 0.2
   vim.g.neovide_cursor_vfx_mode = 'wireframe'
-  vim.o.guifont = 'Hack Nerd Font:h14:#h-none'
-  vim.o.linespace = 4
+  vim.o.guifont = 'CommitMono Nerd Font,Sarasa Fixed K,Segoe UI Emoji:h14'
+  vim.o.linespace = 6
 end
