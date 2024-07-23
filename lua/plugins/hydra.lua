@@ -38,7 +38,6 @@ return {
       name = 'git',
       config = {
         color = 'pink',
-        timeout = false,
         invoke_on_body = true,
         hint = {
           type = 'window',
@@ -69,9 +68,13 @@ return {
       mode = 'n',
       body = '<leader>d',
       heads = {
-        { '<c-m>', function()
-          require 'dapui'.toggle({ reset = true })
-        end, { desc = 'ui' } },
+        {
+          '<c-m>',
+          function()
+            require 'dapui'.toggle({ reset = true })
+          end,
+          { desc = 'ui' }
+        },
         { '<c-b>', require 'dap'.toggle_breakpoint, { desc = 'toggle bp' } },
         { '<c-x>', require 'dap'.clear_breakpoints, { desc = 'clear bp' } },
         { 'c',     require 'dap'.continue,          { desc = 'continue' } },
@@ -84,4 +87,5 @@ return {
       }
     })
   end
+}
 }
