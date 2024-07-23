@@ -266,3 +266,18 @@ vim.keymap.set('v', '<a-up>', ":move '<-2<cr>gv-gv", { silent = true })
 -- lsp functions
 vim.keymap.set('n', '<f2>', vim.lsp.buf.rename)
 vim.keymap.set('n', '<leader>c', vim.lsp.buf.code_action)
+
+-- neovide
+if vim.g.neovide then
+  vim.g.neovide_fullscreen = true
+  vim.g.neovide_padding_top = 10
+  vim.g.neovide_padding_bottom = 0
+  vim.g.neovide_padding_right = 10
+  vim.g.neovide_padding_left = 10
+  vim.g.neovide_scroll_animation_length = 0.15
+  vim.g.neovide_cursor_animation_length = 0.05
+  vim.g.neovide_cursor_trail_size = 0.2
+  vim.g.neovide_cursor_vfx_mode = 'wireframe'
+  vim.o.guifont = 'Hack Nerd Font:h14:#h-none'
+  vim.o.linespace = 4
+end
