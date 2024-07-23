@@ -274,10 +274,11 @@ if vim.g.neovide then
   vim.g.neovide_padding_bottom = 0
   vim.g.neovide_padding_right = 10
   vim.g.neovide_padding_left = 10
+  vim.g.neovide_hide_mouse_when_typing = true
   vim.g.neovide_scroll_animation_length = 0.15
   vim.g.neovide_cursor_animation_length = 0.05
   vim.g.neovide_cursor_trail_size = 0.2
   vim.g.neovide_cursor_vfx_mode = 'wireframe'
-  vim.o.guifont = 'CommitMono_Nerd_Font,Sarasa_Fixed_K,Segoe_UI_Emoji:h14'
+  vim.o.guifont = 'Hack_Nerd_Font,Sarasa_Fixed_K,Segoe_UI_Emoji:h14'
   vim.o.linespace = 6
 end
