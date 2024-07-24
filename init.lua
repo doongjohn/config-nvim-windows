@@ -155,6 +155,9 @@ vim.api.nvim_create_autocmd('FileType', {
   end
 })
 
+-- zig: disable opening quickfix on error
+vim.g.zig_fmt_parse_errors = 0
+
 -- setup winbar
 local winbar_filetype_exclude = {
   'qf',
