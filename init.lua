@@ -155,47 +155,6 @@ vim.api.nvim_create_autocmd('FileType', {
   end
 })
 
--- setup lazy nvim
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not (vim.uv or vim.loop).fs_stat(lazypath) then
-  local lazyrepo = "https://github.com/folke/lazy.nvim.git"
-  vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
-end
-vim.opt.rtp:prepend(lazypath)
-
--- plugins
-require 'lazy'.setup({
-  spec = {
-    { import = 'plugins' },
-  },
-  ui = {
-    backdrop = 100,
-  },
-  change_detection = {
-    notify = false,
-  },
-  defaults = {
-    lazy = true,
-  },
-  rocks = {
-    enabled = false,
-  },
-  performance = {
-    rtp = {
-      reset = true,
-      disabled_plugins = {
-        'gzip',
-        'matchit',
-        'matchparen',
-        'tarPlugin',
-        'tohtml',
-        'tutor',
-        'zipPlugin',
-      },
-    },
-  },
-})
-
 -- setup winbar
 local winbar_filetype_exclude = {
   'qf',
@@ -239,35 +198,38 @@ vim.api.nvim_create_autocmd('BufEnter', {
   end
 })
 
--- esc
-vim.keymap.set('v', '<c-l>', '<esc>')
-vim.keymap.set('i', '<c-l>', '<esc>')
--- goto alternate-file
-vim.keymap.set('n', '<leader>\'', '<c-^>', { silent = true })
--- highlight current word
-vim.keymap.set('n', '<leader>a', '*N', { silent = true })
--- delete word right side of the cursor
-vim.keymap.set('i', '<c-d>', '<c-o>dw', { silent = true })
--- paste yanked
-vim.keymap.set('n', '<leader>p', '"0p', { silent = true })
-vim.keymap.set('v', '<leader>p', '"0p', { silent = true })
--- indent using tab
-vim.keymap.set('v', '<tab>', '>gv', { silent = true })
-vim.keymap.set('v', '<s-tab>', '<gv', { silent = true })
--- move text up down
-vim.keymap.set('n', '<a-j>', "v:move '>+1<cr>", { silent = true })
-vim.keymap.set('n', '<a-k>', "v:move '<-2<cr>", { silent = true })
-vim.keymap.set('n', '<a-down>', "v:move '>+1<cr>", { silent = true })
-vim.keymap.set('n', '<a-up>', "v:move '<-2<cr>", { silent = true })
-vim.keymap.set('v', '<a-j>', ":move '>+1<cr>gv-gv", { silent = true })
-vim.keymap.set('v', '<a-k>', ":move '<-2<cr>gv-gv", { silent = true })
-vim.keymap.set('v', '<a-down>', ":move '>+1<cr>gv-gv", { silent = true })
-vim.keymap.set('v', '<a-up>', ":move '<-2<cr>gv-gv", { silent = true })
--- lsp functions
-vim.keymap.set('n', '<f2>', vim.lsp.buf.rename)
-vim.keymap.set('n', '<leader>c', vim.lsp.buf.code_action)
+-- keymaps
+do
+  -- esc
+  vim.keymap.set('v', '<c-l>', '<esc>')
+  vim.keymap.set('i', '<c-l>', '<esc>')
+  -- goto alternate-file
+  vim.keymap.set('n', '<leader>\'', '<c-^>', { silent = true })
+  -- highlight current word
+  vim.keymap.set('n', '<leader>a', '*N', { silent = true })
+  -- delete word right side of the cursor
+  vim.keymap.set('i', '<c-d>', '<c-o>dw', { silent = true })
+  -- paste yanked
+  vim.keymap.set('n', '<leader>p', '"0p', { silent = true })
+  vim.keymap.set('v', '<leader>p', '"0p', { silent = true })
+  -- indent using tab
+  vim.keymap.set('v', '<tab>', '>gv', { silent = true })
+  vim.keymap.set('v', '<s-tab>', '<gv', { silent = true })
+  -- move text up down
+  vim.keymap.set('n', '<a-j>', "v:move '>+1<cr>", { silent = true })
+  vim.keymap.set('n', '<a-k>', "v:move '<-2<cr>", { silent = true })
+  vim.keymap.set('n', '<a-down>', "v:move '>+1<cr>", { silent = true })
+  vim.keymap.set('n', '<a-up>', "v:move '<-2<cr>", { silent = true })
+  vim.keymap.set('v', '<a-j>', ":move '>+1<cr>gv-gv", { silent = true })
+  vim.keymap.set('v', '<a-k>', ":move '<-2<cr>gv-gv", { silent = true })
+  vim.keymap.set('v', '<a-down>', ":move '>+1<cr>gv-gv", { silent = true })
+  vim.keymap.set('v', '<a-up>', ":move '<-2<cr>gv-gv", { silent = true })
+  -- lsp functions
+  vim.keymap.set('n', '<f2>', vim.lsp.buf.rename)
+  vim.keymap.set('n', '<leader>c', vim.lsp.buf.code_action)
+end
 
--- neovide
+-- neovide settings
 if vim.g.neovide then
   vim.g.neovide_fullscreen = true
   vim.g.neovide_padding_top = 10
@@ -282,3 +244,43 @@ if vim.g.neovide then
   vim.o.guifont = 'Hack_Nerd_Font,Sarasa_Fixed_K,Segoe_UI_Emoji:h14'
   vim.o.linespace = 6
 end
+
+-- setup lazy nvim
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+  local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+  vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
+end
+vim.opt.rtp:prepend(lazypath)
+
+require 'lazy'.setup({
+  spec = {
+    { import = 'plugins' },
+  },
+  ui = {
+    backdrop = 100,
+  },
+  change_detection = {
+    notify = false,
+  },
+  defaults = {
+    lazy = true,
+  },
+  rocks = {
+    enabled = false,
+  },
+  performance = {
+    rtp = {
+      reset = true,
+      disabled_plugins = {
+        'gzip',
+        'matchit',
+        'matchparen',
+        'tarPlugin',
+        'tohtml',
+        'tutor',
+        'zipPlugin',
+      },
+    },
+  },
+})
