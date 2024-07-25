@@ -68,10 +68,6 @@ return {
         cmd = 'Telescope command_history'
       },
       {
-        label = '[editor] undo history',
-        cmd = 'Telescope undo'
-      },
-      {
         label = '[editor] tab new',
         cmd = 'tabnew'
       },
@@ -135,12 +131,6 @@ return {
         cmd = 'Outline'
       },
       {
-        label = '[lsp] line diagnostics',
-        callback = function()
-          vim.diagnostic.open_float({ scope = 'line' })
-        end
-      },
-      {
         label = '[lsp] c, cpp switch source ↔ header',
         callback = function()
           for _, v in pairs(vim.lsp.get_clients({ bufnr = 0 })) do
@@ -182,7 +172,7 @@ return {
 
     vim.keymap.set('n', '<c-p>', function()
       require 'cmd-palette'.setup(opts)
-      vim.cmd('CmdPalette')
+      require 'cmd-palette'.show()
     end)
   end
 }
