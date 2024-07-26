@@ -166,7 +166,6 @@ local winbar_filetype_exclude = {
   'checkhealth',
   'oil',
   'neo-tree',
-  'buffer_manager',
   'toggleterm',
   'Outline',
   'Trouble',
