@@ -5,6 +5,7 @@ return {
   dependencies = {
     'nvim-lua/plenary.nvim',
     {
+      -- https://github.com/nvim-telescope/telescope-fzf-native.nvim/issues/128#issuecomment-2235208849
       'nvim-telescope/telescope-fzf-native.nvim',
       build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release',
     },
