@@ -7,8 +7,8 @@ return {
     'nvim-tree/nvim-web-devicons',
   },
   keys = {
-    { '<leader>e', '<cmd>Neotree show current<cr>' },
-    { '<leader>E', '<cmd>Neotree show current reveal=true<cr>' },
+    { '<leader>e', '<cmd>Neotree current<cr>' },
+    { '<leader>E', '<cmd>Neotree current reveal=true<cr>' },
   },
   opts = {
     close_if_last_window = true,
