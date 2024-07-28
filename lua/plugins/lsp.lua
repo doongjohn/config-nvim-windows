@@ -5,25 +5,6 @@ return {
   dependencies = {
     'smiteshp/nvim-navic',
   },
-  init = function()
-    vim.diagnostic.config({
-      virtual_text = true,
-      signs = true,
-      underline = true,
-      update_in_insert = false,
-      severity_sort = false,
-    })
-
-    -- disable diagnostic icon in the sign column
-    vim.fn.sign_define('DiagnosticSignError',
-      { text = '', texthl = 'DiagnosticSignError', linehl = '', numhl = 'DiagnosticError' })
-    vim.fn.sign_define('DiagnosticSignWarn',
-      { text = '', texthl = 'DiagnosticSignWarn', linehl = '', numhl = 'DiagnosticWarn' })
-    vim.fn.sign_define('DiagnosticSignInfo',
-      { text = '', texthl = 'DiagnosticSignInfo', linehl = '', numhl = 'DiagnosticInfo' })
-    vim.fn.sign_define('DiagnosticSignHint',
-      { text = '', texthl = 'DiagnosticSignHint', linehl = '', numhl = 'DiagnosticHint' })
-  end,
   config = function()
     local lsp = require 'lspconfig'
     local lsp_defaults = lsp.util.default_config

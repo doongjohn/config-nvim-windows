@@ -158,6 +158,31 @@ vim.api.nvim_create_autocmd('FileType', {
 -- zig: disable opening quickfix on error
 vim.g.zig_fmt_parse_errors = 0
 
+-- setup diagnostic
+vim.diagnostic.config({
+  virtual_text = true,
+  signs = true,
+  underline = true,
+  update_in_insert = false,
+  severity_sort = true,
+})
+local diag_icons = {
+  { type = 'Error', icon = '󰅚 ' },
+  { type = 'Warn', icon = '󰀪 ' },
+  { type = 'Info', icon = '󰋽 ' },
+  { type = 'Hint', icon = '󰌶 ' },
+}
+for _, v in pairs(diag_icons) do
+  vim.fn.sign_define(
+    'DiagnosticSign' .. v.type,
+    {
+      text = v.icon,
+      texthl = 'DiagnosticSign' .. v.type,
+      linehl = '',
+      numhl = 'Diagnostic' .. v.type,
+    })
+end
+
 -- setup winbar
 local winbar_filetype_exclude = {
   'qf',
