@@ -232,10 +232,14 @@ do
   -- goto alternate-file
   vim.keymap.set('n', '<leader>\'', '<c-^>', { silent = true })
   -- highlight current word
-  vim.keymap.set('n', '<leader>a', '*N', { silent = true })
+  vim.keymap.set('n', '<leader>a', function()
+    local view = vim.fn.winsaveview()
+    vim.cmd 'norm *N'
+    vim.fn.winrestview(view)
+  end, { silent = true })
   -- delete word right side of the cursor
   vim.keymap.set('i', '<c-d>', '<c-o>dw', { silent = true })
-  -- paste yanked
+  -- paste yanked text
   vim.keymap.set('n', '<leader>p', '"0p', { silent = true })
   vim.keymap.set('v', '<leader>p', '"0p', { silent = true })
   -- indent using tab
@@ -250,9 +254,8 @@ do
   vim.keymap.set('v', '<a-k>', ":move '<-2<cr>gv-gv", { silent = true })
   vim.keymap.set('v', '<a-down>', ":move '>+1<cr>gv-gv", { silent = true })
   vim.keymap.set('v', '<a-up>', ":move '<-2<cr>gv-gv", { silent = true })
-  -- lsp functions
-  vim.keymap.set('n', '<f2>', vim.lsp.buf.rename)
-  vim.keymap.set('n', '<leader>c', vim.lsp.buf.code_action)
+  -- lsp
+  vim.keymap.set('n', '<f2>', vim.lsp.buf.rename, { silent = true })
 end
 
 -- neovide settings
