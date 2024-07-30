@@ -7,7 +7,10 @@ return {
     {
       -- https://github.com/nvim-telescope/telescope-fzf-native.nvim/issues/128#issuecomment-2235208849
       'nvim-telescope/telescope-fzf-native.nvim',
-      build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release',
+      build =
+          'cmake -S . -B build -DCMAKE_BUILD_TYPE=Release && ' ..
+          'cmake --build build --config Release && ' ..
+          'cmake --install build --prefix build',
     },
     'natecraddock/telescope-zf-native.nvim',
   },
