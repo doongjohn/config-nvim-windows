@@ -237,8 +237,6 @@ do
     vim.cmd 'norm *N'
     vim.fn.winrestview(view)
   end, { silent = true })
-  -- delete word right side of the cursor
-  vim.keymap.set('i', '<c-d>', '<c-o>dw', { silent = true })
   -- paste yanked text
   vim.keymap.set('n', '<leader>p', '"0p', { silent = true })
   vim.keymap.set('v', '<leader>p', '"0p', { silent = true })
