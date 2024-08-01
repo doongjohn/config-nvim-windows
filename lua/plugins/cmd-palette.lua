@@ -32,21 +32,11 @@ return {
         end
       },
 
-      -- file
-      {
-        label = '[file] recent',
-        cmd = 'Telescope oldfiles'
-      },
-      {
-        label = '[file] yank all',
-        cmd = '%y'
-      },
-      {
-        label = '[file] cd → nvim config',
-        cmd = 'cd ~/AppData/Local/nvim/'
-      },
-
       -- editor
+      {
+        label = '[editor] sessions',
+        cmd = 'SessionManager available_commands'
+      },
       {
         label = '[editor] messages',
         callback = function()
@@ -74,6 +64,20 @@ return {
       {
         label = '[editor] tab close',
         cmd = 'tabclose'
+      },
+
+      -- file
+      {
+        label = '[file] recent',
+        cmd = 'Telescope oldfiles'
+      },
+      {
+        label = '[file] yank all',
+        cmd = '%y'
+      },
+      {
+        label = '[file] cd → nvim config',
+        cmd = 'cd ~/AppData/Local/nvim/'
       },
 
       -- search
