@@ -40,7 +40,7 @@ return {
             vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<esc>', true, false, true), 'm', false)
           end,
           desc = 'ESC',
-          mode = { 'i', 'v' },
+          mode = { 'v', 'i', 'o' },
         },
       },
     },
