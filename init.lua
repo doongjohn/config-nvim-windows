@@ -1,3 +1,5 @@
+os.setlocale("LC_COLLATE=ko_KR.UTF8;LC_CTYPE=ko_KR.UTF8;LC_MONETARY=ko_KR.UTF8;LC_NUMERIC=C;LC_TIME=ko_KR.UTF8")
+
 vim.o.clipboard = 'unnamedplus'
 vim.o.jumpoptions = 'stack,view'
 vim.o.mouse = 'a'
