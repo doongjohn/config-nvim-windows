@@ -1,4 +1,4 @@
-os.setlocale('')
+os.setlocale('ko_KR.UTF8')
 
 vim.o.clipboard = 'unnamedplus'
 vim.o.jumpoptions = 'stack,view'
