@@ -1,9 +1,9 @@
 return {
   'koenverburg/cmd-palette.nvim',
-  lazy = false,
   dependencies = {
     'stevearc/dressing.nvim',
   },
+  lazy = false,
   config = function()
     local opts = {
       -- plugin

@@ -1,7 +1,6 @@
 return {
   -- telescope
   'nvim-telescope/telescope.nvim',
-  event = 'BufEnter',
   dependencies = {
     'nvim-lua/plenary.nvim',
     {
@@ -14,6 +13,7 @@ return {
     },
     'natecraddock/telescope-zf-native.nvim',
   },
+  event = 'BufEnter',
   keys = {
     { '<space>',    '<cmd>Telescope find_files<cr>' },
     { '<leader>ff', '<cmd>Telescope current_buffer_fuzzy_find<cr>' },

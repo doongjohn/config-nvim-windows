@@ -1,12 +1,12 @@
 return {
   -- treesitter
   'nvim-treesitter/nvim-treesitter',
-  build = ':TSUpdate',
-  event = { 'BufReadPost', 'BufNewFile' },
   dependencies = {
     'liadoz/nvim-dap-repl-highlights',
     'nushell/tree-sitter-nu',
   },
+  build = ':TSUpdate',
+  event = { 'BufReadPost', 'BufNewFile' },
   config = function()
     require 'nvim-dap-repl-highlights'.setup()
 

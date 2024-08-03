@@ -1,9 +1,9 @@
 return {
   'stevearc/oil.nvim',
-  lazy = false,
   dependencies = {
     'nvim-tree/nvim-web-devicons',
   },
+  lazy = false,
   keys = {
     { '-', function() require 'oil'.open() end },
   },

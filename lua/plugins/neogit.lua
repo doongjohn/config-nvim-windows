@@ -1,10 +1,10 @@
 return {
   'neogitorg/neogit',
-  cmd = 'Neogit',
   dependencies = {
     'nvim-lua/plenary.nvim',
     'sindrets/diffview.nvim',
   },
+  cmd = 'Neogit',
   opts = {
     integrations = {
       diffview = true,

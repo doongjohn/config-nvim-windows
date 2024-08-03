@@ -1,10 +1,10 @@
 return {
   -- lsp
   'neovim/nvim-lspconfig',
-  event = { 'BufReadPost', 'BufNewFile' },
   dependencies = {
     'smiteshp/nvim-navic',
   },
+  event = { 'BufReadPost', 'BufNewFile' },
   config = function()
     local lsp = require 'lspconfig'
     local lsp_defaults = lsp.util.default_config
