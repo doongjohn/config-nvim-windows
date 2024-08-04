@@ -231,8 +231,6 @@ do
   -- esc
   vim.keymap.set('v', '<c-l>', '<esc>')
   vim.keymap.set('i', '<c-l>', '<esc>')
-  -- goto alternate-file
-  vim.keymap.set('n', '<leader>\'', '<c-^>', { silent = true })
   -- highlight current word
   vim.keymap.set('n', '<leader>a', function()
     local view = vim.fn.winsaveview()
