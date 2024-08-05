@@ -1,5 +1,8 @@
 return {
   'magicduck/grug-far.nvim',
+  dependencies = {
+    'nvim-tree/nvim-web-devicons',
+  },
   opts = {
     engines = {
       ripgrep = {
