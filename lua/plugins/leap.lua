@@ -1,7 +1,7 @@
 return {
   -- fast cursor movement
   'ggandor/leap.nvim',
-  event = 'BufEnter',
+  event = 'VeryLazy',
   config = function()
     local leap = require 'leap'
     leap.setup {

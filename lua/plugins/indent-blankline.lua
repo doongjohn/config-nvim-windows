@@ -1,6 +1,6 @@
 return {
   'lukas-reineke/indent-blankline.nvim',
-  event = 'BufEnter',
+  event = { 'BufReadPost', 'BufNewFile' },
   main = 'ibl',
   config = function()
     vim.api.nvim_set_hl(0, 'IblIndent', { link = 'LineNr' })

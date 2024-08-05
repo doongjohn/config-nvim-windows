@@ -2,14 +2,12 @@ return {
   -- treesitter
   'nvim-treesitter/nvim-treesitter',
   dependencies = {
-    'liadoz/nvim-dap-repl-highlights',
     'nushell/tree-sitter-nu',
   },
   build = ':TSUpdate',
-  event = { 'BufReadPost', 'BufNewFile' },
+  -- event = { 'BufReadPost', 'BufNewFile' },
+  event = 'UIEnter',
   config = function()
-    require 'nvim-dap-repl-highlights'.setup()
-
     ---@diagnostic disable-next-line: missing-fields
     require 'nvim-treesitter.configs'.setup {
       sync_install = false,
@@ -18,7 +16,7 @@ return {
         'bash', 'fish', 'nu',
         -- tool
         'make', 'cmake', 'ninja',
-        'regex', 'dap_repl', 'vim', 'vimdoc',
+        'regex', 'vim', 'vimdoc',
         -- compiled lanuage
         'c', 'cpp', 'c_sharp',
         'rust', 'zig', 'odin',

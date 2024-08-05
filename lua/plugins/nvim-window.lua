@@ -1,7 +1,7 @@
 return {
   -- window picker
   'yorickpeterse/nvim-window',
-  event = 'BufEnter',
+  event = 'VeryLazy',
   keys = {
     { '<leader>w', function() require 'nvim-window'.pick() end },
   },
