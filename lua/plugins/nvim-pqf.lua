@@ -1,5 +1,5 @@
 return {
   'yorickpeterse/nvim-pqf',
-  ft = 'qf',
+  event = 'UIEnter',
   opts = {},
 }
