@@ -9,7 +9,6 @@ return {
     'hrsh7th/cmp-nvim-lsp-signature-help',
     'dcampos/nvim-snippy',
     'dcampos/cmp-snippy',
-    'rcarriga/cmp-dap',
   },
   event = 'InsertEnter',
   config = function()
@@ -43,10 +42,6 @@ return {
 
     local cmp = require 'cmp'
     cmp.setup {
-      enabled = function()
-        return vim.api.nvim_get_option_value('buftype', { buf = 0 }) ~= 'prompt'
-            or require 'cmp_dap'.is_dap_buffer()
-      end,
       snippet = {
         expand = function(args)
           require 'snippy'.expand_snippet(args.body)
