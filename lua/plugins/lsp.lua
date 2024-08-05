@@ -129,18 +129,18 @@ return {
             suggest = {
               imports = {
                 hosts = {
-                  ["https://deno.land"] = true
+                  ['https://deno.land'] = true
                 }
               }
             }
           }
         },
         root_dir = function(filename, _)
-          local is_deno_project = lsp.util.root_pattern("deno.json", "deno.jsonc")(filename);
+          local is_deno_project = lsp.util.root_pattern('deno.json', 'deno.jsonc')(filename);
           if is_deno_project then
             return nil;
           end
-          return lsp.util.root_pattern("package.json")(filename);
+          return lsp.util.root_pattern('package.json')(filename);
         end,
         single_file_support = false,
         on_attach = on_attach,

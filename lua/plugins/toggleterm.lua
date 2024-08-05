@@ -8,7 +8,7 @@ return {
   },
   init = function()
     vim.api.nvim_create_autocmd('BufWinEnter', {
-      group = 'doongjohn:BufWinEnter',
+      group = 'config',
       pattern = { '*' },
       callback = function()
         if vim.api.nvim_win_get_config(0).relative ~= '' then

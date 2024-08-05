@@ -64,8 +64,8 @@ return {
     vim.api.nvim_set_hl(0, '@lsp.typemod.method.readonly.cpp', { link = '@function.method' })
 
     -- https://gist.github.com/swarn/fb37d9eefe1bc616c2a7e476c0bc0316?permalink_comment_id=4534819#dealing-with-ambiguity
-    vim.api.nvim_create_autocmd("LspTokenUpdate", {
-      group = 'doongjohn:LspTokenUpdate',
+    vim.api.nvim_create_autocmd('LspTokenUpdate', {
+      group = 'config',
       callback = function(args)
         local token = args.data.token
 

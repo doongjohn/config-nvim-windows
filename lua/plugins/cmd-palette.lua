@@ -90,7 +90,7 @@ return {
       {
         label = '[search] current file',
         callback = function()
-          require 'grug-far'.grug_far({ prefills = { flags = vim.fn.expand("%") } })
+          require 'grug-far'.grug_far({ prefills = { flags = vim.fn.expand('%') } })
         end
       },
       {

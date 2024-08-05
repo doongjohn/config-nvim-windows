@@ -35,7 +35,7 @@ return {
 
         program_args = {}
         local args_str = vim.fn.input('args: ', '', 'file')
-        for substring in args_str:gmatch("%S+") do
+        for substring in args_str:gmatch('%S+') do
           table.insert(program_args, substring)
         end
 
@@ -67,7 +67,7 @@ return {
 
         program_args = {}
         local args_str = vim.fn.input('args: ', '', 'file')
-        for substring in args_str:gmatch("%S+") do
+        for substring in args_str:gmatch('%S+') do
           table.insert(program_args, substring)
         end
 

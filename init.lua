@@ -59,15 +59,27 @@ vim.filetype.add {
 -- local leader
 vim.g.maplocalleader = ','
 
--- augroups
-vim.api.nvim_create_augroup('doongjohn:BufEnter', {})
-vim.api.nvim_create_augroup('doongjohn:BufWinEnter', {})
-vim.api.nvim_create_augroup('doongjohn:FileType', {})
-vim.api.nvim_create_augroup('doongjohn:LspTokenUpdate', {})
+-- augroup
+vim.api.nvim_create_augroup('config', {})
+
+-- synchronize terminal background
+-- https://www.reddit.com/r/neovim/comments/1ehidxy/you_can_remove_padding_around_neovim_instance/
+vim.api.nvim_create_autocmd({ 'UIEnter', 'ColorScheme' }, {
+  group = 'config',
+  callback = function()
+    local normal = vim.api.nvim_get_hl(0, { name = 'Normal' })
+    if not normal.bg then return end
+    io.write(string.format('\027]11;#%06x\027\\', normal.bg))
+  end,
+})
+vim.api.nvim_create_autocmd('UILeave', {
+  group = 'config',
+  callback = function() io.write('\027]111\027\\') end,
+})
 
 -- syntax per filetype
 vim.api.nvim_create_autocmd('BufEnter', {
-  group = 'doongjohn:BufEnter',
+  group = 'config',
   pattern = {
     '*.nims',
     '*.nimble',
@@ -77,7 +89,7 @@ vim.api.nvim_create_autocmd('BufEnter', {
   end
 })
 vim.api.nvim_create_autocmd('BufEnter', {
-  group = 'doongjohn:BufEnter',
+  group = 'config',
   pattern = {
     '*.vifm',
     'vifmrc',
@@ -89,14 +101,14 @@ vim.api.nvim_create_autocmd('BufEnter', {
 
 -- options per filetype
 vim.api.nvim_create_autocmd('FileType', {
-  group = 'doongjohn:FileType',
+  group = 'config',
   pattern = { 'toggleterm' },
   callback = function()
     vim.opt_local.signcolumn = 'no'
   end
 })
 vim.api.nvim_create_autocmd('FileType', {
-  group = 'doongjohn:FileType',
+  group = 'config',
   pattern = {
     'gitconfig',
     'make',
@@ -110,7 +122,7 @@ vim.api.nvim_create_autocmd('FileType', {
   end
 })
 vim.api.nvim_create_autocmd('FileType', {
-  group = 'doongjohn:FileType',
+  group = 'config',
   pattern = {
     'markdown',
     'fish',
@@ -126,7 +138,7 @@ vim.api.nvim_create_autocmd('FileType', {
   end
 })
 vim.api.nvim_create_autocmd('FileType', {
-  group = 'doongjohn:FileType',
+  group = 'config',
   pattern = { 'oil' },
   callback = function()
     vim.opt_local.cursorline = true
@@ -135,7 +147,7 @@ vim.api.nvim_create_autocmd('FileType', {
 
 -- comment string per filetype
 vim.api.nvim_create_autocmd('FileType', {
-  group = 'doongjohn:FileType',
+  group = 'config',
   pattern = {
     'c',
     'cpp',
@@ -146,7 +158,7 @@ vim.api.nvim_create_autocmd('FileType', {
   end
 })
 vim.api.nvim_create_autocmd('FileType', {
-  group = 'doongjohn:FileType',
+  group = 'config',
   pattern = {
     'nim',
     'nims',
@@ -199,7 +211,7 @@ local winbar_filetype_exclude = {
   'NeogitStatus',
 }
 vim.api.nvim_create_autocmd('FileType', {
-  group = 'doongjohn:FileType',
+  group = 'config',
   pattern = { '*' },
   callback = function()
     if vim.api.nvim_win_get_config(0).relative ~= "" then
@@ -217,7 +229,7 @@ vim.api.nvim_create_autocmd('FileType', {
   end
 })
 vim.api.nvim_create_autocmd('BufEnter', {
-  group = 'doongjohn:BufEnter',
+  group = 'config',
   pattern = { '*' },
   callback = function()
     if vim.bo.filetype == 'Outline' then
