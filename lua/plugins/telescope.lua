@@ -13,7 +13,7 @@ return {
     },
     'natecraddock/telescope-zf-native.nvim',
   },
-  event = 'BufEnter',
+  event = 'VeryLazy',
   keys = {
     { '<space>',    '<cmd>Telescope find_files<cr>' },
     { '<leader>ff', '<cmd>Telescope current_buffer_fuzzy_find<cr>' },
