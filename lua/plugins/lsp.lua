@@ -7,172 +7,109 @@ return {
   event = { 'BufReadPost', 'BufNewFile' },
   config = function()
     local lsp = require 'lspconfig'
-    local lsp_defaults = lsp.util.default_config
-    local capabilities = require 'cmp_nvim_lsp'.default_capabilities()
-    lsp_defaults.capabilities = vim.tbl_deep_extend('force', lsp_defaults.capabilities, capabilities)
 
-    -- lsp breadcrumbs
-    local navic = require 'nvim-navic'
-
-    local on_attach = function(client, bufnr)
+    lsp.util.default_config.on_attach = function(client, bufnr)
+      -- lsp breadcrumbs
       if client.server_capabilities.documentSymbolProvider then
-        navic.attach(client, bufnr)
+        require 'nvim-navic'.attach(client, bufnr)
+      end
+
+      -- golang: generate a synthetic semanticTokensProvider (https://github.com/golang/go/issues/54531).
+      if client.name == 'gopls' and not client.server_capabilities.semanticTokensProvider then
+        local semantic = client.config.capabilities.textDocument.semanticTokens
+        client.server_capabilities.semanticTokensProvider = {
+          full = true,
+          legend = { tokenModifiers = semantic.tokenModifiers, tokenTypes = semantic.tokenTypes },
+          range = true,
+        }
       end
     end
 
+    -- vscode-langservers-extracted
+    lsp.jsonls.setup {}
+    lsp.html.setup {}
+    lsp.cssls.setup {}
+    lsp.eslint.setup {}
+
     -- scripting languages
-    do
-      lsp.lua_ls.setup {
-        settings = {
-          Lua = {
-            telemetry = {
-              enable = false,
-            },
+    lsp.lua_ls.setup {
+      settings = {
+        Lua = {
+          telemetry = {
+            enable = false,
           },
         },
-        on_attach = on_attach,
-      }
-
-      lsp.pyright.setup {
-        on_attach = on_attach,
-      }
-
-      lsp.nushell.setup {
-        on_attach = on_attach,
-      }
-
-      lsp.neocmake.setup {
-        on_attach = on_attach,
-      }
-    end
+      },
+    }
+    lsp.pyright.setup {}
+    lsp.nushell.setup {}
+    lsp.neocmake.setup {}
 
     -- compiled languages
-    do
-      lsp.clangd.setup {
-        cmd = {
-          'clangd',
-          '--background-index',
-          '--header-insertion=never',
-          '--clang-tidy',
-        },
-        on_attach = on_attach,
-      }
-
-      lsp.rust_analyzer.setup {
-        settings = {
-          ['rust-analyzer'] = {
-            diagnostics = {
-              enable = false,
-            }
+    lsp.clangd.setup {
+      cmd = {
+        'clangd',
+        '--background-index',
+        '--header-insertion=never',
+        '--clang-tidy',
+      },
+    }
+    lsp.rust_analyzer.setup {
+      settings = {
+        ['rust-analyzer'] = {
+          diagnostics = {
+            enable = false,
           }
-        },
-        on_attach = on_attach,
-      }
-
-      lsp.gopls.setup {
-        cmd = { 'gopls', 'serve' },
-        settings = {
-          -- https://github.com/golang/tools/blob/master/gopls/doc/vim.md#neovim-config
-          gopls = {
-            analyses = {
-              unusedparams = true,
-            },
-            gofumpt = true,
-            semanticTokens = true,
-            staticcheck = true,
-          }
-        },
-        on_attach = function(client, bufnr)
-          on_attach(client, bufnr)
-
-          -- Generate a synthetic semanticTokensProvider (https://github.com/golang/go/issues/54531).
-          if client.name == 'gopls' and not client.server_capabilities.semanticTokensProvider then
-            local semantic = client.config.capabilities.textDocument.semanticTokens
-            client.server_capabilities.semanticTokensProvider = {
-              full = true,
-              legend = { tokenModifiers = semantic.tokenModifiers, tokenTypes = semantic.tokenTypes },
-              range = true,
-            }
-          end
-        end,
-      }
-
-      lsp.nimls.setup {
-        on_attach = on_attach,
-      }
-
-      lsp.crystalline.setup {
-        on_attach = on_attach,
-      }
-
-      lsp.zls.setup {
-        on_attach = on_attach,
-      }
-
-      lsp.ols.setup {
-        on_attach = on_attach,
-      }
-    end
+        }
+      },
+    }
+    lsp.gopls.setup {
+      cmd = { 'gopls', 'serve' },
+      settings = {
+        -- https://github.com/golang/tools/blob/master/gopls/doc/vim.md#neovim-config
+        gopls = {
+          analyses = {
+            unusedparams = true,
+          },
+          gofumpt = true,
+          semanticTokens = true,
+          staticcheck = true,
+        }
+      },
+    }
+    lsp.nimls.setup {}
+    lsp.crystalline.setup {}
+    lsp.zls.setup {}
+    lsp.ols.setup {}
 
     -- web dev
-    do
-      lsp.emmet_ls.setup {}
-
-      lsp.tsserver.setup {
-        on_attach = on_attach,
-      }
-
-      lsp.denols.setup {
-        settings = {
-          deno = {
-            enable = true,
-            suggest = {
-              imports = {
-                hosts = {
-                  ['https://deno.land'] = true
-                }
+    lsp.emmet_ls.setup {}
+    lsp.tsserver.setup {}
+    lsp.denols.setup {
+      settings = {
+        deno = {
+          enable = true,
+          suggest = {
+            imports = {
+              hosts = {
+                ['https://deno.land'] = true
               }
             }
           }
-        },
-        root_dir = function(filename, _)
-          local is_deno_project = lsp.util.root_pattern('deno.json', 'deno.jsonc')(filename);
-          if is_deno_project then
-            return nil;
-          end
-          return lsp.util.root_pattern('package.json')(filename);
-        end,
-        single_file_support = false,
-        on_attach = on_attach,
-      }
+        }
+      },
+      root_dir = function(filename, _)
+        local is_deno_project = lsp.util.root_pattern('deno.json', 'deno.jsonc')(filename);
+        if is_deno_project then
+          return nil;
+        end
+        return lsp.util.root_pattern('package.json')(filename);
+      end,
+      single_file_support = false,
+    }
+    lsp.astro.setup {}
 
-      lsp.astro.setup {
-        on_attach = on_attach,
-      }
-    end
-
-    -- vscode-langservers-extracted
-    do
-      lsp.jsonls.setup {
-        on_attach = on_attach,
-      }
-
-      lsp.html.setup {
-        on_attach = on_attach,
-      }
-
-      lsp.cssls.setup {
-        on_attach = on_attach,
-      }
-
-      lsp.eslint.setup {}
-    end
-
-    -- others
-    do
-      lsp.glsl_analyzer.setup {
-        on_attach = on_attach,
-      }
-    end
+    -- shader langauges
+    lsp.glsl_analyzer.setup {}
   end
 }
