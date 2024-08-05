@@ -169,8 +169,9 @@ vim.api.nvim_create_autocmd('FileType', {
   end
 })
 
--- zig: disable opening quickfix on error
+-- zig: disable quickfix on error and auto fmt
 vim.g.zig_fmt_parse_errors = 0
+vim.g.zig_fmt_autosave = 0
 
 -- setup diagnostic
 vim.diagnostic.config({
