@@ -68,22 +68,16 @@ return {
       mode = 'n',
       body = '<leader>d',
       heads = {
-        {
-          '<c-m>',
-          function()
-            require 'dapui'.toggle({ reset = true })
-          end,
-          { desc = 'ui' }
-        },
-        { '<c-b>', require 'dap'.toggle_breakpoint, { desc = 'toggle bp' } },
-        { '<c-x>', require 'dap'.clear_breakpoints, { desc = 'clear bp' } },
-        { 'c',     require 'dap'.continue,          { desc = 'continue' } },
-        { 'n',     require 'dap'.step_over,         { desc = 'step-over' } },
-        { 's',     require 'dap'.step_into,         { desc = 'step-into' } },
-        { 'o',     require 'dap'.step_over,         { desc = 'step-out' } },
-        { 'i',     require 'dap.ui.widgets'.hover,  { desc = 'inspect' } },
-        { 't',     require 'dap'.terminate,         { desc = 'terminate' } },
-        { 'q',     nil,                             { desc = 'exit', exit = true, nowait = true } },
+        { '<c-m>', function() require 'dapui'.toggle({ reset = true }) end, { desc = 'ui' } },
+        { '<c-b>', function() require 'dap'.toggle_breakpoint() end,        { desc = 'toggle bp' } },
+        { '<c-x>', function() require 'dap'.clear_breakpoints() end,        { desc = 'clear bp' } },
+        { 'c',     function() require 'dap'.continue() end,                 { desc = 'continue' } },
+        { 'n',     function() require 'dap'.step_over() end,                { desc = 'step-over' } },
+        { 's',     function() require 'dap'.step_into() end,                { desc = 'step-into' } },
+        { 'o',     function() require 'dap'.step_over() end,                { desc = 'step-out' } },
+        { 'i',     function() require 'dap.ui.widgets'.hover() end,         { desc = 'inspect' } },
+        { 't',     function() require 'dap'.terminate() end,                { desc = 'terminate' } },
+        { 'q',     nil,                                                     { desc = 'exit', exit = true, nowait = true } },
       }
     })
   end

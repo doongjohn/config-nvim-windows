@@ -11,6 +11,7 @@ return {
 
     local program_args = {}
 
+    -- issue: https://github.com/mfussenegger/nvim-dap/issues/1196
     dap.adapters.lldb = {
       type = 'server',
       port = '${port}',
