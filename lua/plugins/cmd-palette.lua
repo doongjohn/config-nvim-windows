@@ -139,9 +139,9 @@ return {
 
       -- dap
       {
-        label = '[dap] clear breakpoints',
+        label = '[dap] toggle ui',
         callback = function()
-          require 'dap'.clear_breakpoints()
+          require 'dapui'.toggle({ reset = true })
         end
       },
       {
