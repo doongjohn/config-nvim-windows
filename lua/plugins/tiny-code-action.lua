@@ -7,7 +7,7 @@ return {
   },
   event = 'LspAttach',
   keys = {
-    { '<leader><leader>', function() require 'tiny-code-action'.code_action() end },
+    { '<leader>\'', function() require 'tiny-code-action'.code_action() end },
   },
   opts = {},
 }
