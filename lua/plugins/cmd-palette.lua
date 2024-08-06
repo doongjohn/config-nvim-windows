@@ -6,33 +6,11 @@ return {
   lazy = false,
   config = function()
     local opts = {
-      -- plugin
-      {
-        label = '[plugin] lazy',
-        callback = function()
-          require 'cmd-palette'.setup({
-            {
-              label = '[lazy] sync',
-              cmd = 'Lazy sync'
-            },
-            {
-              label = '[lazy] update',
-              cmd = 'Lazy update'
-            },
-            {
-              label = '[lazy] clean',
-              cmd = 'Lazy clean'
-            },
-            {
-              label = '[lazy] profile',
-              cmd = 'Lazy profile'
-            },
-          })
-          vim.cmd('CmdPalette')
-        end
-      },
-
       -- editor
+      {
+        label = '[editor] plugins',
+        cmd = 'Lazy home',
+      },
       {
         label = '[editor] sessions',
         cmd = 'SessionManager available_commands'
