@@ -7,9 +7,9 @@ return {
       'markdown',
     },
     patterns = {
-      [[%s/\s\+$//e]],
-      [[%s/\($\n\s*\)\+\%$//]],
-      [[%s/\%^\n\+//]],
+      [[%s/\s\+$//e]],          -- trailing whitespace
+      [[%s/\%^\n\+//]],         -- top empty lines
+      [[%s/\($\n\s*\)\+\%$//]], -- bot empty lines
     },
   },
 }
