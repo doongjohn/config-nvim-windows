@@ -19,37 +19,13 @@ return {
         },
       },
       overrides = function(colors)
-        local theme = colors.theme
         local palette = colors.palette
 
         return {
-          WinSeparator = { fg = palette.sumiInk4 },
-          FloatBorder = { bg = palette.sumiInk0, fg = palette.sumiInk0 },
-
-          -- popup menu
-          Pmenu = { fg = theme.ui.shade0, bg = theme.ui.bg_p1 },
-          PmenuSel = { fg = 'none', bg = theme.ui.bg_p2 },
-          PmenuSbar = { bg = theme.ui.bg_m1 },
-          PmenuThumb = { bg = theme.ui.bg_p2 },
-
           -- treesitter
           ['@module'] = { link = '@keyword.import' },
           ['@field'] = { link = '@variable.member' },
           ['@variable.parameter'] = { fg = palette.oldWhite },
-
-          -- telescope
-          TelescopeNormal = { bg = palette.sumiInk0 },
-          TelescopeTitle = { bg = palette.sumiInk5, fg = palette.dragonBlue, bold = true },
-          TelescopeResultsTitle = { bg = palette.sumiInk2, fg = palette.dragonBlue },
-          TelescopeBorder = { bg = palette.sumiInk0, fg = palette.sumiInk0 },
-          TelescopePromptPrefix = { bg = palette.sumiInk4, fg = palette.autumnRed },
-          TelescopePromptNormal = { bg = theme.ui.bg_p1 },
-          TelescopePromptBorder = { fg = theme.ui.bg_p1, bg = theme.ui.bg_p1 },
-          TelescopeResultsNormal = { fg = theme.ui.fg_dim, bg = theme.ui.bg_m1 },
-          TelescopeResultsBorder = { fg = theme.ui.bg_m1, bg = theme.ui.bg_m1 },
-          TelescopePreviewNormal = { bg = theme.ui.bg_dim },
-          TelescopePreviewBorder = { bg = theme.ui.bg_dim, fg = theme.ui.bg_dim },
-          TelescopeSelection = { bg = palette.sumiInk5 },
         }
       end,
     }
