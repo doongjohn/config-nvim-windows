@@ -25,6 +25,7 @@ return {
             vim.cmd([[%s/\%^\n\+//]])
           end)
           vim.api.nvim_win_set_buf(0, buf)
+          vim.cmd([[norm GG]])
         end
       },
       {
