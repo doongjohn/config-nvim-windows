@@ -33,7 +33,7 @@ return {
       ['gx'] = 'actions.open_external',
       ['g.'] = 'actions.toggle_hidden',
       ['g\\'] = 'actions.toggle_trash',
-      ['yp'] = 'actions.yank_entry',
+      ['<c-g>'] = 'actions.yank_entry',
       ['<c-l>'] = {
         callback = function()
           vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<esc>', true, false, true), 'm', false)
