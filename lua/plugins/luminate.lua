@@ -1,8 +1,8 @@
 return {
-  'mei28/luminate.nvim',
+  'doongjohn/luminate.nvim',
   event = 'VeryLazy',
   opts = {
-    duration = 200,
+    duration = 180,
     yank = {
       hlgroup = 'DiffText',
     },

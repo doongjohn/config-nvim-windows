@@ -13,7 +13,7 @@ return {
       },
       {
         label = '[editor] sessions',
-        cmd = 'SessionManager available_commands'
+        cmd = 'SessionManager available_commands',
       },
       {
         label = '[editor] messages',
@@ -26,37 +26,37 @@ return {
           end)
           vim.api.nvim_win_set_buf(0, buf)
           vim.cmd([[norm GG]])
-        end
+        end,
       },
       {
         label = '[editor] registers',
-        cmd = 'Telescope registers'
+        cmd = 'Telescope registers',
       },
       {
         label = '[editor] command history',
-        cmd = 'Telescope command_history'
+        cmd = 'Telescope command_history',
       },
       {
         label = '[editor] tab new',
-        cmd = 'tabnew'
+        cmd = 'tabnew',
       },
       {
         label = '[editor] tab close',
-        cmd = 'tabclose'
+        cmd = 'tabclose',
       },
 
       -- file
       {
         label = '[file] recent',
-        cmd = 'Telescope oldfiles'
+        cmd = 'Telescope oldfiles',
       },
       {
         label = '[file] yank all',
-        cmd = '%y'
+        cmd = '%y',
       },
       {
         label = '[file] cd → nvim config',
-        cmd = 'cd ~/AppData/Local/nvim/'
+        cmd = 'cd ~/AppData/Local/nvim/',
       },
 
       -- search
@@ -64,31 +64,31 @@ return {
         label = '[search] all files',
         callback = function()
           require 'grug-far'.grug_far()
-        end
+        end,
       },
       {
         label = '[search] current file',
         callback = function()
           require 'grug-far'.grug_far({ prefills = { flags = vim.fn.expand('%') } })
-        end
+        end,
       },
       {
         label = '[search] document symbols',
-        cmd = 'Telescope lsp_document_symbols'
+        cmd = 'Telescope lsp_document_symbols',
       },
 
       -- git
       {
         label = '[git] neogit open',
-        cmd = 'Neogit'
+        cmd = 'Neogit',
       },
       {
         label = '[git] diffview open',
-        cmd = 'DiffviewOpen'
+        cmd = 'DiffviewOpen',
       },
       {
         label = '[git] diffview file history',
-        cmd = 'DiffviewFileHistory %'
+        cmd = 'DiffviewFileHistory %',
       },
 
       -- lsp
@@ -97,21 +97,21 @@ return {
         callback = function()
           vim.lsp.buf.format()
           vim.cmd 'up'
-        end
+        end,
       },
       {
         label = '[lsp] inlay hint toggle',
         callback = function()
           vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({}))
-        end
+        end,
       },
       {
         label = '[lsp] references',
-        cmd = 'Glance references'
+        cmd = 'Glance references',
       },
       {
         label = '[lsp] outline',
-        cmd = 'Outline'
+        cmd = 'Outline',
       },
       {
         label = '[lsp] c, cpp switch source ↔ header',
@@ -143,19 +143,20 @@ return {
         label = '[dap] toggle ui',
         callback = function()
           require 'dapui'.toggle({ reset = true })
-        end
+        end,
       },
       {
         label = '[dap] focus frame',
         callback = function()
           require 'dap'.focus_frame()
-        end
+        end,
       },
     }
 
     vim.keymap.set('n', '<c-p>', function()
-      require 'cmd-palette'.setup(opts)
-      require 'cmd-palette'.show()
+      local palette = require 'cmd-palette'
+      palette.setup(opts)
+      palette.show()
     end)
   end
 }
