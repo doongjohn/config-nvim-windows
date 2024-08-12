@@ -56,7 +56,7 @@ return {
       },
       {
         label = '[file] cd → nvim config',
-        cmd = 'cd ~/AppData/Local/nvim/',
+        cmd = 'cd ' .. vim.fn.stdpath('config'),
       },
 
       -- search

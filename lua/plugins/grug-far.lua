@@ -24,6 +24,7 @@ return {
               .. ' -g !zig-out',
         },
       },
+      windowCreationCommand = 'vert topleft split',
       wrap = false,
     }
 
