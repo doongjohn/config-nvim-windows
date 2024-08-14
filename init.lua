@@ -259,12 +259,8 @@ do
   -- move text up down
   vim.keymap.set('n', '<a-j>', "v:move '>+1<cr>", { silent = true })
   vim.keymap.set('n', '<a-k>', "v:move '<-2<cr>", { silent = true })
-  vim.keymap.set('n', '<a-down>', "v:move '>+1<cr>", { silent = true })
-  vim.keymap.set('n', '<a-up>', "v:move '<-2<cr>", { silent = true })
   vim.keymap.set('v', '<a-j>', ":move '>+1<cr>gv-gv", { silent = true })
   vim.keymap.set('v', '<a-k>', ":move '<-2<cr>gv-gv", { silent = true })
-  vim.keymap.set('v', '<a-down>', ":move '>+1<cr>gv-gv", { silent = true })
-  vim.keymap.set('v', '<a-up>', ":move '<-2<cr>gv-gv", { silent = true })
   -- lsp
   vim.keymap.set('n', '<f2>', vim.lsp.buf.rename, { silent = true })
 end
