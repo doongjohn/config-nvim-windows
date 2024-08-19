@@ -1,5 +1,12 @@
 return {
   'folke/lazydev.nvim',
   ft = 'lua',
-  opts = {},
+  dependencies = {
+    'bilal2453/luvit-meta'
+  },
+  opts = {
+    library = {
+      { path = 'luvit-meta/library', words = { 'uv' } },
+    },
+  },
 }

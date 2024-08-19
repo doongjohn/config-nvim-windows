@@ -77,102 +77,6 @@ vim.api.nvim_create_autocmd('UILeave', {
   callback = function() io.write('\027]111\027\\') end,
 })
 
--- syntax per filetype
-vim.api.nvim_create_autocmd('BufEnter', {
-  group = 'config',
-  pattern = {
-    '*.nims',
-    '*.nimble',
-  },
-  callback = function()
-    vim.opt.syntax = 'nim'
-  end
-})
-vim.api.nvim_create_autocmd('BufEnter', {
-  group = 'config',
-  pattern = {
-    '*.vifm',
-    'vifmrc',
-  },
-  callback = function()
-    vim.opt.syntax = 'vim'
-  end
-})
-
--- options per filetype
-vim.api.nvim_create_autocmd('FileType', {
-  group = 'config',
-  pattern = { 'toggleterm' },
-  callback = function()
-    vim.opt_local.signcolumn = 'no'
-  end
-})
-vim.api.nvim_create_autocmd('FileType', {
-  group = 'config',
-  pattern = {
-    'gitconfig',
-    'make',
-    'go',
-    'odin',
-  },
-  callback = function()
-    vim.bo.tabstop = 4
-    vim.bo.shiftwidth = 4
-    vim.bo.expandtab = false
-  end
-})
-vim.api.nvim_create_autocmd('FileType', {
-  group = 'config',
-  pattern = {
-    'markdown',
-    'fish',
-    'nu',
-    'python',
-    'cs',
-    'zig',
-    'glsl',
-  },
-  callback = function()
-    vim.bo.tabstop = 4
-    vim.bo.shiftwidth = 4
-  end
-})
-vim.api.nvim_create_autocmd('FileType', {
-  group = 'config',
-  pattern = { 'oil' },
-  callback = function()
-    vim.opt_local.cursorline = true
-  end
-})
-
--- comment string per filetype
-vim.api.nvim_create_autocmd('FileType', {
-  group = 'config',
-  pattern = {
-    'c',
-    'cpp',
-    'odin',
-  },
-  callback = function()
-    vim.bo.commentstring = '// %s';
-  end
-})
-vim.api.nvim_create_autocmd('FileType', {
-  group = 'config',
-  pattern = {
-    'nim',
-    'nims',
-    'nimble',
-  },
-  callback = function()
-    vim.bo.commentstring = '# %s';
-  end
-})
-
--- zig: disable quickfix on error and auto fmt
-vim.g.zig_fmt_parse_errors = 0
-vim.g.zig_fmt_autosave = 0
-
 -- setup diagnostic
 vim.diagnostic.config({
   virtual_text = true,
@@ -198,69 +102,39 @@ for _, v in pairs(diag_icons) do
     })
 end
 
--- setup winbar
-local winbar_filetype_exclude = {
-  'qf',
-  'prompt',
-  'terminal',
-  'checkhealth',
-  'oil',
-  'neo-tree',
-  'toggleterm',
-  'Outline',
-  'Trouble',
-  'NeogitStatus',
-}
-vim.api.nvim_create_autocmd('FileType', {
-  group = 'config',
-  pattern = { '*' },
-  callback = function()
-    if vim.api.nvim_win_get_config(0).relative ~= "" then
-      -- ignore floating window
-      return
-    elseif vim.startswith(vim.api.nvim_buf_get_name(0), 'oil') then
-      vim.opt_local.winbar =
-          [[%#TabLineSel# oil%{&modified ? " *" : ""} %#Comment# ]] ..
-          [[%{%luaeval("vim.api.nvim_buf_get_name(0):sub(7,-1)")%}]]
-    elseif not vim.tbl_contains(winbar_filetype_exclude, vim.bo.filetype) then
-      vim.opt_local.winbar =
-          [[%#TabLineSel# %t%{&modified ? " *" : ""} %#Comment# ]] ..
-          [[%{%v:lua.require'nvim-navic'.get_location()%}]]
-    end
-  end
-})
-vim.api.nvim_create_autocmd('BufEnter', {
-  group = 'config',
-  pattern = { '*' },
-  callback = function()
-    if vim.bo.filetype == 'Outline' then
-      vim.opt_local.winbar = [[%#TabLineSel# outline%{&modified ? " *" : ""} %#Comment#]]
-    end
-  end
-})
+HighlighterSkip = false
+
+require 'highlighter'
+require 'languages'
+require 'winbar'
 
 -- keymaps
 do
   -- esc
   vim.keymap.set('v', '<c-l>', '<esc>')
   vim.keymap.set('i', '<c-l>', '<esc>')
+
   -- highlight current word
   vim.keymap.set('n', '<leader>a', function()
     local view = vim.fn.winsaveview()
     vim.cmd 'norm *N'
     vim.fn.winrestview(view)
   end, { silent = true })
+
   -- paste yanked text
   vim.keymap.set('n', '<leader>p', '"0p', { silent = true })
   vim.keymap.set('v', '<leader>p', '"0p', { silent = true })
+
   -- indent using tab
   vim.keymap.set('v', '<tab>', '>gv', { silent = true })
   vim.keymap.set('v', '<s-tab>', '<gv', { silent = true })
+
   -- move text up down
   vim.keymap.set('n', '<a-j>', "v:move '>+1<cr>", { silent = true })
   vim.keymap.set('n', '<a-k>', "v:move '<-2<cr>", { silent = true })
   vim.keymap.set('v', '<a-j>', ":move '>+1<cr>gv-gv", { silent = true })
   vim.keymap.set('v', '<a-k>', ":move '<-2<cr>gv-gv", { silent = true })
+
   -- lsp
   vim.keymap.set('n', '<f2>', vim.lsp.buf.rename, { silent = true })
 end
