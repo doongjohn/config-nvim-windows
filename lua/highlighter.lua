@@ -61,15 +61,17 @@ local change_hl_ns_id = vim.api.nvim_create_namespace('ChangeHighlight')
 vim.api.nvim_create_autocmd('BufEnter', {
   group = 'config',
   callback = function()
-    -- ignore if it's not a normal buffer
     if #vim.bo.buftype ~= 0 then
-      return true
+      return
     end
 
     vim.api.nvim_buf_attach(0, false, {
       on_bytes = function(_, bufnr, _, start_row, start_col, _, _, _, _, new_end_row, new_end_col, _)
+        if #vim.bo.buftype ~= 0 then
+          return true
+        end
+
         if HighlighterSkip then
-          HighlighterSkip = false
           return false
         end
 

@@ -95,8 +95,10 @@ return {
       {
         label = '[lsp] format',
         callback = function()
+          HighlighterSkip = true
           vim.lsp.buf.format()
           vim.cmd 'up'
+          HighlighterSkip = false
         end,
       },
       {
