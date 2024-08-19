@@ -5,7 +5,6 @@ return {
   priority = 1000,
   config = function()
     require 'kanagawa'.setup {
-      compile = true,
       commentStyle = { bold = false, italic = false },
       keywordStyle = { bold = false, italic = false },
       statementStyle = { bold = false, italic = false },
@@ -18,15 +17,18 @@ return {
           },
         },
       },
+
+      ---@param colors KanagawaColors
+      ---@return table
       overrides = function(colors)
         local theme = colors.theme
         local palette = colors.palette
 
         return {
-          WinSeparator = { fg = palette.sumiInk4 },
-          FloatBorder = { bg = palette.sumiInk0, fg = palette.sumiInk0 },
+          WinSeparator = { fg = theme.ui.bg_p1 },
+          FloatBorder = { bg = theme.ui.bg_p1 },
 
-          Pmenu = { fg = theme.ui.shade0, bg = theme.ui.bg_p1 },
+          Pmenu = { bg = theme.ui.bg_p1 },
           PmenuSel = { fg = 'none', bg = theme.ui.bg_p2 },
           PmenuSbar = { bg = theme.ui.bg_m1 },
           PmenuThumb = { bg = theme.ui.bg_p2 },
@@ -38,13 +40,13 @@ return {
 
           -- Telescope
           TelescopeTitle = { fg = theme.ui.special, bold = true },
-          TelescopePromptPrefix = { bg = palette.sumiInk4, fg = palette.autumnRed },
+          TelescopePromptPrefix = { fg = palette.autumnRed, bg = theme.ui.bg_p1 },
           TelescopePromptNormal = { bg = theme.ui.bg_p1 },
           TelescopePromptBorder = { fg = theme.ui.bg_p1, bg = theme.ui.bg_p1 },
           TelescopeResultsNormal = { fg = theme.ui.fg_dim, bg = theme.ui.bg_m1 },
           TelescopeResultsBorder = { fg = theme.ui.bg_m1, bg = theme.ui.bg_m1 },
           TelescopePreviewNormal = { bg = theme.ui.bg_dim },
-          TelescopePreviewBorder = { bg = theme.ui.bg_dim, fg = theme.ui.bg_dim },
+          TelescopePreviewBorder = { fg = theme.ui.bg_dim, bg = theme.ui.bg_dim },
         }
       end,
     }
