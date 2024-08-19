@@ -12,6 +12,18 @@ return {
   },
   event = 'InsertEnter',
   config = function()
+    require 'snippy'.setup {
+      mappings = {
+        is = {
+          ['<tab>'] = 'expand_or_advance',
+          ['<s-tab>'] = 'previous',
+        },
+        nx = {
+          ['<leader>x'] = 'cut_text',
+        },
+      },
+    }
+
     local icons = {
       File = '󰈙',
       Folder = '󰉋',
