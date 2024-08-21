@@ -25,7 +25,7 @@ return {
             vim.cmd([[%s/\%^\n\+//]])
           end)
           vim.api.nvim_win_set_buf(0, buf)
-          vim.cmd([[norm GG]])
+          vim.cmd('norm GG')
         end,
       },
       {
@@ -79,15 +79,11 @@ return {
 
       -- git
       {
-        label = '[git] neogit open',
+        label = '[git] neogit',
         cmd = 'Neogit',
       },
       {
-        label = '[git] diffview open',
-        cmd = 'DiffviewOpen',
-      },
-      {
-        label = '[git] diffview file history',
+        label = '[git] file history',
         cmd = 'DiffviewFileHistory %',
       },
 
@@ -97,7 +93,7 @@ return {
         callback = function()
           HighlighterSkip = true
           vim.lsp.buf.format()
-          vim.cmd 'up'
+          vim.cmd('up')
           HighlighterSkip = false
         end,
       },
