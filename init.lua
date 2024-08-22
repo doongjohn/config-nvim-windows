@@ -99,6 +99,10 @@ do
   vim.keymap.set('v', '<c-l>', '<esc>')
   vim.keymap.set('i', '<c-l>', '<esc>')
 
+  -- inner line
+  vim.keymap.set('v', 'il', ':<c-u>norm ^vg_<cr>')
+  vim.keymap.set('o', 'il', '<cmd>norm ^vg_<cr>')
+
   -- highlight current word
   vim.keymap.set('n', '<leader>a', function()
     local view = vim.fn.winsaveview()
