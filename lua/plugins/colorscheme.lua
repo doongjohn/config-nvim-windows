@@ -47,9 +47,6 @@ return {
           TelescopeResultsBorder = { fg = theme.ui.bg_m1, bg = theme.ui.bg_m1 },
           TelescopePreviewNormal = { bg = theme.ui.bg_dim },
           TelescopePreviewBorder = { fg = theme.ui.bg_dim, bg = theme.ui.bg_dim },
-
-          -- scrollview
-          ScrollView = { bg = theme.ui.bg_p2 },
         }
       end,
     }
@@ -83,5 +80,8 @@ return {
         end
       end,
     })
+
+    -- scrollview
+    vim.api.nvim_set_hl(0, 'ScrollView', { link = 'TabLineSel' })
   end
 }
