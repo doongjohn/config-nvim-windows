@@ -3,13 +3,13 @@ return {
   'akinsho/toggleterm.nvim',
   cmd = { 'ToggleTerm', 'TermExec' },
   opts = {
-    shell = 'nu',
+    shell = os.getenv('MSYS') and 'fish' or 'nu',
     shade_terminals = false,
   },
   init = function()
     vim.api.nvim_create_autocmd('BufWinEnter', {
       group = 'config',
-      pattern = { '*' },
+      pattern = '*',
       callback = function()
         if vim.api.nvim_win_get_config(0).relative ~= '' then
           return

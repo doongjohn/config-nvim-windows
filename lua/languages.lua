@@ -1,29 +1,18 @@
--- syntax per filetype
-vim.api.nvim_create_autocmd('BufEnter', {
-  group = 'config',
-  pattern = {
-    '*.nims',
-    '*.nimble',
-  },
-  callback = function()
-    vim.opt.syntax = 'nim'
-  end
-})
-vim.api.nvim_create_autocmd('BufEnter', {
-  group = 'config',
-  pattern = {
-    '*.vifm',
-    'vifmrc',
-  },
-  callback = function()
-    vim.opt.syntax = 'vim'
-  end
-})
-
 -- options per filetype
 vim.api.nvim_create_autocmd('FileType', {
   group = 'config',
-  pattern = { 'toggleterm' },
+  pattern = {
+    'oil',
+  },
+  callback = function()
+    vim.opt_local.cursorline = true
+  end
+})
+vim.api.nvim_create_autocmd('FileType', {
+  group = 'config',
+  pattern = {
+    'toggleterm',
+  },
   callback = function()
     vim.opt_local.signcolumn = 'no'
   end
@@ -60,16 +49,11 @@ vim.api.nvim_create_autocmd('FileType', {
 })
 vim.api.nvim_create_autocmd('FileType', {
   group = 'config',
-  pattern = { 'nim' },
+  pattern = {
+    'nim',
+  },
   callback = function()
     vim.keymap.set('n', '<s-k>', vim.lsp.buf.hover)
-  end
-})
-vim.api.nvim_create_autocmd('FileType', {
-  group = 'config',
-  pattern = { 'oil' },
-  callback = function()
-    vim.opt_local.cursorline = true
   end
 })
 
@@ -97,6 +81,6 @@ vim.api.nvim_create_autocmd('FileType', {
   end
 })
 
--- zig: disable quickfix on error and auto fmt
+-- zig
 vim.g.zig_fmt_parse_errors = 0
 vim.g.zig_fmt_autosave = 0
