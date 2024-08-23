@@ -5,16 +5,18 @@ vim.o.jumpoptions = 'stack,view'
 vim.o.mouse = 'a'
 vim.o.wrap = false
 vim.o.sidescrolloff = 10
-vim.o.syntax = 'on'
 vim.o.number = true
+vim.o.signcolumn = 'yes:1'
 vim.o.showmode = false
 vim.o.laststatus = 3
-vim.o.signcolumn = 'yes:1'
+vim.o.syntax = 'on'
 
 -- show whitespace
 vim.o.list = true
-vim.opt.listchars:append('trail:·')
-vim.opt.listchars:append('tab:  ')
+vim.opt.listchars:append {
+  trail = '·',
+  tab = '  ',
+}
 
 -- split options
 vim.o.splitright = true
@@ -36,6 +38,9 @@ vim.o.tabstop = 2
 vim.o.shiftwidth = 2
 vim.o.expandtab = true
 
+-- leader key
+vim.g.maplocalleader = ','
+
 -- filetypes
 vim.filetype.add {
   extension = {
@@ -47,17 +52,14 @@ vim.filetype.add {
     nim = 'nim',
     nims = 'nims',
     nimble = 'nimble',
-    asd = 'lisp',
     cr = 'crystal',
+    asd = 'lisp',
   },
   filename = {
     ['go.mod'] = 'gomod',
     ['go.sum'] = 'gosum',
   },
 }
-
--- local leader
-vim.g.maplocalleader = ','
 
 -- augroup
 vim.api.nvim_create_augroup('config', {})
