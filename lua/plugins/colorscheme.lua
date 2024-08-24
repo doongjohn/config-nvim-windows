@@ -26,7 +26,7 @@ return {
 
         return {
           WinSeparator = { fg = theme.ui.bg_p1 },
-          FloatBorder = { bg = theme.ui.float.bg },
+          FloatBorder = { bg = theme.ui.float.bg, fg = theme.ui.float.bg },
 
           Pmenu = { bg = theme.ui.bg_p1 },
           PmenuSel = { fg = 'none', bg = theme.ui.bg_p2 },
