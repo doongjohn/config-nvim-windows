@@ -13,25 +13,27 @@ return {
         { 'l', 'zl', { desc = '' } },
         { 'H', 'zH' },
         { 'L', 'zL', { desc = 'half screen ' } },
-      }
+      },
     })
 
     hydra({
       name = 'window',
+      config = {
+        on_enter = function()
+          vim.cmd('ScrollViewDisable')
+        end,
+        on_exit = function()
+          vim.cmd('ScrollViewEnable')
+        end,
+      },
       mode = 'n',
       body = '<c-w>',
       heads = {
-        { 'p', function()
-          require 'nvim-window'.pick()
-        end, { desc = 'pick' } },
-        { '-', '<c-w><' },
-        { '=', '<c-w>>', { desc = '󰤼 resize' } },
-        { '_', '<c-w>-' },
-        { '+', '<c-w>+', { desc = '󰤻 resize' } },
-        { 'e', '<c-w>=', { desc = 'equal size' } },
-        { 'b', '<cmd>Bdelete<cr>', { desc = 'delete buffer' } },
-        { 'q', '<c-w>q', { desc = 'quit window' } },
-      }
+        { '<', '<c-w><' },
+        { '>', '<c-w>>', { desc = '󰤼 resize' } },
+        { ',', '<c-w>-' },
+        { '.', '<c-w>+', { desc = '󰤻 resize' } },
+      },
     })
 
     hydra({
@@ -52,7 +54,7 @@ return {
         { 'p', '<cmd>Gitsigns preview_hunk<cr>', { desc = 'preview hunk' } },
         { 'r', '<cmd>Gitsigns reset_hunk<cr>',   { desc = 'reset hunk' } },
         { 'q', nil,                              { desc = 'exit', exit = true, nowait = true } },
-      }
+      },
     })
 
     hydra({
@@ -77,7 +79,7 @@ return {
         { 'i',     function() require 'dap.ui.widgets'.hover() end,  { desc = 'inspect' } },
         { 't',     function() require 'dap'.terminate() end,         { desc = 'terminate' } },
         { 'q',     nil,                                              { desc = 'exit', exit = true, nowait = true } },
-      }
+      },
     })
   end
 }

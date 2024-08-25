@@ -3,7 +3,7 @@ return {
   'yorickpeterse/nvim-window',
   event = 'VeryLazy',
   keys = {
-    { '<leader>w', function() require 'nvim-window'.pick() end },
+    { '<c-w><space>', function() require 'nvim-window'.pick() end },
   },
   opts = {
     normal_hl = 'CursorLine',
