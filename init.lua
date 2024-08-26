@@ -105,10 +105,17 @@ do
   vim.keymap.set('v', 'il', ':<c-u>norm ^vg_<cr>')
   vim.keymap.set('o', 'il', '<cmd>norm ^vg_<cr>')
 
-  -- highlight current word
-  vim.keymap.set('n', '<leader>a', function()
+  -- search word under cursor
+  vim.keymap.set('n', '<leader>s', function()
     local view = vim.fn.winsaveview()
-    vim.cmd 'norm *N'
+    vim.cmd('norm *')
+    vim.fn.winrestview(view)
+  end, { silent = true })
+
+  -- search selected
+  vim.keymap.set('v', '<leader>s', function()
+    local view = vim.fn.winsaveview()
+    vim.cmd(vim.api.nvim_replace_termcodes([[norm ""y/<c-r>"<cr>]], true, false, true))
     vim.fn.winrestview(view)
   end, { silent = true })
 

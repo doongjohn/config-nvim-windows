@@ -1,4 +1,4 @@
-local highlight_range = function(bufnr, ns_id, hl_group, pos1, pos2, opts)
+local function highlight_range(bufnr, ns_id, hl_group, pos1, pos2, opts)
   opts = opts or {}
   local regtype = opts.regtype or 'v'
   local inclusive = opts.inclusive or false
@@ -33,7 +33,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   callback = function()
     local bufnr = vim.api.nvim_get_current_buf()
 
-    local highlight_clear = function()
+    local function highlight_clear()
       yank_hl_timer = nil
       if vim.api.nvim_buf_is_valid(bufnr) then
         vim.api.nvim_buf_clear_namespace(bufnr, yank_hl_ns_id, 0, -1)

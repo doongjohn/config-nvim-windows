@@ -9,7 +9,6 @@ return {
   init = function()
     vim.api.nvim_create_autocmd('BufWinEnter', {
       group = 'config',
-      pattern = '*',
       callback = function()
         if vim.api.nvim_win_get_config(0).relative ~= '' then
           return
@@ -19,7 +18,7 @@ return {
         end
 
         local function toggleTerm()
-          vim.cmd 'ToggleTerm direction=horizontal'
+          vim.cmd('ToggleTerm direction=horizontal')
         end
 
         vim.keymap.set('n', '<c-k>', toggleTerm, { buffer = true })
