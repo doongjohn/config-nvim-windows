@@ -12,14 +12,12 @@ return {
   },
   event = 'InsertEnter',
   config = function()
-    require 'snippy'.setup {
+    local snippy = require 'snippy'
+    snippy.setup {
       mappings = {
         is = {
           ['<tab>'] = 'expand_or_advance',
           ['<s-tab>'] = 'previous',
-        },
-        nx = {
-          ['<leader>x'] = 'cut_text',
         },
       },
     }
@@ -56,7 +54,7 @@ return {
     cmp.setup {
       snippet = {
         expand = function(args)
-          require 'snippy'.expand_snippet(args.body)
+          snippy.expand_snippet(args.body)
         end
       },
       formatting = {
@@ -78,6 +76,10 @@ return {
       sources = cmp.config.sources({
         { name = 'nvim_lsp' },
         { name = 'nvim_lsp_signature_help' },
+        {
+          name = 'lazydev',
+          group_index = 0
+        },
         { name = 'snippy' },
       }, {
         { name = 'buffer' },
@@ -86,24 +88,18 @@ return {
 
     cmp.setup.cmdline({ '/', '?' }, {
       mapping = cmp.mapping.preset.cmdline(),
-      sources = {
-        { name = 'buffer' }
-      }
+      sources = cmp.config.sources({
+        { name = 'buffer' },
+      }),
     })
 
     cmp.setup.cmdline(':', {
       mapping = cmp.mapping.preset.cmdline(),
       sources = cmp.config.sources({
-        { name = 'path' }
+        { name = 'path' },
       }, {
-        { name = 'cmdline' }
+        { name = 'cmdline' },
       })
-    })
-
-    cmp.setup.filetype({ 'dap-repl', 'dapui_watches', 'dapui_hover' }, {
-      sources = {
-        { name = 'dap' },
-      },
     })
   end
 }
