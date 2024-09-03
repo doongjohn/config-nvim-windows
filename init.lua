@@ -137,7 +137,7 @@ do
   vim.keymap.set('n', '<f2>', vim.lsp.buf.rename, { silent = true })
 
   -- string to array
-  vim.keymap.set('v', '<leader>,', [[:s/\%V\(.\)/'\1', /g<cr>]])
+  vim.keymap.set('v', '<leader>,', [[:s/\%V./'&', /g<cr>:noh<cr>]], { silent = true })
 end
 
 -- setup lazy nvim
