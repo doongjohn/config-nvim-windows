@@ -84,7 +84,7 @@ return {
 
     -- web dev
     lsp.emmet_ls.setup {}
-    lsp.tsserver.setup {}
+    lsp.ts_ls.setup {}
     lsp.denols.setup {
       settings = {
         deno = {
