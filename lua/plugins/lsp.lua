@@ -64,16 +64,14 @@ return {
       },
     }
     lsp.gopls.setup {
-      cmd = { 'gopls', 'serve' },
       settings = {
-        -- https://github.com/golang/tools/blob/master/gopls/doc/vim.md#neovim-config
         gopls = {
           analyses = {
             unusedparams = true,
           },
           gofumpt = true,
-          semanticTokens = true,
           staticcheck = true,
+          semanticTokens = true,
         }
       },
     }
