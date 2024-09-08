@@ -46,20 +46,14 @@ return {
         'gitignore',
         'gitattributes',
       },
-      ignore_install = {
-        -- 'somelanguage'
-      },
       highlight = {
         enable = true,
         additional_vim_regex_highlighting = false,
-        disable = {
-          -- 'somelanguage'
-          'crystal',
-        },
       },
       indent = {
         enable = true,
         disable = {
+          'cpp',
           'zig',
           'odin',
           'lua',
