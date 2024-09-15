@@ -26,6 +26,7 @@ return {
         -- scripting lanuage
         'python', 'ruby', 'julia',
         'lua', 'fennel',
+        'gdscript',
         -- web dev
         'html', 'css', 'scss',
         'javascript', 'jsdoc',

@@ -24,6 +24,7 @@ vim.api.nvim_create_autocmd('FileType', {
     'make',
     'go',
     'odin',
+    'gdscript',
   },
   callback = function()
     vim.bo.tabstop = 4

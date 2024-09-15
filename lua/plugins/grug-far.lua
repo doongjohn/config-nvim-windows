@@ -21,7 +21,8 @@ return {
               .. ' -g !vendor'
               .. ' -g !dist'
               .. ' -g !node_modules'
-              .. ' -g !zig-out',
+              .. ' -g !zig-out'
+              .. ' -g !.godot',
         },
       },
       windowCreationCommand = 'vert topleft split',

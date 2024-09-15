@@ -95,6 +95,7 @@ return {
             '-E=dist/',
             '-E=node_modules/',
             '-E=zig-out/',
+            '-E=.godot/',
           },
           hidden = true
         }
