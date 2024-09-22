@@ -1,8 +1,5 @@
 return {
   'mfussenegger/nvim-dap',
-  dependencies = {
-    'liadoz/nvim-dap-repl-highlights',
-  },
   config = function()
     local dap = require 'dap'
 
@@ -11,7 +8,6 @@ return {
 
     local program_args = {}
 
-    -- issue: https://github.com/mfussenegger/nvim-dap/issues/1196
     dap.adapters.lldb = {
       type = 'server',
       port = '${port}',
@@ -21,17 +17,17 @@ return {
         detached = is_windows and false or true,
       },
     }
-    local lldb_config = {
-      name = 'Debug C/C++ (lldb)',
+    local config_lldb = {
+      name = 'lldb',
       type = 'lldb',
       request = 'launch',
       program = function()
-        local path = vim.fn.input({
+        local program_path = vim.fn.input({
           prompt = 'executable path: ',
           default = '.' .. path_sep,
           completion = 'file',
         })
-        path = vim.fn.getcwd() .. path:sub(2)
+        program_path = vim.fn.getcwd() .. program_path:sub(2)
 
         program_args = {}
         local args_str = vim.fn.input('args: ', '', 'file')
@@ -39,7 +35,7 @@ return {
           table.insert(program_args, substring)
         end
 
-        return (path and path ~= "") and path or dap.ABORT
+        return program_path
       end,
       args = function()
         return program_args
@@ -53,17 +49,17 @@ return {
       command = vim.fn.exepath('gdb'),
       args = { '-i', 'dap' },
     }
-    local gdb_config = {
-      name = 'Debug C/C++ (gdb)',
+    local config_gdb = {
+      name = 'gdb',
       type = 'gdb',
       request = 'launch',
       program = function()
-        local path = vim.fn.input({
+        local program_path = vim.fn.input({
           prompt = 'executable path: ',
           default = '.' .. path_sep,
           completion = 'file',
         })
-        path = vim.fn.getcwd() .. path:sub(2)
+        program_path = vim.fn.getcwd() .. program_path:sub(2)
 
         program_args = {}
         local args_str = vim.fn.input('args: ', '', 'file')
@@ -71,7 +67,7 @@ return {
           table.insert(program_args, substring)
         end
 
-        return (path and path ~= "") and path or dap.ABORT
+        return program_path
       end,
       args = function()
         return program_args
@@ -79,7 +75,7 @@ return {
       cwd = '${workspaceFolder}',
     }
 
-    dap.configurations.c = { lldb_config, gdb_config }
-    dap.configurations.cpp = { lldb_config, gdb_config }
+    dap.configurations.c = { config_lldb, config_gdb }
+    dap.configurations.cpp = { config_lldb, config_gdb }
   end
 }
