@@ -5,7 +5,6 @@ return {
     'nushell/tree-sitter-nu',
   },
   build = ':TSUpdate',
-  -- event = { 'BufReadPost', 'BufNewFile' },
   event = 'UIEnter',
   config = function()
     ---@diagnostic disable-next-line: missing-fields
