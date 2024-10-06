@@ -15,9 +15,20 @@ return {
   },
   event = 'VeryLazy',
   keys = {
-    { '<space>',    '<cmd>Telescope find_files<cr>' },
     { '<leader>ff', '<cmd>Telescope current_buffer_fuzzy_find<cr>' },
   },
+  init = function()
+    vim.api.nvim_create_autocmd('BufWinEnter', {
+      group = 'config',
+      callback = function()
+        if #vim.bo.buftype ~= 0 or vim.api.nvim_win_get_config(0).relative ~= '' then
+          return
+        end
+
+        vim.keymap.set('n', '<space>', '<cmd>Telescope find_files<cr>', { buffer = true })
+      end
+    })
+  end,
   config = function()
     local telescope = require 'telescope'
     local telescope_actions = require 'telescope.actions'

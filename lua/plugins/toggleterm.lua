@@ -10,10 +10,7 @@ return {
     vim.api.nvim_create_autocmd('BufWinEnter', {
       group = 'config',
       callback = function()
-        if vim.api.nvim_win_get_config(0).relative ~= '' then
-          return
-        end
-        if vim.bo.filetype == 'Outline' then
+        if #vim.bo.buftype ~= 0 or vim.api.nvim_win_get_config(0).relative ~= '' then
           return
         end
 
