@@ -43,7 +43,6 @@ return {
     }
     lsp.pyright.setup {}
     lsp.nushell.setup {}
-    lsp.neocmake.setup {}
     lsp.gdscript.setup {}
 
     -- compiled languages
