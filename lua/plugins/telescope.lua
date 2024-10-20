@@ -89,6 +89,12 @@ return {
             '-E=*.exe',
             '-E=*.pdb',
 
+            '-E=*.pdf',
+            '-E=*.png',
+            '-E=*.jpg',
+            '-E=*.jpeg',
+            '-E=*.gif',
+
             -- exclude folders
             '-E=.git/',
             '-E=.github/',
