@@ -28,7 +28,6 @@ return {
         folder_closed = '',
         folder_open = '',
         folder_empty = '',
-        default = '',
       },
       name = {
         trailing_slash = false,
