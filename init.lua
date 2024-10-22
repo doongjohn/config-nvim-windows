@@ -1,15 +1,15 @@
 os.setlocale('ko_KR.UTF8')
 
 vim.o.clipboard = 'unnamedplus'
-vim.o.jumpoptions = 'stack,view'
 vim.o.mouse = 'a'
 vim.o.wrap = false
-vim.o.sidescrolloff = 10
 vim.o.number = true
 vim.o.signcolumn = 'yes:1'
-vim.o.showmode = false
 vim.o.laststatus = 3
+vim.o.showmode = false
 vim.o.syntax = 'on'
+vim.o.sidescrolloff = 10
+vim.o.jumpoptions = 'stack,view'
 
 -- show whitespace
 vim.o.list = true
@@ -97,6 +97,10 @@ require 'winbar'
 
 -- keymaps
 do
+  -- disable right click menu
+  vim.keymap.set('n', '<rightmouse>', '<nop>')
+  vim.keymap.set('i', '<rightmouse>', '<nop>')
+
   -- esc
   vim.keymap.set('v', '<c-l>', '<esc>')
   vim.keymap.set('i', '<c-l>', '<esc>')
