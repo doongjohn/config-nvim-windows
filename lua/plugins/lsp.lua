@@ -77,7 +77,9 @@ return {
     }
     lsp.nimls.setup {}
     lsp.crystalline.setup {}
-    lsp.zls.setup {}
+    lsp.zls.setup {
+      cmd = { 'zigscient' },
+    }
     lsp.ols.setup {}
 
     -- web dev
