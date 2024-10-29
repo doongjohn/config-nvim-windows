@@ -12,8 +12,6 @@ return {
               .. ' -g !obj'
               .. ' -g !.objs'
               .. ' -g !.deps'
-              .. ' -g !lib'
-              .. ' -g !libs'
               .. ' -g !bin'
               .. ' -g !out'
               .. ' -g !build'
@@ -21,6 +19,7 @@ return {
               .. ' -g !vendor'
               .. ' -g !dist'
               .. ' -g !node_modules'
+              .. ' -g !.svelte-kit'
               .. ' -g !zig-out'
               .. ' -g !.godot',
         },

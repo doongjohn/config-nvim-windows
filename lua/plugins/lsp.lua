@@ -83,21 +83,7 @@ return {
     lsp.ols.setup {}
 
     -- web dev
-    lsp.emmet_ls.setup {}
-    lsp.ts_ls.setup {}
-    lsp.denols.setup {
-      settings = {
-        deno = {
-          enable = true,
-          suggest = {
-            imports = {
-              hosts = {
-                ['https://deno.land'] = true
-              }
-            }
-          }
-        }
-      },
+    lsp.ts_ls.setup {
       root_dir = function(filename, _)
         local is_deno_project = lsp.util.root_pattern('deno.json', 'deno.jsonc')(filename);
         if is_deno_project then
@@ -107,7 +93,17 @@ return {
       end,
       single_file_support = false,
     }
+    lsp.denols.setup {
+      root_dir = lsp.util.root_pattern('deno.json', 'deno.jsonc'),
+      settings = {
+        deno = {
+          enable = true,
+          lint = true,
+        }
+      },
+    }
     lsp.astro.setup {}
+    lsp.svelte.setup {}
 
     -- shader langauges
     lsp.glsl_analyzer.setup {}
