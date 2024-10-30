@@ -64,7 +64,6 @@ return {
           '--line-number',
           '--column',
           '--hidden',
-          '--trim',
         },
         mappings = {
           i = {
@@ -78,6 +77,7 @@ return {
             'fd', '-tf', '-H',
             '--no-ignore-vcs',
             '--strip-cwd-prefix',
+            '--path-separator=/',
 
             -- exclude files
             '-E=*.a',

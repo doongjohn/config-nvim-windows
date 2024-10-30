@@ -94,13 +94,13 @@ return {
       single_file_support = false,
     }
     lsp.denols.setup {
-      root_dir = lsp.util.root_pattern('deno.json', 'deno.jsonc'),
       settings = {
         deno = {
           enable = true,
           lint = true,
         }
       },
+      root_dir = lsp.util.root_pattern('deno.json', 'deno.jsonc'),
     }
     lsp.astro.setup {}
     lsp.svelte.setup {}
