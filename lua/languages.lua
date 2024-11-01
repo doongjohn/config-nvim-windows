@@ -81,6 +81,15 @@ vim.api.nvim_create_autocmd('FileType', {
     vim.bo.commentstring = '# %s';
   end
 })
+vim.api.nvim_create_autocmd('FileType', {
+  group = 'config',
+  pattern = {
+    'svelte',
+  },
+  callback = function()
+    vim.bo.commentstring = '<!-- %s -->';
+  end
+})
 
 -- zig
 vim.g.zig_fmt_parse_errors = 0
