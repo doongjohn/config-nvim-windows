@@ -1,6 +1,7 @@
 return {
   -- telescope
   'nvim-telescope/telescope.nvim',
+  lazy = false,
   dependencies = {
     'nvim-lua/plenary.nvim',
     {
@@ -13,7 +14,6 @@ return {
     },
     'natecraddock/telescope-zf-native.nvim',
   },
-  event = 'VeryLazy',
   keys = {
     { '<leader>ff', '<cmd>Telescope current_buffer_fuzzy_find<cr>' },
   },
