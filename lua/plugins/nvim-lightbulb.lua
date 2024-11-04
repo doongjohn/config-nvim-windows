@@ -11,6 +11,7 @@ return {
     ignore = {
       clients = {
         'gopls',
+        'zls',
       }
     }
   },
