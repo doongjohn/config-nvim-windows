@@ -10,6 +10,7 @@ return {
     autocmd = { enabled = true },
     ignore = {
       clients = {
+        'ts_ls',
         'gopls',
         'zls',
       }
