@@ -12,6 +12,7 @@ return {
 		}
 
 		local ft = require("guard.filetype")
+		local lsp = require("guard.lsp")
 
 		ft("lua"):fmt("stylua")
 
@@ -22,6 +23,10 @@ return {
 					args = { "exec", "prettier", "--stdin-filepath" },
 					fname = true,
 					stdin = true,
+				}
+			else
+				return {
+					fn = lsp.format,
 				}
 			end
 		end)
