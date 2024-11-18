@@ -1,5 +1,5 @@
 return {
-  'yorickpeterse/nvim-pqf',
-  event = 'UIEnter',
-  opts = {},
+	"yorickpeterse/nvim-pqf",
+	event = "UIEnter",
+	opts = {},
 }

@@ -1,5 +1,5 @@
 return {
-  'dstein64/nvim-scrollview',
-  event = 'UIEnter',
-  opts = {},
+	"dstein64/nvim-scrollview",
+	event = "UIEnter",
+	opts = {},
 }
