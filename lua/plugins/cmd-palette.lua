@@ -51,6 +51,12 @@ return {
 				cmd = "Telescope oldfiles",
 			},
 			{
+				label = "[file] format",
+				callback = function()
+					vim.cmd("Guard fmt")
+				end,
+			},
+			{
 				label = "[file] yank all",
 				cmd = "%y",
 			},
@@ -88,12 +94,6 @@ return {
 			},
 
 			-- lsp
-			{
-				label = "[lsp] format",
-				callback = function()
-					vim.cmd("Guard fmt")
-				end,
-			},
 			{
 				label = "[lsp] inlay hint toggle",
 				callback = function()
