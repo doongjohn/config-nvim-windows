@@ -19,11 +19,8 @@ return {
 		hydra({
 			name = "window",
 			config = {
-				on_enter = function()
-					vim.cmd("ScrollViewDisable")
-				end,
-				on_exit = function()
-					vim.cmd("ScrollViewEnable")
+				on_key = function()
+					vim.cmd(":SatelliteRefresh")
 				end,
 			},
 			mode = "n",

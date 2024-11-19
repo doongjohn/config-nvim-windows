@@ -99,6 +99,7 @@ do
 	vim.keymap.set("i", "<rightmouse>", "<nop>")
 
 	-- esc
+	vim.keymap.set("n", "<c-l>", ":nohl<cr>", { silent = true })
 	vim.keymap.set("v", "<c-l>", "<esc>")
 	vim.keymap.set("i", "<c-l>", "<esc>")
 
@@ -107,14 +108,14 @@ do
 	vim.keymap.set("o", "il", "<cmd>norm ^vg_<cr>")
 
 	-- search word under cursor
-	vim.keymap.set("n", "<leader>s", function()
+	vim.keymap.set("n", "<leader>h", function()
 		local view = vim.fn.winsaveview()
 		vim.cmd("norm *")
 		vim.fn.winrestview(view)
 	end, { silent = true })
 
 	-- search selected
-	vim.keymap.set("v", "<leader>s", function()
+	vim.keymap.set("v", "<leader>h", function()
 		local view = vim.fn.winsaveview()
 		vim.cmd(vim.api.nvim_replace_termcodes([[norm ""y/<c-r>"<cr>]], true, false, true))
 		vim.fn.winrestview(view)
