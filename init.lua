@@ -99,7 +99,6 @@ do
 	vim.keymap.set("i", "<rightmouse>", "<nop>")
 
 	-- esc
-	vim.keymap.set("n", "<c-l>", ":nohl<cr>", { silent = true })
 	vim.keymap.set("v", "<c-l>", "<esc>")
 	vim.keymap.set("i", "<c-l>", "<esc>")
 
