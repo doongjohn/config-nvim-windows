@@ -16,7 +16,7 @@ return {
 
 		ft("lua"):fmt("stylua")
 
-		ft("json,html,css,javascript,typescript,svelte"):fmt(function()
+		ft("markdown,json,html,css,javascript,typescript,svelte"):fmt(function()
 			if vim.uv.fs_stat(".prettierrc") then
 				return {
 					cmd = "pnpm",
