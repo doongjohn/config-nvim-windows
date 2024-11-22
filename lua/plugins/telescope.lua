@@ -121,6 +121,10 @@ return {
 						"-E=*.jpg",
 						"-E=*.jpeg",
 						"-E=*.gif",
+						"-E=*.ttf",
+						"-E=*.otf",
+						"-E=*.fbx",
+						"-E=*.vrm",
 
 						-- exclude folders
 						"-E=.git/",
