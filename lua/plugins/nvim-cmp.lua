@@ -1,11 +1,10 @@
 return {
-	"iguanacucumber/magazine.nvim",
-	name = "nvim-cmp",
+	"hrsh7th/nvim-cmp",
 	dependencies = {
-		{ "iguanacucumber/mag-nvim-lsp", name = "cmp-nvim-lsp" },
-		{ "iguanacucumber/mag-buffer", name = "cmp-buffer" },
-		{ "iguanacucumber/mag-cmdline", name = "cmp-cmdline" },
+		"hrsh7th/cmp-buffer",
 		"hrsh7th/cmp-path",
+		"hrsh7th/cmp-cmdline",
+		"hrsh7th/cmp-nvim-lsp",
 		"hrsh7th/cmp-nvim-lsp-signature-help",
 		"dcampos/nvim-snippy",
 		"dcampos/cmp-snippy",
