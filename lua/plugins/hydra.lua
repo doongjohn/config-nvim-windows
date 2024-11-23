@@ -36,7 +36,7 @@ return {
 		hydra({
 			name = "git",
 			config = {
-				color = "pink",
+				foreign_keys = "run",
 				invoke_on_body = true,
 				hint = {
 					type = "window",
@@ -44,7 +44,7 @@ return {
 				},
 			},
 			mode = "n",
-			body = "<leader>g",
+			body = "<leader>G",
 			heads = {
 				{ "n", "<cmd>Gitsigns next_hunk<cr>", { desc = "next hunk" } },
 				{ "N", "<cmd>Gitsigns prev_hunk<cr>", { desc = "prev hunk" } },
@@ -57,7 +57,7 @@ return {
 		hydra({
 			name = "dap",
 			config = {
-				color = "pink",
+				foreign_keys = "run",
 				invoke_on_body = true,
 				hint = {
 					type = "window",
