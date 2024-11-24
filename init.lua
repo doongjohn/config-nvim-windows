@@ -61,28 +61,27 @@ vim.filetype.add({
 	},
 })
 
--- setup diagnostic
+-- diagnostic options
 vim.diagnostic.config({
 	virtual_text = true,
-	signs = true,
 	underline = true,
 	update_in_insert = false,
 	severity_sort = true,
+	signs = {
+		text = {
+			[vim.diagnostic.severity.ERROR] = "󰅚 ",
+			[vim.diagnostic.severity.WARN] = "󰀪 ",
+			[vim.diagnostic.severity.INFO] = "󰋽 ",
+			[vim.diagnostic.severity.HINT] = "󰌶 ",
+		},
+		numhl = {
+			[vim.diagnostic.severity.ERROR] = "DiagnosticError",
+			[vim.diagnostic.severity.WARN] = "DiagnosticWarn",
+			[vim.diagnostic.severity.INFO] = "DiagnosticInfo",
+			[vim.diagnostic.severity.HINT] = "DiagnosticHint",
+		},
+	},
 })
-local diag_icons = {
-	{ type = "Error", icon = "󰅚 " },
-	{ type = "Warn", icon = "󰀪 " },
-	{ type = "Info", icon = "󰋽 " },
-	{ type = "Hint", icon = "󰌶 " },
-}
-for _, v in pairs(diag_icons) do
-	vim.fn.sign_define("DiagnosticSign" .. v.type, {
-		text = v.icon,
-		texthl = "DiagnosticSign" .. v.type,
-		linehl = "",
-		numhl = "Diagnostic" .. v.type,
-	})
-end
 
 -- augroup
 vim.api.nvim_create_augroup("config", {})
