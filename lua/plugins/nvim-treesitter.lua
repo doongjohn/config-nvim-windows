@@ -57,7 +57,6 @@ return {
 				"hlsl",
 				-- markup
 				"markdown",
-				"latex",
 				"rst",
 				-- data
 				"json",

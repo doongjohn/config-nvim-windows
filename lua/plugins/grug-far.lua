@@ -11,6 +11,7 @@ return {
 						.. " -g !obj"
 						.. " -g !.objs"
 						.. " -g !.deps"
+						.. " -g !.venv"
 						.. " -g !bin"
 						.. " -g !out"
 						.. " -g !build"
@@ -19,6 +20,7 @@ return {
 						.. " -g !dist"
 						.. " -g !node_modules"
 						.. " -g !.svelte-kit"
+						.. " -g !__pycache__"
 						.. " -g !zig-out"
 						.. " -g !.godot",
 				},
