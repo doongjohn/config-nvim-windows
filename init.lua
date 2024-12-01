@@ -1,5 +1,6 @@
 -- general options
 os.setlocale("ko_KR.UTF8")
+vim.o.exrc = true
 vim.o.clipboard = "unnamedplus"
 vim.o.mouse = "a"
 vim.o.wrap = false
@@ -50,14 +51,15 @@ vim.filetype.add({
 		hpp = "cpp",
 		d = "d",
 		nim = "nim",
-		nims = "nims",
-		nimble = "nimble",
+		nims = "nim",
+		nimble = "nim",
 		cr = "crystal",
 		asd = "lisp",
 	},
 	filename = {
 		["go.mod"] = "gomod",
 		["go.sum"] = "gosum",
+		["nimble.lock"] = "json",
 	},
 })
 

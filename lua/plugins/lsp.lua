@@ -3,6 +3,7 @@ return {
 	"neovim/nvim-lspconfig",
 	dependencies = {
 		"smiteshp/nvim-navic",
+		"Issafalcon/lsp-overloads.nvim",
 	},
 	event = { "BufReadPost", "BufNewFile" },
 	config = function()
@@ -17,14 +18,18 @@ return {
 				require("nvim-navic").attach(client, bufnr)
 			end
 
-			-- golang: generate a synthetic semanticTokensProvider (https://github.com/golang/go/issues/54531).
-			if client.name == "gopls" and not client.server_capabilities.semanticTokensProvider then
-				local semantic = client.config.capabilities.textDocument.semanticTokens
-				client.server_capabilities.semanticTokensProvider = {
-					full = true,
-					legend = { tokenModifiers = semantic.tokenModifiers, tokenTypes = semantic.tokenTypes },
-					range = true,
-				}
+			-- view overloads
+			if client.server_capabilities.signatureHelpProvider then
+				---@diagnostic disable-next-line: missing-fields
+				require("lsp-overloads").setup(client, {
+					keymaps = {
+						next_signature = "<C-j>",
+						previous_signature = "<C-k>",
+						next_parameter = "<nop>",
+						previous_parameter = "<nop>",
+						close_signature = "<nop>",
+					},
+				})
 			end
 		end
 
@@ -35,6 +40,7 @@ return {
 		lsp.eslint.setup({})
 
 		-- scripting languages
+		lsp.nushell.setup({})
 		lsp.lua_ls.setup({
 			settings = {
 				Lua = {
@@ -45,7 +51,6 @@ return {
 			},
 		})
 		lsp.pyright.setup({})
-		lsp.nushell.setup({})
 		lsp.gdscript.setup({})
 
 		-- compiled languages
@@ -67,6 +72,19 @@ return {
 			},
 		})
 		lsp.gopls.setup({
+			on_attach = function(client, bufnr)
+				lsp.util.default_config.on_attach(client, bufnr)
+
+				-- generate a synthetic semanticTokensProvider (https://github.com/golang/go/issues/54531).
+				if client.name == "gopls" and not client.server_capabilities.semanticTokensProvider then
+					local semantic = client.config.capabilities.textDocument.semanticTokens
+					client.server_capabilities.semanticTokensProvider = {
+						full = true,
+						legend = { tokenModifiers = semantic.tokenModifiers, tokenTypes = semantic.tokenTypes },
+						range = true,
+					}
+				end
+			end,
 			settings = {
 				gopls = {
 					analyses = {
@@ -78,8 +96,22 @@ return {
 				},
 			},
 		})
-		lsp.nimls.setup({})
-		lsp.crystalline.setup({})
+		lsp.nim_langserver.setup({
+			settings = {
+				nim = {
+					projectMapping = {
+						{
+							projectFile = "tests/all.nim",
+							fileRegex = "tests/.*\\.nim",
+						},
+						{
+							projectFile = "main.nim",
+							fileRegex = ".*\\.nim",
+						},
+					},
+				},
+			},
+		})
 		lsp.zls.setup({
 			cmd = { "zigscient" },
 		})
