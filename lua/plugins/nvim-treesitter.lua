@@ -2,7 +2,7 @@ return {
 	-- treesitter
 	"nvim-treesitter/nvim-treesitter",
 	build = ":TSUpdate",
-	event = { "BufReadPost", "BufNewFile" },
+	event = "UIEnter",
 	config = function()
 		---@diagnostic disable-next-line: missing-fields
 		require("nvim-treesitter.configs").setup({
@@ -12,6 +12,7 @@ return {
 				"bash",
 				"fish",
 				"nu",
+				"powershell",
 				-- tool
 				"make",
 				"cmake",
