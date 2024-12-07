@@ -1,5 +1,5 @@
 return {
-	"doongjohn/glance.nvim",
+	"DNLHC/glance.nvim",
 	cmd = { "Glance" },
 	keys = {
 		{ "<f12>", "<cmd>Glance definitions<cr>" },
