@@ -4,6 +4,7 @@ return {
 	lazy = false,
 	priority = 1000,
 	config = function()
+		---@diagnostic disable-next-line: missing-fields
 		require("kanagawa").setup({
 			commentStyle = { bold = false, italic = false },
 			keywordStyle = { bold = false, italic = false },

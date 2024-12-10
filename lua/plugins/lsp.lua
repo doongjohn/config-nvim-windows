@@ -22,6 +22,10 @@ return {
 			if client.server_capabilities.signatureHelpProvider then
 				---@diagnostic disable-next-line: missing-fields
 				require("lsp-overloads").setup(client, {
+					---@diagnostic disable-next-line: missing-fields
+					ui = {
+						border = "none",
+					},
 					keymaps = {
 						next_signature = "<C-j>",
 						previous_signature = "<C-k>",
