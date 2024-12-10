@@ -1,5 +1,5 @@
 -- general options
-os.setlocale("ko_KR.UTF8")
+os.setlocale("en_US.UTF8")
 vim.o.exrc = true
 vim.o.clipboard = "unnamedplus"
 vim.o.mouse = "a"
