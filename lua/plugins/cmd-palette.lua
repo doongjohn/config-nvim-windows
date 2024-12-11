@@ -71,13 +71,13 @@ return {
 			{
 				label = "[search] all files",
 				callback = function()
-					require("grug-far").grug_far()
+					require("grug-far").open()
 				end,
 			},
 			{
 				label = "[search] current file",
 				callback = function()
-					require("grug-far").grug_far({ prefills = { flags = vim.fn.expand("%") } })
+					require("grug-far").open({ prefills = { paths = vim.fn.expand("%") } })
 				end,
 			},
 			{
