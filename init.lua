@@ -88,9 +88,16 @@ vim.diagnostic.config({
 -- augroup
 vim.api.nvim_create_augroup("config", {})
 
+-- highlight yanked text
+vim.api.nvim_create_autocmd("TextYankPost", {
+	group = "config",
+	callback = function()
+		vim.highlight.on_yank({ higroup = "DiffText" })
+	end,
+})
+
 -- modules
 require("filetypes")
-require("highlighter")
 require("winbar")
 
 -- keymaps
