@@ -16,6 +16,7 @@ return {
 	keys = {
 		{ "<leader>ff", "<cmd>Telescope current_buffer_fuzzy_find<cr>" },
 		{ "<leader>fg", "<cmd>Telescope live_grep<cr>" },
+		{ "<leader>fb", '<cmd>Telescope live_grep search_dirs={"%"}<cr>' },
 	},
 	init = function()
 		vim.api.nvim_create_autocmd("BufWinEnter", {

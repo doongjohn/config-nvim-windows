@@ -8,7 +8,7 @@
   "formatter.nvim": { "branch": "master", "commit": "eb89a1f3e079f1b9680bc7293b75fffccb5e1598" },
   "gitsigns.nvim": { "branch": "main", "commit": "5f808b5e4fef30bd8aca1b803b4e555da07fc412" },
   "glance.nvim": { "branch": "master", "commit": "04f7325d46eb3b450f2e2ba96d13dbf0b00aba0b" },
-  "grug-far.nvim": { "branch": "main", "commit": "938ba023eb5cb462436c8c43fa4d9859242b7ba3" },
+  "grug-far.nvim": { "branch": "main", "commit": "0d334f90596af91758d88a9cd3d61fd444dcd274" },
   "hydra.nvim": { "branch": "main", "commit": "7f5341643107d05a8d7d4fdea00b29af28517380" },
   "indent-blankline.nvim": { "branch": "master", "commit": "259357fa4097e232730341fa60988087d189193a" },
   "kanagawa.nvim": { "branch": "master", "commit": "ad3dddecd606746374ba4807324a08331dfca23c" },
