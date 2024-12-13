@@ -11,7 +11,6 @@ return {
 				.. "cmake --build build --config Release && "
 				.. "cmake --install build --prefix build",
 		},
-		"natecraddock/telescope-zf-native.nvim",
 	},
 	keys = {
 		{ "<leader>ff", "<cmd>Telescope current_buffer_fuzzy_find<cr>" },
@@ -154,25 +153,12 @@ return {
 			extensions = {
 				fzf = {
 					fuzzy = true,
-					override_file_sorter = false,
+					override_file_sorter = true,
 					override_generic_sorter = true,
-				},
-				["zf-native"] = {
-					file = {
-						enable = true,
-						highlight_results = true,
-						match_filename = true,
-						initial_sort = nil,
-						smart_case = true,
-					},
-					generic = {
-						enable = false,
-					},
 				},
 			},
 		})
 
 		telescope.load_extension("fzf")
-		telescope.load_extension("zf-native")
 	end,
 }
