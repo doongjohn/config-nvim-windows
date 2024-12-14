@@ -54,8 +54,7 @@ return {
 				label = "[file] format",
 				callback = function()
 					vim.cmd("up")
-					vim.cmd("FormatWrite")
-					vim.cmd("up")
+					vim.cmd("FormatWriteLock")
 				end,
 			},
 			{
