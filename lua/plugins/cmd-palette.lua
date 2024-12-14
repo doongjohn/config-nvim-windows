@@ -55,6 +55,7 @@ return {
 				callback = function()
 					vim.cmd("up")
 					vim.cmd("FormatWriteLock")
+					vim.cmd("up")
 				end,
 			},
 			{
