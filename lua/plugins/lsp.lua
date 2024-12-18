@@ -11,6 +11,7 @@ return {
 
 		-- lsp.util.default_config.capabilities =
 		-- 	require("blink.cmp").get_lsp_capabilities(lsp.util.default_config.capabilities)
+		lsp.util.default_config.capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 		lsp.util.default_config.on_attach = function(client, bufnr)
 			-- lsp breadcrumbs
