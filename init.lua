@@ -93,7 +93,7 @@ vim.api.nvim_create_augroup("config", {})
 vim.api.nvim_create_autocmd("TextYankPost", {
 	group = "config",
 	callback = function()
-		vim.highlight.on_yank({ higroup = "DiffText" })
+		vim.hl.on_yank({ higroup = "DiffText" })
 	end,
 })
 

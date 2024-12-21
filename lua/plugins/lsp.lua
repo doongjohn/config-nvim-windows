@@ -65,6 +65,7 @@ return {
 				"--background-index",
 				"--header-insertion=never",
 				"--clang-tidy",
+				"--experimental-modules-support",
 			},
 		})
 		lsp.rust_analyzer.setup({
