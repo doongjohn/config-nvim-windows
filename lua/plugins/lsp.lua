@@ -118,9 +118,7 @@ return {
 				},
 			},
 		})
-		lsp.zls.setup({
-			cmd = { "zigscient" },
-		})
+		lsp.zls.setup({})
 		lsp.ols.setup({})
 
 		-- web dev

@@ -115,6 +115,7 @@ return {
 						"-E=*.lib",
 						"-E=*.dll",
 						"-E=*.exe",
+						"-E=*.ilk",
 						"-E=*.pdb",
 
 						"-E=*.pdf",
