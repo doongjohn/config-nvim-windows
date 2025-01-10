@@ -7,6 +7,7 @@ return {
 	},
 	event = { "BufReadPost", "BufNewFile" },
 	config = function()
+		local home = os.getenv("USERPROFILE")
 		local lsp = require("lspconfig")
 
 		-- lsp.util.default_config.capabilities =
@@ -67,6 +68,9 @@ return {
 				"--clang-tidy",
 				"--experimental-modules-support",
 			},
+		})
+		lsp.omnisharp.setup({
+			cmd = { home .. "\\apps\\omnisharp\\OmniSharp.exe" },
 		})
 		lsp.rust_analyzer.setup({
 			settings = {
