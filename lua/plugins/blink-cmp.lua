@@ -5,8 +5,8 @@ return {
 	version = "v0.*",
 	opts = {
 		keymap = {
-			preset = "enter",
-			-- ["<C-n>"] = { "show", "select_next", "fallback" },
+			preset = "super-tab",
+			["<C-n>"] = { "show", "select_next", "fallback" },
 		},
 		completion = {
 			trigger = {
@@ -14,19 +14,17 @@ return {
 			},
 		},
 		sources = {
-			completion = {
-				-- enabled_providers = { "lsp", "path", "snippets", "buffer", "lazydev" },
-				enabled_providers = { "lsp", "path", "snippets", "buffer" },
+			default = { "lazydev", "lsp", "path", "snippets", "buffer" },
+			providers = {
+				lazydev = {
+					name = "LazyDev",
+					module = "lazydev.integrations.blink",
+					score_offset = 100,
+				},
 			},
-			-- providers = {
-			-- 	lsp = { fallback_for = { "lazydev" } },
-			-- 	lazydev = { name = "LazyDev", module = "lazydev.integrations.blink" },
-			-- },
 		},
 		appearance = {
-			highlight = {
-				use_nvim_cmp_as_default = true,
-			},
+			use_nvim_cmp_as_default = true,
 			nerd_font_variant = "normal",
 			kind_icons = {
 				File = "󰈙",
