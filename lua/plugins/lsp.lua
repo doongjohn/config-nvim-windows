@@ -107,6 +107,19 @@ return {
 			},
 		})
 		lsp.nim_langserver.setup({
+			handlers = {
+				["window/showMessage"] = function(_, result, _)
+					-- https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#window_showMessage
+					local log_levels = {
+						vim.log.levels.ERROR, -- Error
+						vim.log.levels.WARN, -- Warning
+						vim.log.levels.INFO, -- Info
+						vim.log.levels.INFO, -- Log
+						vim.log.levels.DEBUG, -- Debug
+					}
+					vim.notify("[nim langserver]: " .. result.message, log_levels[result.type])
+				end,
+			},
 			settings = {
 				nim = {
 					projectMapping = {
