@@ -87,6 +87,7 @@ return {
 					"--line-number",
 					"--column",
 					"--hidden",
+					"--trim",
 					"-g!.git",
 					"-g!.github",
 					"-g!*cache",
