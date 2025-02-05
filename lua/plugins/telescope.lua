@@ -1,7 +1,7 @@
 return {
 	-- telescope
 	"nvim-telescope/telescope.nvim",
-	lazy = false,
+	-- lazy = false,
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		{
@@ -11,6 +11,9 @@ return {
 				.. "cmake --build build --config Release && "
 				.. "cmake --install build --prefix build",
 		},
+	},
+	cmd = {
+		"Telescope",
 	},
 	keys = {
 		{ "<leader>ff", "<cmd>Telescope current_buffer_fuzzy_find<cr>" },
@@ -55,6 +58,90 @@ return {
 			return result
 		end
 
+		local find_command = {
+			"fd",
+			"-tf",
+			"-H",
+			"--no-ignore-vcs",
+			"--strip-cwd-prefix",
+		}
+
+		local vimgrep_arguments = {
+			"rg",
+			"--color=never",
+			"--no-heading",
+			"--with-filename",
+			"--line-number",
+			"--column",
+			"--hidden",
+			"--trim",
+			"-o",
+		}
+
+		local exclude = function(glob)
+			table.insert(find_command, "-E=" .. glob)
+			table.insert(vimgrep_arguments, "-g!" .. glob)
+		end
+
+		-- exclude: files
+		exclude("*.a")
+		exclude("*.o")
+		exclude("*.so")
+		exclude("*.obj")
+		exclude("*.lib")
+		exclude("*.dll")
+		exclude("*.exe")
+		exclude("*.ilk")
+		exclude("*.pdb")
+		exclude("*.pdf")
+		exclude("*.png")
+		exclude("*.jpg")
+		exclude("*.jpeg")
+		exclude("*.gif")
+		exclude("*.ttf")
+		exclude("*.otf")
+		exclude("*.psd")
+		exclude("*.fbx")
+		exclude("*.vrm")
+
+		-- exclude: folders
+		exclude(".git/")
+		exclude(".github/")
+		exclude("*cache/")
+		exclude("obj/")
+		exclude(".objs/")
+		exclude(".deps/")
+		exclude(".venv/")
+		exclude("bin/")
+		exclude("out/")
+		exclude("build/")
+		exclude("target/")
+		exclude("vendor/")
+		exclude("dist/")
+		exclude("node_modules/")
+		exclude(".svelte-kit/")
+		exclude("__pycache__/")
+		exclude("zig-out/")
+		exclude(".godot/")
+
+		-- exclude: unity engine
+		if vim.fn.isdirectory("./Assets") and vim.fn.filereadable("./Assembly-CSharp.csproj") then
+			exclude("*.meta")
+			exclude("*.asset")
+			exclude("*.unity")
+			exclude("*.prefab")
+			exclude("*.mat")
+			exclude("*.physicMaterial")
+			exclude("*.inputactions")
+			exclude("Logs/*")
+			exclude("Temp/*")
+			exclude("Library/*")
+			exclude("Packages/*")
+			exclude("ProjectSettings/*")
+			exclude("UserSettings/*")
+			exclude("UIElementsSchema/*")
+		end
+
 		telescope.setup({
 			defaults = {
 				border = {},
@@ -79,34 +166,7 @@ return {
 					preview_cutoff = 120,
 				},
 				path_display = { "truncate" },
-				vimgrep_arguments = {
-					"rg",
-					"--color=never",
-					"--no-heading",
-					"--with-filename",
-					"--line-number",
-					"--column",
-					"--hidden",
-					"--trim",
-					"-g!.git",
-					"-g!.github",
-					"-g!*cache",
-					"-g!obj",
-					"-g!.objs",
-					"-g!.deps",
-					"-g!.venv",
-					"-g!bin",
-					"-g!out",
-					"-g!build",
-					"-g!target",
-					"-g!vendor",
-					"-g!dist",
-					"-g!node_modules",
-					"-g!.svelte-kit",
-					"-g!__pycache__",
-					"-g!zig-out",
-					"-g!.godot",
-				},
+				vimgrep_arguments = vimgrep_arguments,
 				mappings = {
 					i = {
 						["<esc>"] = actions.close,
@@ -119,54 +179,7 @@ return {
 			},
 			pickers = {
 				find_files = {
-					find_command = {
-						"fd",
-						"-tf",
-						"-H",
-						"--no-ignore-vcs",
-						"--strip-cwd-prefix",
-
-						-- exclude files
-						"-E=*.a",
-						"-E=*.o",
-						"-E=*.so",
-						"-E=*.obj",
-						"-E=*.lib",
-						"-E=*.dll",
-						"-E=*.exe",
-						"-E=*.ilk",
-						"-E=*.pdb",
-
-						"-E=*.pdf",
-						"-E=*.png",
-						"-E=*.jpg",
-						"-E=*.jpeg",
-						"-E=*.gif",
-						"-E=*.ttf",
-						"-E=*.otf",
-						"-E=*.fbx",
-						"-E=*.vrm",
-
-						-- exclude folders
-						"-E=.git/",
-						"-E=.github/",
-						"-E=*cache/",
-						"-E=obj/",
-						"-E=.objs/",
-						"-E=.deps/",
-						"-E=.venv/",
-						"-E=bin/",
-						"-E=out/",
-						"-E=build/",
-						"-E=target/",
-						"-E=vendor/",
-						"-E=dist/",
-						"-E=node_modules/",
-						"-E=.svelte-kit/",
-						"-E=__pycache__/",
-						"-E=zig-out/",
-						"-E=.godot/",
-					},
+					find_command = find_command,
 					hidden = true,
 				},
 			},
