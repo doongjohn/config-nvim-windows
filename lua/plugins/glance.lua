@@ -1,6 +1,6 @@
 return {
 	"DNLHC/glance.nvim",
-	cmd = { "Glance" },
+	cmd = "Glance",
 	keys = {
 		{ "<f12>", "<cmd>Glance definitions<cr>" },
 	},
