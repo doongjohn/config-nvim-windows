@@ -74,10 +74,10 @@ return {
 					}
 
 					vim.ui.select({
-						"1) Absolute path: " .. results[1],
-						"2) Relative path from CWD: " .. results[2],
-						"3) Relative path from HOME: " .. results[3],
-					}, { prompt = "Choose a path to copy" }, function(choice)
+						"1) Absolute  : " .. results[1],
+						"2) From CWD  : " .. results[2],
+						"3) From HOME : " .. results[3],
+					}, { prompt = "Copy path" }, function(choice)
 						if not choice then
 							return
 						end
