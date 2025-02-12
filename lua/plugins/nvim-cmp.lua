@@ -6,7 +6,7 @@ return {
 		"hrsh7th/cmp-cmdline",
 		"hrsh7th/cmp-nvim-lsp",
 	},
-	lazy = false,
+	event = "UIEnter",
 	config = function()
 		local kind_icons = {
 			File = "󰈙",
