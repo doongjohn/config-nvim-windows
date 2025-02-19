@@ -29,12 +29,12 @@ return {
 				end,
 			},
 			{
-				label = "[editor] registers",
-				cmd = "Telescope registers",
-			},
-			{
 				label = "[editor] command history",
 				cmd = "Telescope command_history",
+			},
+			{
+				label = "[editor] registers",
+				cmd = "Telescope registers",
 			},
 			{
 				label = "[editor] tab new",
@@ -43,6 +43,14 @@ return {
 			{
 				label = "[editor] tab close",
 				cmd = "tabclose",
+			},
+			{
+				label = "[editor] cd → nvim config",
+				callback = function()
+					local config_path = vim.fn.stdpath("config")
+					vim.cmd("cd " .. config_path)
+					print("cd " .. vim.fn.fnamemodify(config_path, ":~"))
+				end,
 			},
 
 			-- file
@@ -61,10 +69,6 @@ return {
 			{
 				label = "[file] yank all",
 				cmd = "%y",
-			},
-			{
-				label = "[file] cd → nvim config",
-				cmd = "cd " .. vim.fn.stdpath("config"),
 			},
 
 			-- search
