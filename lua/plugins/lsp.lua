@@ -10,10 +10,10 @@ return {
 		local home = os.getenv("USERPROFILE")
 		local lsp = require("lspconfig")
 
-		-- lsp.util.default_config.capabilities =
-		-- 	require("blink.cmp").get_lsp_capabilities(lsp.util.default_config.capabilities)
+		-- setup nvim-cmp
 		lsp.util.default_config.capabilities = require("cmp_nvim_lsp").default_capabilities()
 
+		-- setup default config
 		lsp.util.default_config.on_attach = function(client, bufnr)
 			-- lsp breadcrumbs
 			if client.server_capabilities.documentSymbolProvider then
