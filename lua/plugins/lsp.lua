@@ -4,6 +4,7 @@ return {
 	dependencies = {
 		"smiteshp/nvim-navic",
 		"Issafalcon/lsp-overloads.nvim",
+		"Hoffs/omnisharp-extended-lsp.nvim",
 	},
 	event = { "BufReadPost", "BufNewFile" },
 	config = function()
@@ -39,14 +40,16 @@ return {
 			end
 		end
 
-		-- vscode-langservers-extracted
 		lsp.jsonls.setup({})
+
 		lsp.html.setup({})
+
 		lsp.cssls.setup({})
+
 		lsp.eslint.setup({})
 
-		-- scripting languages
 		lsp.nushell.setup({})
+
 		lsp.lua_ls.setup({
 			settings = {
 				Lua = {
@@ -56,10 +59,11 @@ return {
 				},
 			},
 		})
+
 		lsp.pyright.setup({})
+
 		lsp.gdscript.setup({})
 
-		-- compiled languages
 		lsp.clangd.setup({
 			cmd = {
 				"clangd",
@@ -69,9 +73,18 @@ return {
 				"--experimental-modules-support",
 			},
 		})
+
 		lsp.omnisharp.setup({
+			on_attach = function(client, bufnr)
+				lsp.util.default_config.on_attach(client, bufnr)
+
+				vim.keymap.set("n", "<f12>", function()
+					require("omnisharp_extended").telescope_lsp_definition()
+				end, { buffer = bufnr })
+			end,
 			cmd = { home .. "\\apps\\omnisharp\\OmniSharp.exe" },
 		})
+
 		lsp.rust_analyzer.setup({
 			settings = {
 				["rust-analyzer"] = {
@@ -81,6 +94,7 @@ return {
 				},
 			},
 		})
+
 		lsp.gopls.setup({
 			on_attach = function(client, bufnr)
 				lsp.util.default_config.on_attach(client, bufnr)
@@ -106,6 +120,7 @@ return {
 				},
 			},
 		})
+
 		lsp.nim_langserver.setup({
 			handlers = {
 				["window/showMessage"] = function(_, result, _)
@@ -135,10 +150,11 @@ return {
 				},
 			},
 		})
+
 		lsp.zls.setup({})
+
 		lsp.ols.setup({})
 
-		-- web dev
 		lsp.ts_ls.setup({
 			root_dir = function(filename, _)
 				local is_deno_project = lsp.util.root_pattern("deno.json", "deno.jsonc")(filename)
@@ -149,6 +165,7 @@ return {
 			end,
 			single_file_support = false,
 		})
+
 		lsp.denols.setup({
 			settings = {
 				deno = {
@@ -158,10 +175,11 @@ return {
 			},
 			root_dir = lsp.util.root_pattern("deno.json", "deno.jsonc"),
 		})
+
 		lsp.astro.setup({})
+
 		lsp.svelte.setup({})
 
-		-- shader langauges
 		lsp.glsl_analyzer.setup({})
 	end,
 }

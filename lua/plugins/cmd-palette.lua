@@ -108,7 +108,13 @@ return {
 			},
 			{
 				label = "[lsp] references",
-				cmd = "Glance references",
+				callback = function()
+					if vim.bo.filetype == "cs" then
+						vim.cmd("lua require('omnisharp_extended').telescope_lsp_references()")
+					else
+						vim.cmd("Glance references")
+					end
+				end,
 			},
 			{
 				label = "[lsp] outline",
