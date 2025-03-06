@@ -1,18 +1,14 @@
 -- options per filetype
 vim.api.nvim_create_autocmd("FileType", {
 	group = "config",
-	pattern = {
-		"oil",
-	},
+	pattern = "oil",
 	callback = function()
 		vim.opt_local.cursorline = true
 	end,
 })
 vim.api.nvim_create_autocmd("FileType", {
 	group = "config",
-	pattern = {
-		"toggleterm",
-	},
+	pattern = "toggleterm",
 	callback = function()
 		vim.opt_local.signcolumn = "no"
 	end,
