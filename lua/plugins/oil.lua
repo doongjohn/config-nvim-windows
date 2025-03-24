@@ -22,6 +22,9 @@ return {
 					return vim.startswith(name, "..")
 				end,
 			},
+			win_options = {
+				signcolumn = "yes:2",
+			},
 			use_default_keymaps = false,
 			keymaps = {
 				["g?"] = "actions.show_help",
