@@ -117,8 +117,8 @@ return {
 				end,
 			},
 			{
-				label = "[lsp] outline",
-				cmd = "Outline",
+				label = "[lsp] symbols",
+				cmd = "SymbolsToggle",
 			},
 			{
 				label = "[lsp] c, cpp switch source ↔ header",
