@@ -36,7 +36,7 @@ return {
 		hydra({
 			name = "git",
 			config = {
-				foreign_keys = "run",
+				color = "pink",
 				invoke_on_body = true,
 				hint = {
 					type = "window",
@@ -57,7 +57,7 @@ return {
 		hydra({
 			name = "dap",
 			config = {
-				foreign_keys = "run",
+				color = "pink",
 				invoke_on_body = true,
 				hint = {
 					type = "window",
