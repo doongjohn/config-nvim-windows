@@ -35,7 +35,12 @@ return {
 				},
 			},
 		},
-		fuzzy = { implementation = "prefer_rust_with_warning" },
+		fuzzy = {
+			implementation = "prefer_rust_with_warning",
+		},
+		appearance = {
+			use_nvim_cmp_as_default = true,
+		},
 	},
 	opts_extend = { "sources.default" },
 }
