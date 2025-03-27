@@ -11,8 +11,8 @@ return {
 		local home = os.getenv("USERPROFILE")
 		local lsp = require("lspconfig")
 
-		-- setup nvim-cmp
-		lsp.util.default_config.capabilities = require("cmp_nvim_lsp").default_capabilities()
+		-- setup blink-cmp
+		lsp.util.default_config.capabilities = require("blink.cmp").get_lsp_capabilities()
 
 		-- setup default config
 		lsp.util.default_config.on_attach = function(client, bufnr)
