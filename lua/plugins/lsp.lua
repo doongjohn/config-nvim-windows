@@ -2,7 +2,6 @@ return {
 	-- lsp
 	"neovim/nvim-lspconfig",
 	dependencies = {
-		"smiteshp/nvim-navic",
 		"Issafalcon/lsp-overloads.nvim",
 		"Hoffs/omnisharp-extended-lsp.nvim",
 	},
@@ -16,11 +15,6 @@ return {
 
 		-- setup default config
 		lsp.util.default_config.on_attach = function(client, bufnr)
-			-- lsp breadcrumbs
-			if client.server_capabilities.documentSymbolProvider then
-				require("nvim-navic").attach(client, bufnr)
-			end
-
 			-- view overloads
 			if client.server_capabilities.signatureHelpProvider then
 				---@diagnostic disable-next-line: missing-fields
