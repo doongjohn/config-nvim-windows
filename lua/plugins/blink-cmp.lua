@@ -28,10 +28,10 @@ return {
 					score_offset = 990,
 				},
 				buffer = {
-					score_offset = 980,
+					score_offset = 1,
 				},
 				path = {
-					score_offset = 970,
+					score_offset = 0,
 				},
 			},
 		},
