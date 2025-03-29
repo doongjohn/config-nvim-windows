@@ -7,19 +7,17 @@ return {
 	},
 	event = { "BufReadPost", "BufNewFile" },
 	config = function()
-		local home = os.getenv("USERPROFILE")
-		local lsp = require("lspconfig")
+		local lsp_conf = require("lspconfig")
+		local lsp_util = lsp_conf.util
 
 		-- setup blink-cmp
-		lsp.util.default_config.capabilities = require("blink.cmp").get_lsp_capabilities()
+		lsp_util.default_config.capabilities = require("blink.cmp").get_lsp_capabilities()
 
 		-- setup default config
-		lsp.util.default_config.on_attach = function(client, bufnr)
-			-- view overloads
+		lsp_util.default_config.on_attach = function(client, bufnr)
 			if client.server_capabilities.signatureHelpProvider then
-				---@diagnostic disable-next-line: missing-fields
+				---@diagnostic disable: missing-fields
 				require("lsp-overloads").setup(client, {
-					---@diagnostic disable-next-line: missing-fields
 					ui = {
 						border = "none",
 					},
@@ -31,20 +29,21 @@ return {
 						close_signature = "<nop>",
 					},
 				})
+				---@diagnostic enable: missing-fields
 			end
 		end
 
-		lsp.jsonls.setup({})
+		lsp_conf.jsonls.setup({})
 
-		lsp.html.setup({})
+		lsp_conf.html.setup({})
 
-		lsp.cssls.setup({})
+		lsp_conf.cssls.setup({})
 
-		lsp.eslint.setup({})
+		lsp_conf.eslint.setup({})
 
-		lsp.nushell.setup({})
+		lsp_conf.nushell.setup({})
 
-		lsp.lua_ls.setup({
+		lsp_conf.lua_ls.setup({
 			settings = {
 				Lua = {
 					telemetry = {
@@ -54,11 +53,11 @@ return {
 			},
 		})
 
-		lsp.pyright.setup({})
+		lsp_conf.pyright.setup({})
 
-		lsp.gdscript.setup({})
+		lsp_conf.gdscript.setup({})
 
-		lsp.clangd.setup({
+		lsp_conf.clangd.setup({
 			cmd = {
 				"clangd",
 				"--background-index",
@@ -68,18 +67,18 @@ return {
 			},
 		})
 
-		lsp.omnisharp.setup({
+		lsp_conf.omnisharp.setup({
 			on_attach = function(client, bufnr)
-				lsp.util.default_config.on_attach(client, bufnr)
+				lsp_util.default_config.on_attach(client, bufnr)
 
 				vim.keymap.set("n", "<f12>", function()
 					require("omnisharp_extended").telescope_lsp_definition()
 				end, { buffer = bufnr })
 			end,
-			cmd = { home .. "\\apps\\omnisharp\\OmniSharp.exe" },
+			cmd = { vim.env.HOME .. "\\apps\\omnisharp\\OmniSharp.exe" },
 		})
 
-		lsp.rust_analyzer.setup({
+		lsp_conf.rust_analyzer.setup({
 			settings = {
 				["rust-analyzer"] = {
 					diagnostics = {
@@ -89,9 +88,9 @@ return {
 			},
 		})
 
-		lsp.gopls.setup({
+		lsp_conf.gopls.setup({
 			on_attach = function(client, bufnr)
-				lsp.util.default_config.on_attach(client, bufnr)
+				lsp_util.default_config.on_attach(client, bufnr)
 
 				-- generate a synthetic semanticTokensProvider (https://github.com/golang/go/issues/54531).
 				if client.name == "gopls" and not client.server_capabilities.semanticTokensProvider then
@@ -115,15 +114,14 @@ return {
 			},
 		})
 
-		lsp.nim_langserver.setup({
+		lsp_conf.nim_langserver.setup({
 			handlers = {
 				["window/showMessage"] = function(_, result, _)
-					-- https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#window_showMessage
 					local log_levels = {
 						vim.log.levels.ERROR, -- Error
 						vim.log.levels.WARN, -- Warning
 						vim.log.levels.INFO, -- Info
-						vim.log.levels.INFO, -- Log
+						vim.log.levels.TRACE, -- Log
 						vim.log.levels.DEBUG, -- Debug
 					}
 					vim.notify("[nim langserver]: " .. result.message, log_levels[result.type])
@@ -145,35 +143,35 @@ return {
 			},
 		})
 
-		lsp.zls.setup({})
+		lsp_conf.zls.setup({})
 
-		lsp.ols.setup({})
+		lsp_conf.ols.setup({})
 
-		lsp.ts_ls.setup({
+		lsp_conf.ts_ls.setup({
 			root_dir = function(filename, _)
-				local is_deno_project = lsp.util.root_pattern("deno.json", "deno.jsonc")(filename)
+				local is_deno_project = lsp_util.root_pattern("deno.json", "deno.jsonc")(filename)
 				if is_deno_project then
 					return nil
 				end
-				return lsp.util.root_pattern("package.json")(filename)
+				return lsp_util.root_pattern("package.json")(filename)
 			end,
 			single_file_support = false,
 		})
 
-		lsp.denols.setup({
+		lsp_conf.denols.setup({
 			settings = {
 				deno = {
 					enable = true,
 					lint = true,
 				},
 			},
-			root_dir = lsp.util.root_pattern("deno.json", "deno.jsonc"),
+			root_dir = lsp_util.root_pattern("deno.json", "deno.jsonc"),
 		})
 
-		lsp.astro.setup({})
+		lsp_conf.astro.setup({})
 
-		lsp.svelte.setup({})
+		lsp_conf.svelte.setup({})
 
-		lsp.glsl_analyzer.setup({})
+		lsp_conf.glsl_analyzer.setup({})
 	end,
 }
