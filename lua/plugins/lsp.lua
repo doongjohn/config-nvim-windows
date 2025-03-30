@@ -63,7 +63,7 @@ return {
 				"--background-index",
 				"--header-insertion=never",
 				"--clang-tidy",
-				"--experimental-modules-support",
+				-- "--experimental-modules-support",
 			},
 		})
 

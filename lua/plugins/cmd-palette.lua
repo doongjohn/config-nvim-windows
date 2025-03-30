@@ -144,20 +144,6 @@ return {
 					print("[lsp] c, cpp switch source ↔ header (v-split): clangd not active")
 				end,
 			},
-
-			-- dap
-			{
-				label = "[dap] toggle ui",
-				callback = function()
-					require("dapui").toggle({ reset = true })
-				end,
-			},
-			{
-				label = "[dap] focus frame",
-				callback = function()
-					require("dap").focus_frame()
-				end,
-			},
 		}
 
 		vim.keymap.set("n", "<c-p>", function()
