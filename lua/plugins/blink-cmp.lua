@@ -9,6 +9,9 @@ return {
 			preset = "enter",
 		},
 		completion = {
+			accept = {
+				auto_brackets = { enabled = false },
+			},
 			documentation = { auto_show = false },
 			ghost_text = { enabled = true },
 		},
