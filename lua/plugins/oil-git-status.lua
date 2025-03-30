@@ -1,8 +1,35 @@
 return {
 	"refractalize/oil-git-status.nvim",
-	ft = "oil",
 	dependencies = {
 		"stevearc/oil.nvim",
 	},
-	opts = {},
+	ft = "oil",
+	opts = {
+		symbols = {
+			index = {
+				["!"] = "󰔌",
+				["?"] = "?",
+				["A"] = "",
+				["C"] = "C",
+				["D"] = "",
+				["M"] = "",
+				["R"] = "",
+				["T"] = "T",
+				["U"] = "U",
+				[" "] = " ",
+			},
+			working_tree = {
+				["!"] = "󰔌",
+				["?"] = "?",
+				["A"] = "",
+				["C"] = "C",
+				["D"] = "",
+				["M"] = "",
+				["R"] = "",
+				["T"] = "T",
+				["U"] = "U",
+				[" "] = " ",
+			},
+		},
+	},
 }
