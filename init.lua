@@ -204,3 +204,18 @@ require("lazy").setup({
 		},
 	},
 })
+
+-- neovide
+if vim.g.neovide then
+	vim.o.guifont = "CommitMonoV143400 Nerd Font,Sarasa Fixed K:h14"
+	vim.o.linespace = 9
+	vim.g.neovide_scroll_animation_length = 0.2
+	vim.g.neovide_cursor_animation_length = 0.12
+
+	vim.g.neovide_floating_blur_amount_x = 1.0
+	vim.g.neovide_floating_blur_amount_y = 1.0
+
+	local hl_normal = vim.api.nvim_get_hl(0, { id = vim.api.nvim_get_hl_id_by_name("Normal") })
+	vim.g.neovide_title_background_color = string.format("%x", hl_normal.bg)
+	vim.g.neovide_title_text_color = string.format("%x", hl_normal.fg)
+end
