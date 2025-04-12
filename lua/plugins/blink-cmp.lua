@@ -38,8 +38,7 @@ return {
 				},
 				cmdline = {
 					enabled = function()
-						local cmdline = vim.fn.getcmdline()
-						return not (cmdline:sub(1, 1) == "!" or cmdline:sub(1, 2) == ".!")
+						return vim.fn.getcmdtype() ~= ":" or not vim.fn.getcmdline():match("^[%%0-9,'<>%-]*!")
 					end,
 				},
 			},
