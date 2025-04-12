@@ -17,7 +17,7 @@
   "leap.nvim": { "branch": "main", "commit": "03eaa2e0c0ec9436dea0e954bc47564ff3ca9196" },
   "lsp-overloads.nvim": { "branch": "main", "commit": "7d766bfccbff2ab0be8089ea4d1493089f67a408" },
   "lualine.nvim": { "branch": "master", "commit": "0ea56f91b7f51a37b749c050a5e5dfdd56b302b3" },
-  "multicursor.nvim": { "branch": "1.0", "commit": "7d3b16fbd86d0de77f7dc25bf2b923796eb37537" },
+  "multicursor.nvim": { "branch": "1.0", "commit": "7e5710e014ee9b9ffc0ca4f93b685675841ff4ee" },
   "neo-tree.nvim": { "branch": "main", "commit": "5224467c6a49a6c77b8a8333f4d9af0abc788e10" },
   "neogit": { "branch": "master", "commit": "97f83f1dc51dee41e08e3c7a8adf00e1083e3178" },
   "neovim-session-manager": { "branch": "master", "commit": "3409dc920d40bec4c901c0a122a80bee03d6d1e1" },

@@ -36,6 +36,12 @@ return {
 				path = {
 					score_offset = 0,
 				},
+				cmdline = {
+					enabled = function()
+						local cmdline = vim.fn.getcmdline()
+						return not (cmdline:sub(1, 1) == "!" or cmdline:sub(1, 2) == ".!")
+					end,
+				},
 			},
 		},
 		fuzzy = {
