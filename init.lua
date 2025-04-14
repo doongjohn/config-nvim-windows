@@ -207,7 +207,7 @@ require("lazy").setup({
 
 -- neovide
 if vim.g.neovide then
-	vim.o.guifont = "CommitMonoV143400 Nerd Font,Sarasa Fixed K:h14"
+	vim.o.guifont = "Hack Nerd Font,Sarasa Fixed K:h14"
 	vim.o.linespace = 9
 
 	vim.g.neovide_scroll_animation_length = 0.2

@@ -49,6 +49,9 @@ return {
 					telemetry = {
 						enable = false,
 					},
+					runtime = {
+						version = "LuaJIT",
+					},
 				},
 			},
 		})
@@ -63,7 +66,7 @@ return {
 				"--background-index",
 				"--header-insertion=never",
 				"--clang-tidy",
-				"--experimental-modules-support",
+				-- "--experimental-modules-support",
 			},
 		})
 
@@ -135,7 +138,7 @@ return {
 							fileRegex = "tests/.*\\.nim",
 						},
 						{
-							projectFile = "main.nim",
+							projectFile = "src/main.nim",
 							fileRegex = ".*\\.nim",
 						},
 					},
