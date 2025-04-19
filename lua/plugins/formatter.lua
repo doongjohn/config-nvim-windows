@@ -3,6 +3,15 @@ return {
 	event = { "BufReadPost", "BufNewFile" },
 	config = function()
 		local filetype = {
+			["*"] = {
+				function()
+					local config_filetype = require("formatter.config").values.filetype
+					if config_filetype[vim.bo.filetype] == nil then
+						vim.lsp.buf.format()
+					end
+					return nil
+				end,
+			},
 			lua = {
 				require("formatter.filetypes.lua").stylua,
 			},
@@ -29,16 +38,6 @@ return {
 				end,
 			}
 		end
-
-		filetype["*"] = {
-			function()
-				local config_filetype = require("formatter.config").values.filetype
-				if config_filetype[vim.bo.filetype] == nil then
-					vim.lsp.buf.format()
-				end
-				return nil
-			end,
-		}
 
 		require("formatter").setup({
 			filetype = filetype,
