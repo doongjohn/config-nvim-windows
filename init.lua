@@ -13,6 +13,11 @@ vim.o.syntax = "on"
 vim.o.sidescrolloff = 10
 vim.o.jumpoptions = "stack,view"
 
+if os.getenv("MSYS") then
+	vim.o.shell = "cmd.exe"
+	vim.o.shellcmdflag = "/s /c"
+end
+
 -- split options
 vim.o.splitright = true
 vim.o.splitbelow = true

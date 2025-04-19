@@ -3,7 +3,7 @@ return {
 	"akinsho/toggleterm.nvim",
 	cmd = { "ToggleTerm", "TermExec" },
 	opts = {
-		shell = os.getenv("MSYS") and "fish" or "nu",
+		shell = "nu",
 		shade_terminals = false,
 	},
 	init = function()
