@@ -8,7 +8,7 @@ return {
 	event = "LspAttach",
 	keys = {
 		{
-			"<c-a>",
+			"<a-o>",
 			function()
 				require("tiny-code-action").code_action({})
 			end,

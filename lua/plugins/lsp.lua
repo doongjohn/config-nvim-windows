@@ -162,12 +162,6 @@ return {
 		})
 
 		lsp_conf.denols.setup({
-			settings = {
-				deno = {
-					enable = true,
-					lint = true,
-				},
-			},
 			root_dir = lsp_util.root_pattern("deno.json", "deno.jsonc"),
 		})
 
