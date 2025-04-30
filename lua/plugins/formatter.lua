@@ -2,7 +2,9 @@ return {
 	"mhartington/formatter.nvim",
 	event = { "BufReadPost", "BufNewFile" },
 	config = function()
-		local filetype = {
+		local util = require("formatter.util")
+
+		local opts_per_filetype = {
 			["*"] = {
 				function()
 					local config_filetype = require("formatter.config").values.filetype
@@ -17,30 +19,45 @@ return {
 			},
 		}
 
-		local util = require("formatter.util")
-		local prettier_filetypes = { "markdown", "json", "html", "css", "javascript", "typescript", "svelte" }
+		local prettier_filetypes = {
+			"markdown",
+			"json",
+			"html",
+			"css",
+			"javascript",
+			"typescript",
+			"svelte",
+		}
 		for _, ft in ipairs(prettier_filetypes) do
-			filetype[ft] = {
+			opts_per_filetype[ft] = {
 				function()
-					if vim.fn.filereadable("./node_modules/.bin/prettier") == 0 then
-						vim.lsp.buf.format()
-						return nil
+					local using_prettier = vim.fn.filereadable("./node_modules/.bin/prettier") == 1
+					if using_prettier then
+						return {
+							exe = "prettier",
+							args = {
+								"--stdin-filepath",
+								util.escape_path(util.get_current_buffer_file_path()),
+							},
+							stdin = true,
+							try_node_modules = true,
+						}
 					end
-					return {
-						exe = "prettier",
-						args = {
-							"--stdin-filepath",
-							util.escape_path(util.get_current_buffer_file_path()),
-						},
-						stdin = true,
-						try_node_modules = true,
-					}
+
+					local using_deno = vim.fn.filereadable("./deno.json") == 1
+					if using_deno then
+						return require("formatter.defaults.denofmt")()
+					end
+
+					-- default
+					vim.lsp.buf.format()
+					return nil
 				end,
 			}
 		end
 
 		require("formatter").setup({
-			filetype = filetype,
+			filetype = opts_per_filetype,
 		})
 	end,
 }
