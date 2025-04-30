@@ -26,6 +26,8 @@ return {
 			"css",
 			"javascript",
 			"typescript",
+			"javascriptreact",
+			"typescriptreact",
 			"svelte",
 		}
 		for _, ft in ipairs(prettier_filetypes) do
