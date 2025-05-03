@@ -108,9 +108,7 @@ return {
 			},
 			{
 				label = "[lsp] references",
-				callback = function()
-					vim.cmd("Glance references")
-				end,
+				cmd = "Glance references",
 			},
 			{
 				label = "[lsp] symbols",
