@@ -64,6 +64,7 @@ return {
 		vim.api.nvim_set_hl(0, "@lsp.typemod.type.readonly.odin", { link = "@type" })
 		vim.api.nvim_set_hl(0, "@lsp.typemod.enum.readonly.odin", { link = "@type" })
 		vim.api.nvim_set_hl(0, "@lsp.typemod.struct.readonly.odin", { link = "@type" })
+		vim.api.nvim_set_hl(0, "@lsp.typemod.method.readonly.typescript", { link = "@function.method" })
 
 		-- https://gist.github.com/swarn/fb37d9eefe1bc616c2a7e476c0bc0316?permalink_comment_id=4534819#dealing-with-ambiguity
 		vim.api.nvim_create_autocmd("LspTokenUpdate", {
