@@ -1,6 +1,8 @@
 return {
 	-- file tree
 	"nvim-neo-tree/neo-tree.nvim",
+	lazy = false,
+	branch = "v3.x",
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		"muniftanjim/nui.nvim",
@@ -10,38 +12,24 @@ return {
 		{ "<leader>e", "<cmd>Neotree current<cr>" },
 		{ "<leader>E", "<cmd>Neotree current reveal=true<cr>" },
 	},
+	---@module "neo-tree"
+	---@type neotree.Config?
 	opts = {
 		close_if_last_window = true,
-		popup_border_style = "solid",
-		enable_git_status = true,
-		enable_diagnostics = true,
 		default_component_configs = {
-			indent = {
-				indent_size = 2,
-				padding = 1, -- extra padding on left hand side
-				with_markers = true,
-				indent_marker = "│",
-				last_indent_marker = "└",
-				highlight = "NeoTreeIndentMarker",
-			},
 			icon = {
+				default = "",
 				folder_closed = "",
 				folder_open = "",
 				folder_empty = "",
-			},
-			name = {
-				trailing_slash = false,
-				use_git_status_colors = true,
+				folder_empty_open = "",
 			},
 			git_status = {
-				highlight = "NeoTreeDimText", -- if you remove this the status will be colorful
 				symbols = {
-					-- Change type
 					added = "",
 					modified = "",
 					deleted = "",
 					renamed = "",
-					-- Status type
 					untracked = "?",
 					ignored = "󰔌",
 					unstaged = "",
@@ -50,7 +38,30 @@ return {
 				},
 			},
 		},
+		window = {
+			mappings = {
+				["h"] = function(state)
+					local node = state.tree:get_node()
+					if (node.type == "directory" or node:has_children()) and node:is_expanded() then
+						state.commands.toggle_node(state)
+					else
+						require("neo-tree.ui.renderer").focus_node(state, node:get_parent_id())
+					end
+				end,
+				["l"] = function(state)
+					local node = state.tree:get_node()
+					if node.type == "directory" or node:has_children() then
+						if not node:is_expanded() then
+							state.commands.toggle_node(state)
+						else
+							require("neo-tree.ui.renderer").focus_node(state, node:get_child_ids()[1])
+						end
+					end
+				end,
+			},
+		},
 		filesystem = {
+			use_libuv_file_watcher = true,
 			filtered_items = {
 				hide_dotfiles = false,
 				hide_gitignored = false,

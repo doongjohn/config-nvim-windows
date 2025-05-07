@@ -94,9 +94,9 @@ return {
 
 		require("snacks").setup({
 			bigfile = { enabled = true },
+			quickfile = { enabled = true },
 			input = { enabled = true },
 			picker = {
-				enabled = true,
 				sources = {
 					files = {
 						hidden = true,
@@ -119,7 +119,6 @@ return {
 					},
 				},
 			},
-			quickfile = { enabled = true },
 			styles = {
 				input = {
 					position = "bottom",
