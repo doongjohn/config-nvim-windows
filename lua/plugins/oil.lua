@@ -76,16 +76,19 @@ return {
 					}
 
 					vim.ui.select({
-						"1) Absolute  : " .. results[1],
-						"2) From CWD  : " .. results[2],
-						"3) From HOME : " .. results[3],
-					}, { prompt = "Copy path" }, function(choice)
+						{ label = "Absolute  : " .. results[1], i = 1 },
+						{ label = "From CWD  : " .. results[2], i = 2 },
+						{ label = "From HOME : " .. results[3], i = 3 },
+					}, {
+						prompt = "Copy path",
+						format_item = function(item)
+							return item.label
+						end,
+					}, function(choice)
 						if not choice then
 							return
 						end
-
-						local i = tonumber(choice:sub(1, 1))
-						local result = results[i]
+						local result = results[choice.i]
 						vim.fn.setreg("+", result)
 						vim.notify("Copied: " .. result)
 					end)

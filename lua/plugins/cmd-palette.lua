@@ -1,7 +1,7 @@
 return {
 	"koenverburg/cmd-palette.nvim",
 	dependencies = {
-		"stevearc/dressing.nvim",
+		"folke/snacks.nvim",
 	},
 	lazy = false,
 	config = function()
@@ -30,11 +30,11 @@ return {
 			},
 			{
 				label = "[editor] command history",
-				cmd = "Telescope command_history",
+				callback = Snacks.picker.command_history,
 			},
 			{
 				label = "[editor] registers",
-				cmd = "Telescope registers",
+				callback = Snacks.picker.registers,
 			},
 			{
 				label = "[editor] tab new",
@@ -56,7 +56,7 @@ return {
 			-- file
 			{
 				label = "[file] recent",
-				cmd = "Telescope oldfiles",
+				callback = Snacks.picker.recent,
 			},
 			{
 				label = "[file] format",
@@ -86,7 +86,7 @@ return {
 			},
 			{
 				label = "[search] document symbols",
-				cmd = "Telescope lsp_document_symbols",
+				callback = Snacks.picker.lsp_symbols,
 			},
 
 			-- git

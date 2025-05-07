@@ -75,7 +75,7 @@ return {
 				lsp_util.default_config.on_attach(client, bufnr)
 
 				vim.keymap.set("n", "<f12>", function()
-					require("omnisharp_extended").telescope_lsp_definition()
+					require("omnisharp_extended").lsp_definition()
 				end, { buffer = bufnr })
 			end,
 			cmd = { vim.env.HOME .. "\\apps\\omnisharp\\OmniSharp.exe" },
