@@ -94,12 +94,6 @@ return {
 
 		require("snacks").setup({
 			bigfile = { enabled = true },
-			explorer = { enabled = true },
-			indent = {
-				enabled = true,
-				animate = { enabled = false },
-				scope = { enabled = false },
-			},
 			input = { enabled = true },
 			picker = {
 				enabled = true,
@@ -134,6 +128,4 @@ return {
 			},
 		})
 	end,
-
-	opts = {},
 }

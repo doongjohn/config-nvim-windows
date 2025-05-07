@@ -20,7 +20,6 @@ return {
 			},
 
 			---@param colors KanagawaColors
-			---@return table
 			overrides = function(colors)
 				local theme = colors.theme
 				local palette = colors.palette
