@@ -47,7 +47,7 @@ return {
 			},
 			hl = {
 				base = "TabLineSel",
-				secondary = "Comment",
+				secondary = "LineNr",
 			},
 			configs = {
 				path = {
