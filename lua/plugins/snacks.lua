@@ -121,8 +121,16 @@ return {
 			},
 			styles = {
 				input = {
-					position = "bottom",
-					relative = "editor",
+					position = "float",
+					relative = "cursor",
+					height = 1,
+					row = 1,
+					col = 0,
+					border = "none",
+					wo = {
+						winhighlight = "NormalFloat:NormalFloat",
+						cursorline = false,
+					},
 				},
 			},
 		})
