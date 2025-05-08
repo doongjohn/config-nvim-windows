@@ -63,6 +63,7 @@ return {
 					hl = {
 						primary = "TabLineSel",
 					},
+					directory = false,
 					icons = {
 						folder = "",
 						modified = "",

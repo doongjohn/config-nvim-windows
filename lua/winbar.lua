@@ -6,30 +6,23 @@ local winbar_filetype_exclude = {
 	"oil",
 	"neo-tree",
 	"toggleterm",
-	"Outline",
 	"Trouble",
 	"NeogitStatus",
 }
 
-vim.api.nvim_create_autocmd("FileType", {
+vim.api.nvim_create_autocmd("BufEnter", {
 	group = "config",
 	callback = function()
 		if vim.api.nvim_win_get_config(0).relative ~= "" then
 			-- ignore floating window
 		elseif vim.startswith(vim.api.nvim_buf_get_name(0), "oil") then
-			vim.opt_local.winbar =
-				[[%#TabLineSel# oil%{&modified ? " " : ""} %#Comment# %{%luaeval("vim.api.nvim_buf_get_name(0):sub(7,-1)")%}]]
+			vim.opt_local.winbar = [[%#TabLineSel# oil%{&modified ? " " : ""} ]]
+				.. [[%#LineNr# %{v:lua.Config.oil_get_path()}]]
+		elseif vim.bo.filetype == "SymbolsSidebar" then
+			vim.opt_local.winbar = [[%#TabLineSel# symbols %#Comment#]]
 		elseif not vim.tbl_contains(winbar_filetype_exclude, vim.bo.filetype) then
-			vim.opt_local.winbar = [[%#TabLineSel# %t%{&modified ? " " : ""} %#Comment#]]
-		end
-	end,
-})
-
-vim.api.nvim_create_autocmd("BufEnter", {
-	group = "config",
-	callback = function()
-		if vim.bo.filetype == "Outline" then
-			vim.opt_local.winbar = [[%#TabLineSel# outline %#Comment#]]
+			vim.opt_local.winbar = [[%#TabLineSel# %t%{&modified ? " " : ""} ]]
+				.. [[%#LineNr# %{v:lua.Config.buf_get_short_path()}]]
 		end
 	end,
 })

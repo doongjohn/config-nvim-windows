@@ -1,4 +1,5 @@
 os.setlocale("en_US.UTF8")
+require("globals")
 
 -- general options
 vim.o.exrc = true
@@ -59,8 +60,8 @@ vim.filetype.add({
 		nim = "nim",
 		nims = "nims",
 		nimble = "nimble",
-		cr = "crystal",
-		asd = "lisp",
+		xaml = "xml",
+		axaml = "xml",
 	},
 	filename = {
 		["go.mod"] = "gomod",
