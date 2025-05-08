@@ -62,7 +62,7 @@ return {
 				},
 				git = {
 					hl = {
-						primary = "Keyword",
+						primary = "Delimiter",
 					},
 				},
 				diagnostics = {
