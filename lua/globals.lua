@@ -2,13 +2,13 @@ _G.Config = {}
 
 _G.Config.buf_get_short_path = function()
 	local filepath = vim.fs.normalize(vim.fn.expand("%:.:h"))
-	if filepath == "." then
+	if not filepath or filepath == "." then
 		return ""
 	end
 	local parts = vim.split(filepath, "/")
 	local n = #parts
 	if n >= 3 then
-		return "…/" .. table.concat({ parts[n - 2], parts[n - 1], parts[n] }, "/")
+		return "…/" .. table.concat(vim.list_slice(parts, math.max(n - 2, 1)), "/")
 	else
 		return filepath
 	end
