@@ -47,8 +47,24 @@ return {
 			},
 			hl = {
 				base = "TabLineSel",
+				secondary = "Comment",
 			},
 			configs = {
+				path = {
+					hl = {
+						primary = "TabLineSel",
+					},
+					icons = {
+						folder = "",
+						modified = "",
+						read_only = "",
+					},
+				},
+				git = {
+					hl = {
+						primary = "Keyword",
+					},
+				},
 				diagnostics = {
 					workspace = false,
 					icons = {
@@ -56,6 +72,11 @@ return {
 						WARN = diagnostic_signs[vim.diagnostic.severity.WARN],
 						INFO = diagnostic_signs[vim.diagnostic.severity.INFO],
 						HINT = diagnostic_signs[vim.diagnostic.severity.HINT],
+					},
+				},
+				filetype_lsp = {
+					hl = {
+						primary = "TabLineSel",
 					},
 				},
 			},
