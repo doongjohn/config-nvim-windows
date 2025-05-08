@@ -50,6 +50,15 @@ return {
 				secondary = "LineNr",
 			},
 			configs = {
+				mode = {
+					hl = {
+						normal = "Delimiter",
+						insert = "Delimiter",
+						pending = "Delimiter",
+						visual = "Delimiter",
+						command = "Delimiter",
+					},
+				},
 				path = {
 					hl = {
 						primary = "TabLineSel",

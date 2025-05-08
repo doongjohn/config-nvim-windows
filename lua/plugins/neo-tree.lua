@@ -1,13 +1,13 @@
 return {
 	-- file tree
 	"nvim-neo-tree/neo-tree.nvim",
-	lazy = false,
 	branch = "v3.x",
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		"muniftanjim/nui.nvim",
 		"nvim-tree/nvim-web-devicons",
 	},
+	lazy = false,
 	keys = {
 		{ "<leader>e", "<cmd>Neotree current<cr>" },
 		{ "<leader>E", "<cmd>Neotree current reveal=true<cr>" },
