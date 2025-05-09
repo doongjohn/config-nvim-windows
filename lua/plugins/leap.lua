@@ -1,21 +1,17 @@
 return {
 	-- fast cursor movement
 	"ggandor/leap.nvim",
-	event = "VeryLazy",
+	lazy = false,
 	config = function()
 		local leap = require("leap")
-		leap.setup({
-			highlight_unlabeled_phase_one_targets = true,
-		})
+
+		leap.opts.highlight_unlabeled_phase_one_targets = true
+		leap.opts.safe_labels = {}
 
 		vim.api.nvim_set_hl(0, "LeapBackdrop", { link = "Comment" })
 
-		local function leapSearch()
-			leap.leap({ target_windows = require("leap.user").get_focusable_windows() })
-		end
-
-		vim.keymap.set("n", "m", leapSearch)
-		vim.keymap.set("v", "m", leapSearch)
-		vim.keymap.set("o", "m", leapSearch)
+		vim.keymap.set("n", "m", "<Plug>(leap-anywhere)")
+		vim.keymap.set("v", "m", "<Plug>(leap)")
+		vim.keymap.set("o", "m", "<Plug>(leap)")
 	end,
 }
