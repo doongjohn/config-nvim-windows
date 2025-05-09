@@ -37,6 +37,9 @@ return {
 					["@module"] = { link = "@keyword.import" },
 					["@field"] = { link = "@variable.member" },
 					["@variable.parameter"] = { fg = palette.oldWhite },
+
+					-- Snacks
+					SnacksPickerIdx = { link = "LineNr" },
 				}
 			end,
 		})
@@ -49,6 +52,7 @@ return {
 		vim.api.nvim_set_hl(0, "@lsp.typemod.method.readonly.cpp", { link = "@function.method" })
 		vim.api.nvim_set_hl(0, "@lsp.type.builtin.zig", { link = "@type.builtin" })
 		vim.api.nvim_set_hl(0, "@lsp.type.keywordLiteral.zig", { link = "@keyword" })
+		vim.api.nvim_set_hl(0, "@lsp.typemod.variable.static.zig", { link = "@variable" })
 		vim.api.nvim_set_hl(0, "@lsp.typemod.namespace.readonly.odin", { link = "@module" })
 		vim.api.nvim_set_hl(0, "@lsp.typemod.type.readonly.odin", { link = "@type" })
 		vim.api.nvim_set_hl(0, "@lsp.typemod.enum.readonly.odin", { link = "@type" })
@@ -60,12 +64,6 @@ return {
 			group = "config",
 			callback = function(args)
 				local token = args.data.token
-
-				if token.type == "variable" then
-					if token.modifiers.static then
-						vim.lsp.semantic_tokens.highlight_token(token, args.buf, args.data.client_id, "Constant")
-					end
-				end
 
 				if token.type == "method" then
 					if token.modifiers.defaultLibrary then
