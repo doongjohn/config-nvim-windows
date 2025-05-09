@@ -24,6 +24,7 @@ return {
 			},
 			win_options = {
 				signcolumn = "yes:2",
+				winhighlight = "OilFileHidden:OilFile,OilDirHidden:OilDir",
 			},
 			use_default_keymaps = false,
 			keymaps = {
