@@ -4,6 +4,12 @@ return {
 	priority = 1000,
 	keys = {
 		{
+			"<leader>e",
+			function()
+				Snacks.explorer()
+			end,
+		},
+		{
 			"<leader>fl",
 			function()
 				Snacks.picker.lines()
@@ -95,8 +101,18 @@ return {
 		require("snacks").setup({
 			bigfile = { enabled = true },
 			input = { enabled = true },
+			explorer = { enabled = true },
 			picker = {
 				sources = {
+					explorer = {
+						win = {
+							list = {
+								wo = {
+									scrolloff = 5,
+								},
+							},
+						},
+					},
 					files = {
 						hidden = true,
 						exclude = exclude,

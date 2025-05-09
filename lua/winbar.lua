@@ -4,7 +4,6 @@ local winbar_filetype_exclude = {
 	"terminal",
 	"checkhealth",
 	"oil",
-	"neo-tree",
 	"toggleterm",
 	"Trouble",
 	"NeogitStatus",
