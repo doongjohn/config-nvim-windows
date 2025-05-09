@@ -2,7 +2,7 @@ return {
 	-- treesitter
 	"nvim-treesitter/nvim-treesitter",
 	build = ":TSUpdate",
-	event = "UIEnter",
+	event = "VeryLazy",
 	config = function()
 		---@diagnostic disable-next-line: missing-fields
 		require("nvim-treesitter.configs").setup({
