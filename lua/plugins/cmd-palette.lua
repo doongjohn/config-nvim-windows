@@ -37,6 +37,14 @@ return {
 				callback = Snacks.picker.registers,
 			},
 			{
+				label = "[editor] highlights",
+				callback = Snacks.picker.highlights,
+			},
+			{
+				label = "[editor] help",
+				callback = Snacks.picker.help,
+			},
+			{
 				label = "[editor] tab new",
 				cmd = "tabnew",
 			},
