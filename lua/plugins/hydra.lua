@@ -18,11 +18,6 @@ return {
 
 		hydra({
 			name = "window",
-			config = {
-				on_key = function()
-					vim.cmd(":SatelliteRefresh")
-				end,
-			},
 			mode = "n",
 			body = "<c-w>",
 			heads = {
