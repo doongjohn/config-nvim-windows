@@ -13,7 +13,18 @@ return {
 		},
 	},
 	opts = {
+		highlight = "Normal:FloatTitle",
 		borderchars = { " ", " ", " ", " ", " ", " ", " ", " " },
 		show_indicators = "before",
+		select_menu_item_commands = {
+			s = {
+				key = "<c-s>",
+				command = "split",
+			},
+			v = {
+				key = "<c-v>",
+				command = "vsplit",
+			},
+		},
 	},
 }
