@@ -81,13 +81,13 @@ return {
 
 			-- search
 			{
-				label = "[search] all files",
+				label = "[search] in current dir",
 				callback = function()
 					require("grug-far").open()
 				end,
 			},
 			{
-				label = "[search] current file",
+				label = "[search] in current buf",
 				callback = function()
 					require("grug-far").open({ prefills = { paths = vim.fn.expand("%") } })
 				end,
@@ -123,27 +123,27 @@ return {
 				cmd = "SymbolsToggle",
 			},
 			{
-				label = "[lsp] c, cpp switch source ↔ header",
+				label = "[lsp] clangd switch source header",
 				callback = function()
 					for _, v in pairs(vim.lsp.get_clients({ bufnr = 0 })) do
 						if v.config.name == "clangd" then
 							vim.cmd("ClangdSwitchSourceHeader")
-							break
+							return
 						end
 					end
-					print("[lsp] c, cpp switch source ↔ header: clangd not active")
+					vim.notify("[lsp] clangd switch source header: clangd is not active", vim.log.levels.WARN)
 				end,
 			},
 			{
-				label = "[lsp] c, cpp switch source ↔ header (v-split)",
+				label = "[lsp] clangd switch source ↔ header (v-split)",
 				callback = function()
 					for _, v in pairs(vim.lsp.get_clients({ bufnr = 0 })) do
 						if v.config.name == "clangd" then
 							vim.cmd("vs | ClangdSwitchSourceHeader")
-							break
+							return
 						end
 					end
-					print("[lsp] c, cpp switch source ↔ header (v-split): clangd not active")
+					vim.notify("[lsp] clangd switch source header: clangd is not active", vim.log.levels.WARN)
 				end,
 			},
 		}
