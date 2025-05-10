@@ -26,5 +26,13 @@ return {
 				command = "vsplit",
 			},
 		},
+		format_function = function(input)
+			local cwd = vim.fs.normalize(vim.fn.getcwd()) .. "/"
+			local path = vim.fs.normalize(input)
+			if vim.startswith(path, cwd) then
+				path = path:gsub(cwd, "", 1)
+			end
+			return path
+		end,
 	},
 }
