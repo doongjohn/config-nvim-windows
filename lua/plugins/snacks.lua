@@ -45,7 +45,7 @@ return {
 						win = {
 							list = {
 								wo = {
-									scrolloff = 5,
+									scrolloff = 3,
 								},
 							},
 						},
@@ -276,7 +276,6 @@ return {
 			Snacks.picker.pick({
 				title = "Command palette",
 				items = command_palette,
-				layout = { preset = "vscode" },
 				format = function(item, _)
 					return {
 						{ item.category, "Comment" },
@@ -294,6 +293,13 @@ return {
 						end
 					end)
 				end,
+				layout = {
+					preset = "vscode",
+					layout = {
+						max_width = 60,
+						max_height = 9,
+					},
+				},
 			})
 		end)
 	end,
