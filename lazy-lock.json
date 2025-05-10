@@ -1,7 +1,6 @@
 {
   "blink.cmp": { "branch": "main", "commit": "4f38ce99a472932d5776337f08f7a8180f1f571a" },
   "buffer_manager.nvim": { "branch": "main", "commit": "d82035f35c3a24aa5b7d13c511890bdcc8c33976" },
-  "cmd-palette.nvim": { "branch": "main", "commit": "24c4ee404cacad2b60b1e77e26b9d0574c8dbdf0" },
   "diffview.nvim": { "branch": "main", "commit": "4516612fe98ff56ae0415a259ff6361a89419b0a" },
   "fidget.nvim": { "branch": "main", "commit": "d9ba6b7bfe29b3119a610892af67602641da778e" },
   "formatter.nvim": { "branch": "master", "commit": "eb89a1f3e079f1b9680bc7293b75fffccb5e1598" },
