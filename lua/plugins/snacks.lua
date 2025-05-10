@@ -218,7 +218,7 @@ return {
 			},
 			{
 				category = "Editor",
-				label = "CWD nvim config",
+				label = "Go to nvim config",
 				text = "",
 				callback = function()
 					local config_path = vim.fn.stdpath("config")
