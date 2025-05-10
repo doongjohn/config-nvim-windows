@@ -4,8 +4,8 @@ local winbar_filetype_exclude = {
 	"terminal",
 	"checkhealth",
 	"oil",
-	"toggleterm",
 	"Trouble",
+	"toggleterm",
 	"NeogitStatus",
 }
 
