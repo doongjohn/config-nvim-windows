@@ -52,7 +52,7 @@ return {
 					},
 					files = {
 						hidden = true,
-						exclude = Config.rg_get_exclude(),
+						exclude = Config.search_get_exclude(),
 					},
 					lines = {
 						win = {

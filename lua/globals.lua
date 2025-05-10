@@ -18,7 +18,7 @@ _G.Config.oil_get_path = function()
 	return vim.api.nvim_buf_get_name(0):sub(7, -1)
 end
 
-_G.Config.rg_get_exclude = function()
+_G.Config.search_get_exclude = function()
 	local exclude = {
 		-- files
 		"*.a",
