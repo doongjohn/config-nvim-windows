@@ -9,8 +9,7 @@ return {
 		local lsp_conf = require("lspconfig")
 		local lsp_util = lsp_conf.util
 
-		---@diagnostic disable-next-line: unused-local
-		lsp_util.default_config.on_attach = function(client, bufnr)
+		lsp_util.default_config.on_attach = function(client, _)
 			if client.server_capabilities.signatureHelpProvider then
 				---@diagnostic disable: missing-fields
 				require("lsp-overloads").setup(client, {
