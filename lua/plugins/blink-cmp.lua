@@ -26,7 +26,7 @@ return {
 				lsp = {
 					score_offset = 1000,
 					fallbacks = {},
-					opts = { tailwind_color_icon = "■" },
+					opts = { tailwind_color_icon = "" },
 				},
 				snippets = {
 					score_offset = 990,

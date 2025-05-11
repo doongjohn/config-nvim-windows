@@ -3,7 +3,7 @@ return {
 	lazy = false,
 	opts = {
 		render = "virtual",
-		virtual_symbol = "■",
+		virtual_symbol = "",
 		virtual_symbol_position = "inline",
 		enable_tailwind = true,
 		exclude_buffer = function(bufnr)
