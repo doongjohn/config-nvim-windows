@@ -51,8 +51,20 @@ return {
 					end
 				end
 
+				vim.keymap.del("n", "E", opts(""))
+				vim.keymap.del("n", "<c-]>", opts(""))
+
+				vim.keymap.set("n", "`", api.tree.change_root, opts("CD"))
 				vim.keymap.set("n", "l", dir_open, opts("Open dir"))
 				vim.keymap.set("n", "h", goto_parent_or_collapse, opts("Go to parent dir or collapse dir"))
+			end,
+		})
+
+		vim.api.nvim_create_autocmd("BufWinEnter", {
+			group = "config",
+			pattern = "NvimTree*",
+			callback = function()
+				vim.wo.scrolloff = 3
 			end,
 		})
 	end,
