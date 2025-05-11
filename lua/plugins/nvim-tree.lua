@@ -34,19 +34,33 @@ return {
 				-- default mappings
 				api.config.mappings.default_on_attach(bufnr)
 
-				local function dir_open()
+				local cd_to_current_node = function()
+					---@type Node|FileNode|DirectoryNode
 					local node = api.tree.get_node_under_cursor()
+					if node.name == ".." then
+						return
+					end
+					api.tree.change_root_to_node(node)
+					vim.cmd("norm gg0")
+				end
+
+				local dir_open = function()
+					---@type Node|FileNode|DirectoryNode
+					local node = api.tree.get_node_under_cursor()
+					if node.name == ".." then
+						return
+					end
 					if node.type == "directory" then
 						api.node.open.edit()
 					end
 				end
 
-				local function goto_parent_or_collapse()
-					---@type nvim_tree.api.Node
-					---@type nvim_tree.api.FileNode
-					---@type nvim_tree.api.DirectoryNode
+				local goto_parent_or_collapse = function()
+					---@type Node|FileNode|DirectoryNode
 					local node = api.tree.get_node_under_cursor()
-
+					if node.name == ".." then
+						return
+					end
 					if node.type == "file" or (node.type == "directory" and not node.open) then
 						api.node.navigate.parent()
 					elseif node.type == "directory" and node.open then
@@ -57,7 +71,7 @@ return {
 				vim.keymap.del("n", "E", opts(""))
 				vim.keymap.del("n", "<c-]>", opts(""))
 
-				vim.keymap.set("n", "`", api.tree.change_root, opts("CD"))
+				vim.keymap.set("n", "`", cd_to_current_node, opts("CD"))
 				vim.keymap.set("n", "l", dir_open, opts("Open dir"))
 				vim.keymap.set("n", "h", goto_parent_or_collapse, opts("Go to parent dir or collapse dir"))
 			end,
