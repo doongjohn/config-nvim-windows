@@ -149,18 +149,13 @@ return {
 		})
 
 		vim.lsp.config("ts_ls", {
-			root_dir = function(filename, _)
-				local is_deno_project = lsp_util.root_pattern("deno.json", "deno.jsonc")(filename)
-				if is_deno_project then
-					return nil
-				end
-				return lsp_util.root_pattern("package.json")(filename)
-			end,
-			single_file_support = false,
+			root_markers = { "package.json" },
+			workspace_required = true,
 		})
 
 		vim.lsp.config("denols", {
-			root_dir = lsp_util.root_pattern("deno.json", "deno.jsonc"),
+			root_markers = { "deno.json", "deno.jsonc" },
+			workspace_required = true,
 		})
 
 		vim.lsp.enable({
