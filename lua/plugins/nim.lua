@@ -1,5 +1,4 @@
 return {
-	-- nim language support
 	"alaviss/nim.nvim",
 	lazy = false,
 	ft = { "nim", "nims" },

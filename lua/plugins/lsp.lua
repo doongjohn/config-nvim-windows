@@ -1,5 +1,4 @@
 return {
-	-- lsp
 	"neovim/nvim-lspconfig",
 	dependencies = {
 		"Issafalcon/lsp-overloads.nvim",
@@ -10,10 +9,7 @@ return {
 		local lsp_conf = require("lspconfig")
 		local lsp_util = lsp_conf.util
 
-		-- setup blink-cmp
-		lsp_util.default_config.capabilities = require("blink.cmp").get_lsp_capabilities()
-
-		-- setup default config
+		---@diagnostic disable-next-line: unused-local
 		lsp_util.default_config.on_attach = function(client, bufnr)
 			if client.server_capabilities.signatureHelpProvider then
 				---@diagnostic disable: missing-fields
@@ -33,17 +29,7 @@ return {
 			end
 		end
 
-		lsp_conf.jsonls.setup({})
-
-		lsp_conf.html.setup({})
-
-		lsp_conf.cssls.setup({})
-
-		lsp_conf.eslint.setup({})
-
-		lsp_conf.nushell.setup({})
-
-		lsp_conf.lua_ls.setup({
+		vim.lsp.config("lua_ls", {
 			settings = {
 				Lua = {
 					telemetry = {
@@ -56,11 +42,7 @@ return {
 			},
 		})
 
-		lsp_conf.pyright.setup({})
-
-		lsp_conf.gdscript.setup({})
-
-		lsp_conf.clangd.setup({
+		vim.lsp.config("clangd", {
 			cmd = {
 				"clangd",
 				"--background-index",
@@ -70,7 +52,7 @@ return {
 			},
 		})
 
-		lsp_conf.omnisharp.setup({
+		vim.lsp.config("omnisharp", {
 			on_attach = function(client, bufnr)
 				lsp_util.default_config.on_attach(client, bufnr)
 
@@ -81,7 +63,7 @@ return {
 			cmd = { vim.env.HOME .. "\\apps\\omnisharp\\OmniSharp.exe" },
 		})
 
-		lsp_conf.rust_analyzer.setup({
+		vim.lsp.config("rust_analyzer", {
 			settings = {
 				["rust-analyzer"] = {
 					diagnostics = {
@@ -91,7 +73,7 @@ return {
 			},
 		})
 
-		lsp_conf.gopls.setup({
+		vim.lsp.config("gopls", {
 			on_attach = function(client, bufnr)
 				lsp_util.default_config.on_attach(client, bufnr)
 
@@ -117,7 +99,7 @@ return {
 			},
 		})
 
-		lsp_conf.nim_langserver.setup({
+		vim.lsp.config("nim_langserver", {
 			handlers = {
 				["window/showMessage"] = function(_, result, _)
 					local log_levels = {
@@ -146,11 +128,27 @@ return {
 			},
 		})
 
-		lsp_conf.zls.setup({})
+		vim.lsp.config("cssls", {
+			settings = {
+				css = {
+					lint = {
+						unknownAtRules = "ignore",
+					},
+				},
+				scss = {
+					lint = {
+						unknownAtRules = "ignore",
+					},
+				},
+				less = {
+					lint = {
+						unknownAtRules = "ignore",
+					},
+				},
+			},
+		})
 
-		lsp_conf.ols.setup({})
-
-		lsp_conf.ts_ls.setup({
+		vim.lsp.config("ts_ls", {
 			root_dir = function(filename, _)
 				local is_deno_project = lsp_util.root_pattern("deno.json", "deno.jsonc")(filename)
 				if is_deno_project then
@@ -161,14 +159,34 @@ return {
 			single_file_support = false,
 		})
 
-		lsp_conf.denols.setup({
+		vim.lsp.config("denols", {
 			root_dir = lsp_util.root_pattern("deno.json", "deno.jsonc"),
 		})
 
-		lsp_conf.astro.setup({})
+		vim.lsp.enable({
+			"nushell",
+			"lua_ls",
+			"pyright",
+			"gdscript",
 
-		lsp_conf.svelte.setup({})
+			"clangd",
+			"omnisharp",
+			"rust_analyzer",
+			"gopls",
+			"nim_langserver",
+			"zls",
+			"ols",
 
-		lsp_conf.glsl_analyzer.setup({})
+			"jsonls",
+			"html",
+			"cssls",
+			"eslint",
+
+			"ts_ls",
+			"denols",
+			"svelte",
+			"astro",
+			"tailwindcss",
+		})
 	end,
 }

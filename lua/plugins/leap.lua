@@ -1,5 +1,4 @@
 return {
-	-- fast cursor movement
 	"ggandor/leap.nvim",
 	lazy = false,
 	config = function()

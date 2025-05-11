@@ -1,5 +1,4 @@
 return {
-	-- trim trailing whitespace
 	"cappyzawa/trim.nvim",
 	event = { "BufReadPost", "BufNewFile" },
 	opts = {

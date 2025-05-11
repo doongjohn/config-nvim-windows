@@ -1,5 +1,4 @@
 return {
-	-- git sign
 	"lewis6991/gitsigns.nvim",
 	event = "VeryLazy",
 	cmd = { "Gitsigns" },

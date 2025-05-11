@@ -1,5 +1,4 @@
 return {
-	-- window picker
 	"yorickpeterse/nvim-window",
 	event = "VeryLazy",
 	keys = {

@@ -1,5 +1,4 @@
 return {
-	-- code action menu with preview
 	"rachartier/tiny-code-action.nvim",
 	dependencies = {
 		"nvim-lua/plenary.nvim",
