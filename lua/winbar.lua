@@ -3,7 +3,7 @@ local winbar_filetype_exclude = {
 	"prompt",
 	"terminal",
 	"checkhealth",
-	"oil",
+	"NvimTree",
 	"Trouble",
 	"toggleterm",
 	"NeogitStatus",

@@ -4,12 +4,6 @@ return {
 	priority = 1000,
 	keys = {
 		{
-			"<leader>e",
-			function()
-				Snacks.explorer()
-			end,
-		},
-		{
 			"<leader>fl",
 			function()
 				Snacks.picker.lines()
@@ -37,19 +31,8 @@ return {
 		require("snacks").setup({
 			bigfile = { enabled = true },
 			input = { enabled = true },
-			explorer = { enabled = true },
 			picker = {
 				sources = {
-					explorer = {
-						hidden = true,
-						win = {
-							list = {
-								wo = {
-									scrolloff = 3,
-								},
-							},
-						},
-					},
 					files = {
 						hidden = true,
 						exclude = Config.search_get_exclude(),
@@ -90,21 +73,21 @@ return {
 		---@type snacks.picker.finder.Item[]
 		local command_palette = {
 			{
+				text = "",
 				category = "Editor",
 				label = "Plugins",
-				text = "",
 				cmd = "Lazy home",
 			},
 			{
+				text = "",
 				category = "Editor",
 				label = "Sessions",
-				text = "",
 				cmd = "SessionManager available_commands",
 			},
 			{
+				text = "",
 				category = "Editor",
 				label = "Messages",
-				text = "",
 				callback = function()
 					vim.cmd("split")
 					local buf = vim.api.nvim_create_buf(false, true)
@@ -117,45 +100,45 @@ return {
 				end,
 			},
 			{
+				text = "",
 				category = "Editor",
 				label = "Command history",
-				text = "",
 				callback = Snacks.picker.command_history,
 			},
 			{
+				text = "",
 				category = "Editor",
 				label = "Registers",
-				text = "",
 				callback = Snacks.picker.registers,
 			},
 			{
+				text = "",
 				category = "Editor",
 				label = "Highlights",
-				text = "",
 				callback = Snacks.picker.highlights,
 			},
 			{
+				text = "",
 				category = "Editor",
 				label = "Help",
-				text = "",
 				callback = Snacks.picker.help,
 			},
 			{
+				text = "",
 				category = "Editor",
 				label = "Tab new",
-				text = "",
 				cmd = "tabnew",
 			},
 			{
+				text = "",
 				category = "Editor",
 				label = "Tab close",
-				text = "",
 				cmd = "tabclose",
 			},
 			{
+				text = "",
 				category = "Editor",
 				label = "Go to nvim config",
-				text = "",
 				callback = function()
 					local config_path = vim.fn.stdpath("config")
 					vim.cmd("cd " .. config_path)
@@ -163,37 +146,37 @@ return {
 				end,
 			},
 			{
+				text = "",
 				category = "Search",
 				label = "Current dir",
-				text = "",
 				callback = function()
 					require("grug-far").open()
 				end,
 			},
 			{
+				text = "",
 				category = "Search",
 				label = "Current buf",
-				text = "",
 				callback = function()
 					require("grug-far").open({ prefills = { paths = vim.fn.expand("%") } })
 				end,
 			},
 			{
+				text = "",
 				category = "Search",
 				label = "Document symbols",
-				text = "",
 				callback = Snacks.picker.lsp_symbols,
 			},
 			{
+				text = "",
 				category = "File",
 				label = "Recent",
-				text = "",
 				callback = Snacks.picker.recent,
 			},
 			{
+				text = "",
 				category = "File",
 				label = "Format",
-				text = "",
 				callback = function()
 					vim.cmd("up")
 					vim.cmd("FormatWriteLock")
@@ -201,47 +184,47 @@ return {
 				end,
 			},
 			{
+				text = "",
 				category = "File",
 				label = "Yank all",
-				text = "",
 				cmd = "%y",
 			},
 			{
+				text = "",
 				category = "Git",
 				label = "Neogit",
-				text = "",
 				cmd = "Neogit",
 			},
 			{
+				text = "",
 				category = "Git",
 				label = "File history",
-				text = "",
 				cmd = "DiffviewFileHistory %",
 			},
 			{
+				text = "",
 				category = "Lsp",
 				label = "Inlay hint toggle",
-				text = "",
 				callback = function()
 					vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({}))
 				end,
 			},
 			{
+				text = "",
 				category = "Lsp",
 				label = "References",
-				text = "",
 				cmd = "Glance references",
 			},
 			{
+				text = "",
 				category = "Lsp",
 				label = "Symbols",
-				text = "",
 				cmd = "SymbolsToggle",
 			},
 			{
+				text = "",
 				category = "Lsp",
 				label = "(clangd) Switch source header",
-				text = "",
 				callback = function()
 					for _, v in pairs(vim.lsp.get_clients({ bufnr = 0 })) do
 						if v.config.name == "clangd" then
@@ -253,9 +236,9 @@ return {
 				end,
 			},
 			{
+				text = "",
 				category = "Lsp",
 				label = "(clangd) Switch source header in vsplit",
-				text = "",
 				callback = function()
 					for _, v in pairs(vim.lsp.get_clients({ bufnr = 0 })) do
 						if v.config.name == "clangd" then
