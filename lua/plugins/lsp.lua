@@ -176,6 +176,7 @@ return {
 			"cssls",
 			"eslint",
 
+			"emmet_language_server",
 			"ts_ls",
 			"denols",
 			"svelte",

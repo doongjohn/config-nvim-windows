@@ -6,20 +6,45 @@ return {
 			local h = require("slimline.highlights")
 			local c = require("slimline").config
 
-			local secondary = ""
+			local text = ""
 			local line = vim.fn.line(".")
 			local ccol = vim.fn.charcol(".")
 			local col = vim.fn.col(".")
 			if ccol == col then
-				secondary = string.format("%3d:%-2d", line, ccol)
+				text = string.format("%3d:%-2d", line, ccol)
 			else
-				secondary = string.format("%3d:%d[%d]", line, ccol, col)
+				text = string.format("%3d:%d[%d]", line, ccol, col)
 			end
 
-			return h.hl_component({ primary = "", secondary = secondary }, {
+			return h.hl_component({ primary = text }, {
 				primary = {
-					text = "SlimlineModeNormal",
-					sep = "SlimlineModeNormalSep",
+					text = "SlimlineModeSecondary",
+					sep = "SlimlineModeSecondarySep",
+					sep2sec = "SlimlineModeNormalSep2Sec",
+				},
+				secondary = {
+					text = "SlimlineModeSecondary",
+					sep = "SlimlineModeSecondarySep",
+				},
+			}, c.sep)
+		end
+
+		local filetype_lsp = function()
+			local h = require("slimline.highlights")
+			local c = require("slimline").config
+
+			local attached_clients = vim.lsp.get_clients({ bufnr = 0 })
+			local secondary = ""
+			if #attached_clients == 0 then
+				secondary = ""
+			else
+				secondary = "(" .. #attached_clients .. " lsp)"
+			end
+
+			return h.hl_component({ primary = vim.bo.ft, secondary = secondary }, {
+				primary = {
+					text = "SlimlineModeSecondary",
+					sep = "SlimlineModeSecondarySep",
 					sep2sec = "SlimlineModeNormalSep2Sec",
 				},
 				secondary = {
@@ -100,7 +125,7 @@ return {
 				center = {},
 				right = {
 					linecol,
-					"filetype_lsp",
+					filetype_lsp,
 					"progress",
 				},
 			},

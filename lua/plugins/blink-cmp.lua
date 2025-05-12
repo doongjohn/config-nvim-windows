@@ -9,6 +9,9 @@ return {
 			preset = "enter",
 		},
 		completion = {
+			trigger = {
+				show_on_accept_on_trigger_character = false,
+			},
 			accept = {
 				auto_brackets = { enabled = false },
 			},
