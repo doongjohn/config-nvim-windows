@@ -35,6 +35,8 @@ _G.Config.search_get_exclude = function()
 		"*.jpg",
 		"*.jpeg",
 		"*.gif",
+		"*.ico",
+		"*.svg",
 		"*.ttf",
 		"*.otf",
 		"*.psd",
