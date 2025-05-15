@@ -17,7 +17,7 @@ return {
 				"checkhealth",
 				"oil",
 				"grug-far",
-				"Trouble",
+				"trouble",
 				"toggleterm",
 				"NeogitStatus",
 			},

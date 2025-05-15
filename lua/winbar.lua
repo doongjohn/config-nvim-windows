@@ -4,7 +4,7 @@ local winbar_filetype_exclude = {
 	"terminal",
 	"checkhealth",
 	"NvimTree",
-	"Trouble",
+	"trouble",
 	"toggleterm",
 	"NeogitStatus",
 }
