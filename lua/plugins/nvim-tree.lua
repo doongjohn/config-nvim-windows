@@ -62,7 +62,9 @@ return {
 						return
 					end
 					if node.type == "file" or (node.type == "directory" and not node.open) then
-						api.node.navigate.parent()
+						if node.parent.name ~= ".." then
+							api.node.navigate.parent()
+						end
 					elseif node.type == "directory" and node.open then
 						api.node.open.edit()
 					end
