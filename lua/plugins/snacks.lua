@@ -276,13 +276,14 @@ return {
 						end
 					end)
 				end,
+				prompt = "  ",
 				layout = {
 					layout = {
 						backdrop = false,
 						row = 1,
 						max_width = 60,
 						max_height = 9,
-						border = "hpad",
+						border = "none",
 						box = "vertical",
 						{
 							win = "input",
