@@ -23,6 +23,8 @@ return {
 				"c",
 				"cpp",
 				"c_sharp",
+				"java",
+				"kotlin",
 				"rust",
 				"zig",
 				"odin",
