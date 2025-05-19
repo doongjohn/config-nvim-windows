@@ -29,6 +29,7 @@ vim.api.nvim_create_autocmd("FileType", {
 		"fish",
 		"nu",
 		"python",
+		"java",
 		"cs",
 		"zig",
 		"glsl",

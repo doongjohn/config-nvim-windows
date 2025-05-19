@@ -165,6 +165,7 @@ return {
 
 			"clangd",
 			"omnisharp",
+			"jdtls",
 			"rust_analyzer",
 			"gopls",
 			"nim_langserver",

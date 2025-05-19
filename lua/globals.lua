@@ -20,7 +20,7 @@ end
 
 _G.Config.search_get_exclude = function()
 	local exclude = {
-		-- files
+		-- binary files
 		"*.a",
 		"*.o",
 		"*.so",
@@ -30,6 +30,13 @@ _G.Config.search_get_exclude = function()
 		"*.exe",
 		"*.ilk",
 		"*.pdb",
+		"*.tar",
+		"*.gz",
+		"*.zip",
+		"*.7z",
+		"*.jar",
+
+		-- media files
 		"*.pdf",
 		"*.png",
 		"*.jpg",
@@ -37,6 +44,10 @@ _G.Config.search_get_exclude = function()
 		"*.gif",
 		"*.ico",
 		"*.svg",
+		"*.wav",
+		"*.ogg",
+		"*.mp3",
+		"*.mp4",
 		"*.ttf",
 		"*.otf",
 		"*.psd",
@@ -56,6 +67,8 @@ _G.Config.search_get_exclude = function()
 		"build/",
 		"target/",
 		"vendor/",
+		".gradle/",
+		"gradle/wrapper/",
 		"dist/",
 		"node_modules/",
 		".svelte-kit/",
@@ -63,6 +76,15 @@ _G.Config.search_get_exclude = function()
 		"zig-out/",
 		".godot/",
 	}
+
+	local exclude_java = {
+		".classpath",
+		".project",
+		".settings",
+	}
+	if vim.fn.isdirectory("./.gradle") == 1 and vim.fn.filereadable("./gradlew") == 1 then
+		exclude = vim.tbl_extend("force", exclude, exclude_java)
+	end
 
 	local exclude_unity_engine = {
 		"*.meta",
@@ -80,7 +102,7 @@ _G.Config.search_get_exclude = function()
 		"UserSettings/*",
 		"UIElementsSchema/*",
 	}
-	if vim.fn.isdirectory("./Assets") and vim.fn.filereadable("./Assembly-CSharp.csproj") then
+	if vim.fn.isdirectory("./Assets") == 1 and vim.fn.filereadable("./Assembly-CSharp.csproj") == 1 then
 		exclude = vim.tbl_extend("force", exclude, exclude_unity_engine)
 	end
 
