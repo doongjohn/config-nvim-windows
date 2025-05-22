@@ -32,6 +32,7 @@ _G.Config.search_get_exclude = function()
 		"*.pdb",
 		"*.tar",
 		"*.gz",
+		"*.xz",
 		"*.zip",
 		"*.7z",
 		"*.jar",
