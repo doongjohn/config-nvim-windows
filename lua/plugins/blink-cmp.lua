@@ -1,5 +1,6 @@
 return {
 	"saghen/blink.cmp",
+	enabled = false, -- https://github.com/Saghen/blink.cmp/issues/923
 	version = "1.*",
 	event = "VeryLazy",
 	---@module "blink.cmp"
