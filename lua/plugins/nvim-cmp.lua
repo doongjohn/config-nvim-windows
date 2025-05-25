@@ -11,31 +11,31 @@ return {
 		local cmp = require("cmp")
 
 		local kind_icons = {
-			Text = " ",
-			Method = " ",
-			Function = " ",
-			Constructor = " ",
-			Field = " ",
-			Variable = " ",
-			Class = " ",
-			Interface = " ",
-			Module = " ",
-			Property = " ",
-			Unit = " ",
-			Value = " ",
-			Enum = " ",
-			Keyword = " ",
-			Snippet = " ",
-			Color = " ",
-			File = " ",
-			Reference = " ",
-			Folder = " ",
-			EnumMember = " ",
-			Constant = " ",
-			Struct = " ",
-			Event = " ",
-			Operator = " ",
-			TypeParameter = " ",
+			Text = "󰉿",
+			Method = "󰊕",
+			Function = "󰊕",
+			Constructor = "󰒓",
+			Field = "󰜢",
+			Variable = "󰆦",
+			Property = "󰖷",
+			Class = "󱡠",
+			Interface = "󱡠",
+			Struct = "󱡠",
+			Module = "󰅩",
+			Unit = "󰪚",
+			Value = "󰦨",
+			Enum = "󰦨",
+			EnumMember = "󰦨",
+			Keyword = "󰻾",
+			Constant = "󰏿",
+			Snippet = "󱄽",
+			Color = "󰏘",
+			File = "󰈔",
+			Reference = "󰬲",
+			Folder = "󰉋",
+			Event = "󱐋",
+			Operator = "󰪚",
+			TypeParameter = "󰬛",
 		}
 
 		cmp.setup({
@@ -58,10 +58,6 @@ return {
 					item.abbr_hl_group = nil
 					return item
 				end,
-			},
-			window = {
-				-- completion = cmp.config.window.bordered(),
-				-- documentation = cmp.config.window.bordered(),
 			},
 			mapping = cmp.mapping.preset.insert({
 				["<C-b>"] = cmp.mapping.scroll_docs(-4),
@@ -91,6 +87,7 @@ return {
 			}, {
 				{ name = "cmdline" },
 			}),
+			---@diagnostic disable-next-line: missing-fields
 			matching = { disallow_symbol_nonprefix_matching = false },
 		})
 	end,
