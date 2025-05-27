@@ -269,10 +269,12 @@ return {
 				confirm = function(picker, item)
 					return picker:norm(function()
 						picker:close()
-						if item.cmd then
-							vim.cmd(item.cmd)
-						elseif item.callback then
-							item.callback()
+						if item then
+							if item.cmd then
+								vim.cmd(item.cmd)
+							elseif item.callback then
+								item.callback()
+							end
 						end
 					end)
 				end,
