@@ -228,7 +228,7 @@ return {
 				callback = function()
 					for _, v in pairs(vim.lsp.get_clients({ bufnr = 0 })) do
 						if v.config.name == "clangd" then
-							vim.cmd("ClangdSwitchSourceHeader")
+							vim.cmd("LspClangdSwitchSourceHeader")
 							return
 						end
 					end
@@ -242,7 +242,7 @@ return {
 				callback = function()
 					for _, v in pairs(vim.lsp.get_clients({ bufnr = 0 })) do
 						if v.config.name == "clangd" then
-							vim.cmd("vs | ClangdSwitchSourceHeader")
+							vim.cmd("vs | LspClangdSwitchSourceHeader")
 							return
 						end
 					end
