@@ -4,7 +4,7 @@ return {
 		"Issafalcon/lsp-overloads.nvim",
 		"Hoffs/omnisharp-extended-lsp.nvim",
 	},
-	event = { "BufReadPost", "BufNewFile" },
+	lazy = false,
 	config = function()
 		local lsp_conf = require("lspconfig")
 		local lsp_util = lsp_conf.util
@@ -165,7 +165,6 @@ return {
 
 			"clangd",
 			"omnisharp",
-			"jdtls",
 			"rust_analyzer",
 			"gopls",
 			"nim_langserver",
