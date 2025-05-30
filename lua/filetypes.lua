@@ -1,3 +1,16 @@
+vim.filetype.add({
+	extension = {
+		nim = "nim",
+		nims = "nims",
+		nimble = "nimble",
+		xaml = "xml",
+		axaml = "xml",
+	},
+	filename = {
+		["nimble.lock"] = "json",
+	},
+})
+
 -- options per filetype
 vim.api.nvim_create_autocmd("FileType", {
 	group = "config",
