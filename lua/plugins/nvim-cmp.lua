@@ -6,7 +6,7 @@ return {
 		"hrsh7th/cmp-path",
 		"hrsh7th/cmp-cmdline",
 	},
-	lazy = false,
+	event = "UIEnter",
 	config = function()
 		local cmp = require("cmp")
 
