@@ -87,7 +87,16 @@ return {
 					require("omnisharp_extended").lsp_definition()
 				end, { buffer = bufnr })
 			end,
-			cmd = { vim.env.HOME .. "\\apps\\omnisharp\\OmniSharp.exe" },
+			cmd = {
+				vim.env.HOME .. "\\apps\\omnisharp\\OmniSharp.exe",
+				"-z",
+				"--hostPID",
+				"12345",
+				"DotNet:enablePackageRestore=false",
+				"--encoding",
+				"utf-8",
+				"--languageserver",
+			},
 		})
 
 		vim.lsp.config("rust_analyzer", {
