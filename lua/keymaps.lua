@@ -40,6 +40,7 @@ vim.keymap.set("v", "<a-k>", ":move '<-2<cr>gv-gv", { silent = true })
 
 -- lsp
 vim.keymap.set("n", "<f2>", vim.lsp.buf.rename, { silent = true })
+vim.keymap.set("n", "<s-k>", vim.lsp.buf.hover)
 
 -- utils
 vim.keymap.set(

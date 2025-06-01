@@ -1,3 +1,4 @@
+-- filetypes
 vim.filetype.add({
 	extension = {
 		nim = "nim",
@@ -11,14 +12,7 @@ vim.filetype.add({
 	},
 })
 
--- options per filetype
-vim.api.nvim_create_autocmd("FileType", {
-	group = "config",
-	pattern = { "qf", "oil" },
-	callback = function()
-		vim.opt_local.cursorline = true
-	end,
-})
+-- indent with tab
 vim.api.nvim_create_autocmd("FileType", {
 	group = "config",
 	pattern = {
@@ -35,34 +29,29 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.bo.expandtab = false
 	end,
 })
+
+-- indent with spaces
 vim.api.nvim_create_autocmd("FileType", {
 	group = "config",
 	pattern = {
-		"markdown",
 		"fish",
 		"nu",
-		"python",
-		"java",
 		"cs",
+		"java",
+		"kotlin",
 		"zig",
+		"python",
 		"glsl",
+		"markdown",
 	},
 	callback = function()
 		vim.bo.tabstop = 4
 		vim.bo.shiftwidth = 4
-	end,
-})
-vim.api.nvim_create_autocmd("FileType", {
-	group = "config",
-	pattern = {
-		"nim",
-	},
-	callback = function()
-		vim.keymap.set("n", "<s-k>", vim.lsp.buf.hover)
+		vim.bo.expandtab = true
 	end,
 })
 
--- comment string per filetype
+-- comment string settings
 vim.api.nvim_create_autocmd("FileType", {
 	group = "config",
 	pattern = {

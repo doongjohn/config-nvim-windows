@@ -15,16 +15,18 @@ return {
 	config = function()
 		local oil = require("oil")
 		oil.setup({
+			default_file_explorer = true,
+			win_options = {
+				winhighlight = "OilFileHidden:OilFile,OilDirHidden:OilDir",
+				signcolumn = "yes:2",
+				cursorline = true,
+			},
 			delete_to_trash = true,
 			view_options = {
 				show_hidden = true,
 				is_always_hidden = function(name, _)
 					return vim.startswith(name, "..")
 				end,
-			},
-			win_options = {
-				signcolumn = "yes:2",
-				winhighlight = "OilFileHidden:OilFile,OilDirHidden:OilDir",
 			},
 			use_default_keymaps = false,
 			keymaps = {

@@ -81,6 +81,15 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	end,
 })
 
+-- enable cursorline for quick fix
+vim.api.nvim_create_autocmd("FileType", {
+	group = "config",
+	pattern = "qf",
+	callback = function()
+		vim.opt_local.cursorline = true
+	end,
+})
+
 -- modules
 require("globals")
 require("filetypes")
