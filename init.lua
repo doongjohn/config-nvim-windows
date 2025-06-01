@@ -27,7 +27,7 @@ vim.o.expandtab = true
 vim.o.list = true
 vim.opt.listchars:append({
 	trail = "·",
-	tab = "> ",
+	tab = "  ",
 })
 
 -- split options
