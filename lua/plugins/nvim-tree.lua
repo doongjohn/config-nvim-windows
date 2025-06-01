@@ -24,6 +24,9 @@ return {
 			filters = {
 				git_ignored = false,
 			},
+			trash = {
+				cmd = vim.fn.stdpath("config") .. "/trash.cmd",
+			},
 			on_attach = function(bufnr)
 				local api = require("nvim-tree.api")
 
@@ -76,6 +79,7 @@ return {
 				vim.keymap.set("n", "`", cd_to_current_node, opts("CD"))
 				vim.keymap.set("n", "l", dir_open, opts("Open dir"))
 				vim.keymap.set("n", "h", goto_parent_or_collapse, opts("Go to parent dir or collapse dir"))
+				vim.keymap.set("n", "d", api.fs.trash, opts("Trash"))
 			end,
 		})
 
