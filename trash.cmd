@@ -1,2 +1,2 @@
 @echo off
-nu -c "rm --trash %*"
+nu -c "rm -r --trash %*"
