@@ -279,24 +279,7 @@ return {
 					end)
 				end,
 				prompt = "  ",
-				layout = {
-					layout = {
-						backdrop = false,
-						row = 1,
-						max_width = 60,
-						max_height = 9,
-						border = "none",
-						box = "vertical",
-						{
-							win = "input",
-							height = 1,
-							border = "top",
-							title = "{title}",
-							title_pos = "center",
-						},
-						{ win = "list", border = "none" },
-					},
-				},
+				layout = "vscode",
 			})
 		end)
 	end,
