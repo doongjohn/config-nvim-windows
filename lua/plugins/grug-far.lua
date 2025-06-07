@@ -8,6 +8,7 @@ return {
 		end
 
 		require("grug-far").setup({
+			showCompactInputs = true,
 			engines = {
 				ripgrep = {
 					extraArgs = ripgrep_extraArgs,

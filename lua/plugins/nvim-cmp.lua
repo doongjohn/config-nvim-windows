@@ -8,6 +8,9 @@ return {
 	},
 	event = "UIEnter",
 	config = function()
+		-- go lang first selection issue:
+		-- https://github.com/hrsh7th/nvim-cmp/discussions/1670
+
 		local cmp = require("cmp")
 
 		local kind_icons = {
