@@ -35,6 +35,7 @@ return {
 				sources = {
 					files = {
 						hidden = true,
+						ignored = true,
 						exclude = Config.search_get_exclude(),
 					},
 					lines = {
