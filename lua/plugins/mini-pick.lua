@@ -92,16 +92,6 @@ return {
 			},
 			{
 				category = "Editor",
-				label = "Tab new",
-				cmd = "tabnew",
-			},
-			{
-				category = "Editor",
-				label = "Tab close",
-				cmd = "tabclose",
-			},
-			{
-				category = "Editor",
 				label = "Messages",
 				callback = function()
 					vim.cmd("split")
@@ -127,6 +117,16 @@ return {
 				callback = function()
 					Snacks.picker.highlights()
 				end,
+			},
+			{
+				category = "Editor",
+				label = "Tab new",
+				cmd = "tabnew",
+			},
+			{
+				category = "Editor",
+				label = "Tab close",
+				cmd = "tabclose",
 			},
 			{
 				category = "Editor",
