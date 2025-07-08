@@ -36,9 +36,6 @@ return {
 					["@module"] = { link = "@keyword.import" },
 					["@field"] = { link = "@variable.member" },
 					["@variable.parameter"] = { fg = palette.oldWhite },
-
-					-- Snacks
-					SnacksPickerIdx = { link = "LineNr" },
 				}
 			end,
 		})

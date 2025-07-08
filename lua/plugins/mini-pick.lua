@@ -30,6 +30,33 @@ return {
 			},
 		})
 
+		MiniPick.registry.old_files = function()
+			local old_files = vim.v.oldfiles
+			local done = {} ---@type table<string, boolean>
+			local files = {} ---@type string[]
+			local i = 0
+			for f = i + 1, #old_files do
+				i = f
+				local file = old_files[f]
+				file = vim.fn.fnamemodify(file, ":p")
+				file = vim.fs.normalize(file, { _fast = true, expand_env = false })
+				local show = not done[file] and vim.uv.fs_stat(file)
+				if show then
+					done[file] = true
+					table.insert(files, file)
+				end
+			end
+			MiniPick.start({
+				source = {
+					name = "Old files",
+					items = files,
+					show = function(buf_id, items, query)
+						return MiniPick.default_show(buf_id, items, query, { show_icons = true })
+					end,
+				},
+			})
+		end
+
 		MiniPick.registry.files = function()
 			local command = vim.tbl_extend(
 				"keep",
@@ -41,7 +68,7 @@ return {
 			local show_with_icons = function(buf_id, items, query)
 				return MiniPick.default_show(buf_id, items, query, { show_icons = true })
 			end
-			local source = { name = "Files fd", show = show_with_icons }
+			local source = { name = "Files (fd)", show = show_with_icons }
 			return MiniPick.builtin.cli({ command = command }, { source = source })
 		end
 
@@ -53,8 +80,25 @@ return {
 			},
 			{
 				category = "Editor",
+				label = "Help",
+				callback = function()
+					Snacks.picker.help()
+				end,
+			},
+			{
+				category = "Editor",
 				label = "Sessions",
 				cmd = "SessionManager available_commands",
+			},
+			{
+				category = "Editor",
+				label = "Tab new",
+				cmd = "tabnew",
+			},
+			{
+				category = "Editor",
+				label = "Tab close",
+				cmd = "tabclose",
 			},
 			{
 				category = "Editor",
@@ -72,13 +116,6 @@ return {
 			},
 			{
 				category = "Editor",
-				label = "Command history",
-				callback = function()
-					Snacks.picker.command_history()
-				end,
-			},
-			{
-				category = "Editor",
 				label = "Registers",
 				callback = function()
 					Snacks.picker.registers()
@@ -90,23 +127,6 @@ return {
 				callback = function()
 					Snacks.picker.highlights()
 				end,
-			},
-			{
-				category = "Editor",
-				label = "Help",
-				callback = function()
-					Snacks.picker.help()
-				end,
-			},
-			{
-				category = "Editor",
-				label = "Tab new",
-				cmd = "tabnew",
-			},
-			{
-				category = "Editor",
-				label = "Tab close",
-				cmd = "tabclose",
 			},
 			{
 				category = "Editor",
@@ -142,7 +162,7 @@ return {
 				category = "File",
 				label = "Recent",
 				callback = function()
-					Snacks.picker.recent()
+					MiniPick.registry.old_files()
 				end,
 			},
 			{
@@ -238,7 +258,7 @@ return {
 							end
 						end)
 					end,
-					show = function(buf_id, items, query)
+					show = function(buf_id, items)
 						local lines = vim.tbl_map(function(item)
 							return string.format("%-8s %s", item.data.category, item.data.label)
 						end, items)
@@ -246,20 +266,12 @@ return {
 
 						local ns = vim.api.nvim_create_namespace("CommandPaletteShow")
 						vim.api.nvim_buf_clear_namespace(buf_id, ns, 0, -1)
-
 						for i, item in ipairs(items) do
 							vim.api.nvim_buf_set_extmark(buf_id, ns, i - 1, 0, {
 								end_col = #item.data.category,
 								hl_group = "Comment",
 							})
-							-- vim.api.nvim_buf_set_extmark(buf_id, ns, i - 1, 9, {
-							-- 	end_col = 9 + #item.data.label,
-							-- 	hl_group = "MiniFilesNormal",
-							-- })
 						end
-
-						-- TODO: set highlight for matching characters
-						-- pick.default_show(buf_id, items, query)
 					end,
 				},
 				window = {
