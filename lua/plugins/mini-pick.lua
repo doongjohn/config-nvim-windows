@@ -3,11 +3,25 @@ return {
 	version = "*",
 	lazy = false,
 	init = function()
+		local ctx = {
+			minipick_buf = 0,
+			old_ic = vim.o.ignorecase,
+		}
 		vim.api.nvim_create_autocmd("FileType", {
 			group = "config",
 			pattern = "minipick",
-			callback = function()
-				vim.opt_local.ignorecase = true
+			callback = function(args)
+				ctx.minipick_buf = args.buf
+				ctx.old_ic = vim.o.ignorecase
+				vim.o.ignorecase = true
+			end,
+		})
+		vim.api.nvim_create_autocmd("BufHidden", {
+			group = "config",
+			callback = function(args)
+				if args.buf == ctx.minipick_buf then
+					vim.o.ignorecase = ctx.old_ic
+				end
 			end,
 		})
 		vim.api.nvim_create_autocmd("BufWinEnter", {
