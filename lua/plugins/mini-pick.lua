@@ -3,6 +3,13 @@ return {
 	version = "*",
 	lazy = false,
 	init = function()
+		vim.api.nvim_create_autocmd("FileType", {
+			group = "config",
+			pattern = "minipick",
+			callback = function()
+				vim.opt_local.ignorecase = true
+			end,
+		})
 		vim.api.nvim_create_autocmd("BufWinEnter", {
 			group = "config",
 			callback = function()
@@ -65,10 +72,12 @@ return {
 					return "-E=" .. item
 				end, Config.search_get_exclude())
 			)
-			local show_with_icons = function(buf_id, items, query)
-				return MiniPick.default_show(buf_id, items, query, { show_icons = true })
-			end
-			local source = { name = "Files (fd)", show = show_with_icons }
+			local source = {
+				name = "Files (fd)",
+				show = function(buf_id, items, query)
+					return MiniPick.default_show(buf_id, items, query, { show_icons = true })
+				end,
+			}
 			return MiniPick.builtin.cli({ command = command }, { source = source })
 		end
 
@@ -242,7 +251,7 @@ return {
 					name = "Command palette",
 					items = vim.tbl_map(function(item)
 						return {
-							text = (item.category .. " " .. item.label):lower(),
+							text = (item.category .. " " .. item.label),
 							data = item,
 						}
 					end, command_palette_items),
