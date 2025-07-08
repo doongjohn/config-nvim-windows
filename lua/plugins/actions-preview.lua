@@ -9,4 +9,7 @@ return {
 			end,
 		},
 	},
+	opts = {
+		backend = { "snacks" },
+	},
 }
