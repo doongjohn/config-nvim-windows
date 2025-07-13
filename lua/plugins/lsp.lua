@@ -4,35 +4,7 @@ return {
 		"Issafalcon/lsp-overloads.nvim",
 		"Hoffs/omnisharp-extended-lsp.nvim",
 	},
-	event = { "BufReadPost", "BufNewFile" },
-	init = function()
-		vim.lsp.enable({
-			"nushell",
-			"lua_ls",
-			"pyright",
-			"gdscript",
-
-			"clangd",
-			"omnisharp",
-			"rust_analyzer",
-			"gopls",
-			"nim_langserver",
-			"zls",
-			"ols",
-
-			"jsonls",
-			"html",
-			"cssls",
-			"eslint",
-
-			"emmet_language_server",
-			"ts_ls",
-			"denols",
-			"svelte",
-			"astro",
-			"tailwindcss",
-		})
-	end,
+	lazy = false,
 	config = function()
 		local lsp_conf = require("lspconfig")
 		local lsp_util = lsp_conf.util
@@ -192,6 +164,33 @@ return {
 		vim.lsp.config("denols", {
 			root_markers = { "deno.json", "deno.jsonc" },
 			workspace_required = true,
+		})
+
+		vim.lsp.enable({
+			"nushell",
+			"lua_ls",
+			"pyright",
+			"gdscript",
+
+			"clangd",
+			"omnisharp",
+			"rust_analyzer",
+			"gopls",
+			"nim_langserver",
+			"zls",
+			"ols",
+
+			"jsonls",
+			"html",
+			"cssls",
+			"eslint",
+
+			"emmet_language_server",
+			"ts_ls",
+			"denols",
+			"svelte",
+			"astro",
+			"tailwindcss",
 		})
 	end,
 }
