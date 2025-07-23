@@ -88,7 +88,9 @@ return {
 			sources = cmp.config.sources({
 				{ name = "path" },
 			}, {
-				{ name = "cmdline" },
+				{ name = "cmdline", option = {
+					ignore_cmds = { "Man", "!", "Multiterm" },
+				} },
 			}),
 			---@diagnostic disable-next-line: missing-fields
 			matching = { disallow_symbol_nonprefix_matching = false },
