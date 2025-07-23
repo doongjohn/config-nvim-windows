@@ -9,9 +9,18 @@ return {
 		vim.api.nvim_create_autocmd("BufWinEnter", {
 			group = "config",
 			callback = function()
+				if #vim.bo.buftype == 0 and vim.api.nvim_win_get_config(0).relative == "" then
+					vim.keymap.set("n", "<c-k>", function()
+						vim.cmd("1Multiterm nu")
+					end, { buffer = true })
+				end
+
 				vim.schedule(function()
 					local ok, _ = pcall(vim.api.nvim_win_get_var, 0, "_multiterm_term_tag")
 					if ok then
+						local hl = "NormalFloat:Normal,FloatBorder:WinSeparator"
+						vim.api.nvim_set_option_value("winhighlight", hl, { scope = "local", win = 0 })
+
 						vim.keymap.set("t", "<c-k>", function()
 							vim.cmd("Multiterm")
 						end, { buffer = true })
@@ -20,17 +29,13 @@ return {
 						vim.cmd("startinsert")
 					end
 				end)
-
-				if #vim.bo.buftype == 0 and vim.api.nvim_win_get_config(0).relative == "" then
-					vim.keymap.set("n", "<c-k>", function()
-						vim.cmd("1Multiterm nu")
-					end, { buffer = true })
-				end
 			end,
 		})
 	end,
 	opts = {
-		border = "none",
-		backdrop_transparency = 60,
+		height = 0.7,
+		width = 0.7,
+		border = "single",
+		border_hl = "WinSeparator",
 	},
 }
