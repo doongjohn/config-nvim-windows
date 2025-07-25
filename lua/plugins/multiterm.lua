@@ -21,6 +21,9 @@ return {
 						local hl = "NormalFloat:Normal,FloatBorder:WinSeparator"
 						vim.api.nvim_set_option_value("winhighlight", hl, { scope = "local", win = 0 })
 
+						vim.keymap.set("n", "<c-k>", function()
+							vim.cmd("Multiterm")
+						end, { buffer = true })
 						vim.keymap.set("t", "<c-k>", function()
 							vim.cmd("Multiterm")
 						end, { buffer = true })

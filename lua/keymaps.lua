@@ -47,5 +47,5 @@ vim.keymap.set(
 	"v",
 	"<leader>,",
 	[[:s/\%V./'&', /g<cr>:noh<cr>]],
-	{ silent = true, desc = "convert selected text to char array" }
+	{ silent = true, desc = "Convert selected text to char array." }
 )

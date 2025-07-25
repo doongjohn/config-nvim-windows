@@ -99,6 +99,13 @@ return {
 			},
 			{
 				category = "Editor",
+				label = "Keymaps",
+				callback = function()
+					Snacks.picker.keymaps()
+				end,
+			},
+			{
+				category = "Editor",
 				label = "Registers",
 				callback = function()
 					Snacks.picker.registers()
