@@ -32,7 +32,7 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
 		local is_normal_buf = #vim.bo.buftype == 0
 		if is_normal_buf and not is_floating_win then
 			vim.keymap.set("n", "<c-k>", function()
-				M.toggle_term(vim.v.count1)
+				M.toggle_term(vim.v.count ~= 0 and vim.v.count or M.get_last_term_tag())
 			end, { buffer = true })
 		end
 	end,
@@ -47,8 +47,13 @@ local bgfill_win = nil
 local term_bufs = {}
 local term_wins = {}
 local cur_term_tag = nil
+local last_term_tag = 1
 
 vim.api.nvim_set_hl(0, "MultitermBackdrop", { bg = "Black" })
+
+M.get_last_term_tag = function()
+	return last_term_tag
+end
 
 M.show_bg = function()
 	if cur_term_tag then
@@ -127,7 +132,7 @@ end
 
 M.show_term = function(tag, cmd)
 	if tag == nil or type(tag) ~= "number" then
-		vim.notify("tag must be 0 ~ 9", vim.log.levels.ERROR)
+		vim.notify("tag must be a number", vim.log.levels.ERROR)
 		return
 	end
 
@@ -135,6 +140,7 @@ M.show_term = function(tag, cmd)
 		return
 	end
 	cur_term_tag = tag
+	last_term_tag = tag
 
 	local opts = term_opts
 	local height = opts.height_value(opts)
