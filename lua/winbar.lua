@@ -9,22 +9,35 @@ local winbar_filetype_exclude = {
 	"NeogitStatus",
 }
 
-vim.api.nvim_create_autocmd({ "BufEnter", "FileType" }, {
+vim.api.nvim_create_autocmd({ "BufWinEnter", "FileType" }, {
 	group = "config",
 	callback = function()
-		if vim.api.nvim_win_get_config(0).relative ~= "" then
-			-- ignore floating window
-		elseif vim.tbl_contains(winbar_filetype_exclude, vim.bo.ft) then
-			vim.opt_local.winbar = ""
-		elseif vim.bo.ft == "oil" then
-			vim.opt_local.winbar = [[%#TabLineSel# oil%{&modified ? " " : ""} ]]
-				.. [[%#LineNr# %{v:lua.Config.oil_get_path()}]]
-		elseif vim.bo.ft == "SymbolsSidebar" then
-			vim.opt_local.winbar = [[%#TabLineSel# symbols %#Comment#]]
-		else
-			-- default
-			vim.opt_local.winbar = [[%#TabLineSel# %t%{&modified ? " " : ""} ]]
-				.. [[%#LineNr# %{v:lua.Config.buf_get_short_path()}]]
+		local is_floating_win = vim.api.nvim_win_get_config(0).relative ~= ""
+		local is_exclude_ft = vim.tbl_contains(winbar_filetype_exclude, vim.bo.ft)
+		if is_floating_win or is_exclude_ft then
+			return
 		end
+
+		local opts_win = { scope = "local", win = 0 }
+
+		if vim.bo.ft == "oil" then
+			local winbar = ""
+				.. [[%#TabLineSel# oil%{&modified ? " " : ""} ]]
+				.. [[%#LineNr# %{v:lua.Config.oil_get_path()}]]
+			vim.api.nvim_set_option_value("winbar", winbar, opts_win)
+			return
+		end
+
+		if vim.bo.ft == "SymbolsSidebar" then
+			local winbar = [[%#TabLineSel# symbols %#Comment#]]
+			vim.api.nvim_set_option_value("winbar", winbar, opts_win)
+			return
+		end
+
+		-- default
+		local winbar = ""
+			.. [[%#TabLineSel# %t%{&modified ? " " : ""} ]]
+			.. [[%#LineNr# %{v:lua.Config.buf_get_short_path()}]]
+		vim.api.nvim_set_option_value("winbar", winbar, opts_win)
 	end,
 })

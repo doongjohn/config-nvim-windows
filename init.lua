@@ -95,6 +95,7 @@ require("globals")
 require("filetypes")
 require("winbar")
 require("keymaps")
+require("multiterm")
 
 -- setup lazy nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
