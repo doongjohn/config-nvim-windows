@@ -20,9 +20,9 @@ local term_opts = {
 		return math.floor((vim.o.columns - w) / 2)
 	end,
 	on_term_show = function(buf)
-		vim.keymap.set("t", "<c-k>", M.hide_term, { buffer = buf })
-		vim.keymap.set("t", "<c-]>", M.next_term, { buffer = buf })
-		vim.keymap.set("t", "<c-[>", M.prev_term, { buffer = buf })
+		vim.keymap.set({ "n", "t" }, "<c-k>", M.hide_term, { buffer = buf })
+		vim.keymap.set({ "n", "t" }, "<c-]>", M.next_term, { buffer = buf })
+		vim.keymap.set({ "n", "t" }, "<c-[>", M.prev_term, { buffer = buf })
 	end,
 }
 
