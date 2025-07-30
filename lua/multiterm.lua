@@ -27,18 +27,19 @@ local term_opts = {
 }
 
 vim.api.nvim_create_autocmd("BufWinEnter", {
+	group = "config",
 	callback = function()
+		local is_multiterm = pcall(vim.api.nvim_buf_get_var, 0, "multiterm_tag")
 		local is_floating_win = vim.api.nvim_win_get_config(0).relative ~= ""
 		local is_normal_buf = #vim.bo.buftype == 0
-		if is_normal_buf and not is_floating_win then
+		if is_multiterm == true or (is_normal_buf and not is_floating_win) then
 			vim.keymap.set("n", "<c-k>", function()
-				M.toggle_term(vim.v.count ~= 0 and vim.v.count or M.get_last_term_tag())
+				M.toggle_term(M.get_input_term_tag())
 			end, { buffer = true })
 		end
 	end,
 })
 
-local keep_bg = false
 local backdrop_buf = nil
 local backdrop_win = nil
 local bgfill_buf = nil
@@ -51,12 +52,35 @@ local last_term_tag = 1
 
 vim.api.nvim_set_hl(0, "MultitermBackdrop", { bg = "Black" })
 
+vim.api.nvim_create_augroup("multiterm", {})
+
+vim.api.nvim_create_autocmd("WinLeave", {
+	group = "multiterm",
+	callback = function()
+		local ok, tag = pcall(vim.api.nvim_win_get_var, 0, "multiterm_tag")
+		if ok then
+			if term_wins[tag] then
+				pcall(vim.api.nvim_win_close, term_wins[tag], true)
+				term_wins[tag] = nil
+			end
+			if cur_term_tag == tag then
+				cur_term_tag = nil
+				M.hide_bg()
+			end
+		end
+	end,
+})
+
 M.get_last_term_tag = function()
 	return last_term_tag
 end
 
+M.get_input_term_tag = function()
+	return vim.v.count ~= 0 and vim.v.count or M.get_last_term_tag()
+end
+
 M.show_bg = function()
-	if cur_term_tag then
+	if backdrop_buf then
 		return
 	end
 
@@ -117,17 +141,15 @@ M.show_bg = function()
 end
 
 M.hide_bg = function()
-	if cur_term_tag then
-		pcall(vim.api.nvim_buf_delete, backdrop_buf, { force = true })
-		pcall(vim.api.nvim_win_close, backdrop_win, true)
-		backdrop_buf = nil
-		backdrop_win = nil
+	pcall(vim.api.nvim_buf_delete, backdrop_buf, { force = true })
+	pcall(vim.api.nvim_win_close, backdrop_win, true)
+	backdrop_buf = nil
+	backdrop_win = nil
 
-		pcall(vim.api.nvim_buf_delete, bgfill_buf, { force = true })
-		pcall(vim.api.nvim_win_close, bgfill_win, true)
-		bgfill_buf = nil
-		bgfill_win = nil
-	end
+	pcall(vim.api.nvim_buf_delete, bgfill_buf, { force = true })
+	pcall(vim.api.nvim_win_close, bgfill_win, true)
+	bgfill_buf = nil
+	bgfill_win = nil
 end
 
 M.show_term = function(tag, cmd)
@@ -149,8 +171,9 @@ M.show_term = function(tag, cmd)
 	local col = opts.col(opts)
 
 	cmd = cmd or ""
-	local start_term = false
+	cmd = cmd ~= "" and cmd or opts.shell
 
+	local start_term = false
 	if not term_bufs[tag] or not vim.api.nvim_buf_is_valid(term_bufs[tag]) then
 		term_bufs[tag] = vim.api.nvim_create_buf(false, false)
 		vim.api.nvim_buf_set_var(term_bufs[tag], "multiterm_tag", tag)
@@ -168,6 +191,7 @@ M.show_term = function(tag, cmd)
 	}
 
 	term_wins[tag] = vim.api.nvim_open_win(term_bufs[tag], true, win_opts)
+	vim.api.nvim_win_set_var(term_wins[tag], "multiterm_tag", tag)
 
 	local opts_win = { scope = "local", win = term_wins[tag] }
 
@@ -175,41 +199,37 @@ M.show_term = function(tag, cmd)
 	vim.api.nvim_set_option_value("winhighlight", hl, opts_win)
 	vim.api.nvim_set_option_value("winbar", "%#TabLineSel# terminal " .. tag .. " %#Normal#", opts_win)
 
-	vim.api.nvim_create_autocmd("WinLeave", {
-		buffer = term_bufs[tag],
-		once = true,
-		callback = function()
-			if not keep_bg then
-				M.hide_bg()
-			end
-			if term_wins[tag] then
-				pcall(vim.api.nvim_win_close, term_wins[tag], true)
-				term_wins[tag] = nil
-				cur_term_tag = nil
-			end
-		end,
-	})
-
 	if start_term then
-		vim.fn.jobstart((cmd ~= "" and cmd) or opts.shell, {
+		vim.fn.jobstart(cmd, {
 			term = true,
 			on_exit = function()
 				if term_bufs[tag] and vim.api.nvim_buf_is_valid(term_bufs[tag]) then
-					vim.api.nvim_buf_delete(term_bufs[tag], { force = true })
+					if not M.next_term() and not M.prev_term() then
+						M.hide_bg()
+						last_term_tag = 1
+					end
+
+					local close_buf = term_bufs[tag]
+					vim.defer_fn(function()
+						vim.api.nvim_buf_delete(close_buf, { force = true })
+					end, 10)
 					term_bufs[tag] = nil
+
+					pcall(vim.api.nvim_win_close, term_wins[tag], true)
+					term_wins[tag] = nil
 				end
 			end,
 		})
 	end
 
 	vim.cmd("startinsert")
-
 	opts.on_term_show(term_bufs[tag])
 end
 
-M.hide_term = function()
-	if cur_term_tag then
-		pcall(vim.api.nvim_win_close, term_wins[cur_term_tag], true)
+M.hide_term = function(tag)
+	tag = tag or cur_term_tag
+	if term_wins[tag] then
+		pcall(vim.api.nvim_win_close, term_wins[tag], true)
 	end
 end
 
@@ -223,31 +243,33 @@ M.toggle_term = function(tag)
 	end
 end
 
-M.next_term = function()
-	if cur_term_tag then
+M.next_term = function(ref_tag)
+	ref_tag = ref_tag or cur_term_tag
+	if ref_tag then
 		local next = nil
 		local prev = nil
 		for tag, _ in pairs(term_bufs) do
-			if prev == cur_term_tag and tag ~= nil then
+			if prev == ref_tag and tag ~= nil then
 				next = tag
 				break
 			end
 			prev = tag
 		end
 		if next then
-			keep_bg = true
-			M.hide_term()
-			keep_bg = false
 			M.show_term(next)
+			M.hide_term(ref_tag)
+			return true
 		end
 	end
+	return false
 end
 
-M.prev_term = function()
-	if cur_term_tag then
+M.prev_term = function(ref_tag)
+	ref_tag = ref_tag or cur_term_tag
+	if ref_tag then
 		local next = nil
 		for tag, _ in pairs(term_bufs) do
-			if tag == cur_term_tag then
+			if tag == ref_tag then
 				break
 			end
 			if tag ~= nil then
@@ -255,10 +277,10 @@ M.prev_term = function()
 			end
 		end
 		if next then
-			keep_bg = true
-			M.hide_term()
-			keep_bg = false
 			M.show_term(next)
+			M.hide_term(ref_tag)
+			return true
 		end
 	end
+	return false
 end
