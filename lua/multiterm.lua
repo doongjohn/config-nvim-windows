@@ -243,12 +243,18 @@ M.toggle_term = function(tag)
 	end
 end
 
+local sorted_tags = function()
+	local t = vim.tbl_keys(term_bufs)
+	table.sort(t)
+	return t
+end
+
 M.next_term = function(ref_tag)
 	ref_tag = ref_tag or cur_term_tag
 	if ref_tag then
 		local next = nil
 		local prev = nil
-		for tag, _ in pairs(term_bufs) do
+		for tag in pairs(sorted_tags()) do
 			if prev == ref_tag and tag ~= nil then
 				next = tag
 				break
@@ -268,7 +274,7 @@ M.prev_term = function(ref_tag)
 	ref_tag = ref_tag or cur_term_tag
 	if ref_tag then
 		local next = nil
-		for tag, _ in pairs(term_bufs) do
+		for tag in pairs(sorted_tags()) do
 			if tag == ref_tag then
 				break
 			end
