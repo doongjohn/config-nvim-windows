@@ -204,9 +204,11 @@ M.show_term = function(tag, cmd)
 			term = true,
 			on_exit = function()
 				if term_bufs[tag] and vim.api.nvim_buf_is_valid(term_bufs[tag]) then
-					if not M.next_term() and not M.prev_term() then
-						M.hide_bg()
-						last_term_tag = 1
+					if cur_term_tag == tag then
+						if not M.next_term() and not M.prev_term() then
+							M.hide_bg()
+							last_term_tag = 1
+						end
 					end
 
 					local close_buf = term_bufs[tag]
@@ -254,8 +256,8 @@ M.next_term = function(ref_tag)
 	if ref_tag then
 		local next = nil
 		local prev = nil
-		for tag in pairs(sorted_tags()) do
-			if prev == ref_tag and tag ~= nil then
+		for _, tag in ipairs(sorted_tags()) do
+			if prev == ref_tag and term_bufs[tag] ~= nil then
 				next = tag
 				break
 			end
@@ -274,11 +276,11 @@ M.prev_term = function(ref_tag)
 	ref_tag = ref_tag or cur_term_tag
 	if ref_tag then
 		local next = nil
-		for tag in pairs(sorted_tags()) do
+		for _, tag in ipairs(sorted_tags()) do
 			if tag == ref_tag then
 				break
 			end
-			if tag ~= nil then
+			if term_bufs[tag] ~= nil then
 				next = tag
 			end
 		end
