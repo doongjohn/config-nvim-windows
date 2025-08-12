@@ -26,7 +26,7 @@ return {
 					text = "SlimlineModeSecondary",
 					sep = "SlimlineModeSecondarySep",
 				},
-			}, c.sep)
+			}, c.sep, "left", true, "fg")
 		end
 
 		local filetype_lsp = function()
@@ -51,7 +51,7 @@ return {
 					text = "SlimlineModeSecondary",
 					sep = "SlimlineModeSecondarySep",
 				},
-			}, c.sep)
+			}, c.sep, "left", true, "fg")
 		end
 
 		local diagnostic_signs = vim.diagnostic.config().signs.text
