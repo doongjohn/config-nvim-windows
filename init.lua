@@ -149,3 +149,18 @@ require("lazy").setup({
 		},
 	},
 })
+
+if vim.g.neovide then
+	vim.o.guifont = "Hack Nerd Font,Sarasa Fixed K:h14"
+	vim.o.linespace = 7
+	vim.g.neovide_title_background_color =
+		string.format("%x", vim.api.nvim_get_hl(0, { id = vim.api.nvim_get_hl_id_by_name("Normal") }).bg)
+	vim.g.neovide_floating_shadow = false
+	vim.g.neovide_floating_corner_radius = 0.2
+	vim.g.neovide_scroll_animation_length = 0
+	vim.g.neovide_floating_blur_amount_x = 1.0
+	vim.g.neovide_floating_blur_amount_y = 1.0
+	vim.g.neovide_cursor_trail_size = 0.3
+	vim.g.neovide_cursor_animation_length = 0.04
+	vim.g.neovide_cursor_short_animation_length = 0.04
+end
