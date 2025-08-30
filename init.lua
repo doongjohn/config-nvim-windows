@@ -7,6 +7,7 @@ end
 
 -- general options
 vim.o.exrc = true
+vim.o.belloff = "all"
 vim.o.clipboard = "unnamedplus"
 vim.o.mouse = "a"
 vim.o.wrap = false
