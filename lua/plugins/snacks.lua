@@ -26,8 +26,9 @@ return {
 			picker = {
 				sources = {
 					files = {
+						cmd = "fd",
+						args = { "--no-ignore-vcs" },
 						hidden = true,
-						ignored = true,
 						exclude = Config.search_get_exclude(),
 					},
 					lines = {
