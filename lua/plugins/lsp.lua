@@ -122,16 +122,7 @@ return {
 			},
 			settings = {
 				nim = {
-					projectMapping = {
-						{
-							projectFile = "tests/all.nim",
-							fileRegex = "tests/.*\\.nim",
-						},
-						{
-							projectFile = "src/main.nim",
-							fileRegex = ".*\\.nim",
-						},
-					},
+					nimsuggestPath = "~/apps/nim/bin/nimsuggest",
 				},
 			},
 		})
@@ -189,7 +180,6 @@ return {
 			"ts_ls",
 			"denols",
 			"svelte",
-			"astro",
 			"tailwindcss",
 		})
 	end,

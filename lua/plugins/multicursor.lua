@@ -40,8 +40,8 @@ return {
 		vim.keymap.set("n", "<c-leftrelease>", mc.handleMouseRelease)
 
 		-- Select a different cursor as the main one.
-		vim.keymap.set({ "n", "x" }, "<left>", mc.nextCursor)
-		vim.keymap.set({ "n", "x" }, "<right>", mc.prevCursor)
+		vim.keymap.set({ "n", "x" }, "<left>", mc.prevCursor)
+		vim.keymap.set({ "n", "x" }, "<right>", mc.nextCursor)
 
 		-- Delete the main cursor.
 		vim.keymap.set({ "n", "v" }, "<leader>x", mc.deleteCursor)
