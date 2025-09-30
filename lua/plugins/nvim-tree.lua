@@ -30,6 +30,9 @@ return {
 			on_attach = function(bufnr)
 				local api = require("nvim-tree.api")
 
+				local FileLinkNode = require("nvim-tree.node.file-link")
+				local DirectoryLinkNode = require("nvim-tree.node.directory-link")
+
 				local function opts(desc)
 					return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
 				end
@@ -47,13 +50,19 @@ return {
 					vim.cmd("norm gg0")
 				end
 
+				---@param node Node
+				---@return boolean
+				local is_dir = function(node)
+					return node.type == "directory" or node:as(DirectoryLinkNode) ~= nil
+				end
+
 				local dir_open = function()
 					---@type Node|FileNode|DirectoryNode
 					local node = api.tree.get_node_under_cursor()
 					if node.name == ".." then
 						return
 					end
-					if node.type == "directory" then
+					if is_dir(node) then
 						api.node.open.edit()
 					end
 				end
@@ -64,11 +73,11 @@ return {
 					if node.name == ".." then
 						return
 					end
-					if node.type == "file" or (node.type == "directory" and not node.open) then
+					if not is_dir(node) or not node.open then
 						if node.parent.name ~= ".." then
 							api.node.navigate.parent()
 						end
-					elseif node.type == "directory" and node.open then
+					elseif is_dir(node) and node.open then
 						api.node.open.edit()
 					end
 				end
