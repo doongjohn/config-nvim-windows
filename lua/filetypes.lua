@@ -35,6 +35,7 @@ vim.api.nvim_create_autocmd("FileType", {
 	group = "config",
 	pattern = {
 		"fish",
+		"ps1",
 		"nu",
 		"cs",
 		"java",
