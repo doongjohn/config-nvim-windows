@@ -28,6 +28,14 @@ vim.api.nvim_create_autocmd({ "BufWinEnter", "FileType" }, {
 			return
 		end
 
+		if vim.bo.ft == "Fyler" then
+			local winbar = ""
+				.. [[%#TabLineSel# Files%{&modified ? " " : ""} ]]
+				.. [[%#LineNr# %{v:lua.Config.fyler_get_path()}]]
+			vim.api.nvim_set_option_value("winbar", winbar, opts_win)
+			return
+		end
+
 		if vim.bo.ft == "SymbolsSidebar" then
 			local winbar = [[%#TabLineSel# symbols %#Comment#]]
 			vim.api.nvim_set_option_value("winbar", winbar, opts_win)
