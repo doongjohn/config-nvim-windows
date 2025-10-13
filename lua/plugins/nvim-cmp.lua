@@ -2,6 +2,7 @@ return {
 	"hrsh7th/nvim-cmp",
 	dependencies = {
 		"hrsh7th/cmp-nvim-lsp",
+		"hrsh7th/cmp-nvim-lsp-signature-help",
 		"hrsh7th/cmp-buffer",
 		"hrsh7th/cmp-path",
 		"hrsh7th/cmp-cmdline",
@@ -71,6 +72,7 @@ return {
 			}),
 			sources = cmp.config.sources({
 				{ name = "nvim_lsp" },
+				{ name = "nvim_lsp_signature_help" },
 			}, {
 				{ name = "buffer" },
 			}),
@@ -89,7 +91,7 @@ return {
 				{ name = "path" },
 			}, {
 				{ name = "cmdline", option = {
-					ignore_cmds = { "Man", "!", "Multiterm" },
+					ignore_cmds = { "Man", "!" },
 				} },
 			}),
 			---@diagnostic disable-next-line: missing-fields

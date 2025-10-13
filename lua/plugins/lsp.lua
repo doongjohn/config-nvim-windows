@@ -1,31 +1,9 @@
 return {
 	"neovim/nvim-lspconfig",
-	dependencies = {
-		"Issafalcon/lsp-overloads.nvim",
-	},
 	lazy = false,
 	config = function()
 		local lsp_conf = require("lspconfig")
 		local lsp_util = lsp_conf.util
-
-		lsp_util.default_config.on_attach = function(client, _)
-			if client.server_capabilities.signatureHelpProvider then
-				---@diagnostic disable: missing-fields
-				require("lsp-overloads").setup(client, {
-					ui = {
-						border = "none",
-					},
-					keymaps = {
-						next_signature = "<C-j>",
-						previous_signature = "<C-k>",
-						next_parameter = "<nop>",
-						previous_parameter = "<nop>",
-						close_signature = "<nop>",
-					},
-				})
-				---@diagnostic enable: missing-fields
-			end
-		end
 
 		vim.lsp.config("lua_ls", {
 			settings = {
