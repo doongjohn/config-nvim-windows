@@ -2,7 +2,6 @@ return {
 	"neovim/nvim-lspconfig",
 	dependencies = {
 		"Issafalcon/lsp-overloads.nvim",
-		"Hoffs/omnisharp-extended-lsp.nvim",
 	},
 	lazy = false,
 	config = function()
@@ -48,26 +47,6 @@ return {
 				"--header-insertion=never",
 				"--clang-tidy",
 				-- "--experimental-modules-support",
-			},
-		})
-
-		vim.lsp.config("omnisharp", {
-			on_attach = function(client, bufnr)
-				lsp_util.default_config.on_attach(client, bufnr)
-
-				vim.keymap.set("n", "<f12>", function()
-					require("omnisharp_extended").lsp_definition()
-				end, { buffer = bufnr })
-			end,
-			cmd = {
-				vim.env.HOME .. "\\apps\\omnisharp\\OmniSharp.exe",
-				"-z",
-				"--hostPID",
-				"12345",
-				"DotNet:enablePackageRestore=false",
-				"--encoding",
-				"utf-8",
-				"--languageserver",
 			},
 		})
 
@@ -164,7 +143,7 @@ return {
 			"gdscript",
 
 			"clangd",
-			"omnisharp",
+			"roslyn_ls",
 			"rust_analyzer",
 			"gopls",
 			"nim_langserver",
