@@ -7,7 +7,6 @@ return {
 
 		lazydev.setup({
 			library = {
-				vim.fs.joinpath(luals_dir, "meta/LuaJIT en-us utf8"),
 				vim.fs.joinpath(luals_dir, "meta/3rd/luv/library"),
 			},
 		})
