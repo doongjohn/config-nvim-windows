@@ -20,6 +20,7 @@ return {
 				winhighlight = "OilFileHidden:OilFile,OilDirHidden:OilDir",
 				signcolumn = "yes:2",
 				cursorline = true,
+				scrolloff = 4,
 			},
 			delete_to_trash = true,
 			view_options = {
