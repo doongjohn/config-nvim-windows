@@ -22,7 +22,8 @@ vim.api.nvim_create_autocmd({ "BufWinEnter", "FileType" }, {
 
 		if vim.bo.ft == "oil" then
 			local winbar = ""
-				.. [[%#TabLineSel# oil%{&modified ? " " : ""} ]]
+				.. [[%{&modified ? "" : " "} ]]
+				.. [[%#TabLineSel# oil ]]
 				.. [[%#LineNr# %{v:lua.Config.oil_get_path()}]]
 			vim.api.nvim_set_option_value("winbar", winbar, opts_win)
 			return
@@ -30,7 +31,8 @@ vim.api.nvim_create_autocmd({ "BufWinEnter", "FileType" }, {
 
 		if vim.bo.ft == "Fyler" then
 			local winbar = ""
-				.. [[%#TabLineSel# Files%{&modified ? " " : ""} ]]
+				.. [[%{&modified ? "" : " "} ]]
+				.. [[%#TabLineSel# files ]]
 				.. [[%#LineNr# %{v:lua.Config.fyler_get_path()}]]
 			vim.api.nvim_set_option_value("winbar", winbar, opts_win)
 			return
@@ -44,7 +46,8 @@ vim.api.nvim_create_autocmd({ "BufWinEnter", "FileType" }, {
 
 		-- default
 		local winbar = ""
-			.. [[%#TabLineSel# %t%{&modified ? " " : ""} ]]
+			.. [[%{&modified ? "" : " "} ]]
+			.. [[%#TabLineSel# %t ]]
 			.. [[%#LineNr# %{v:lua.Config.buf_get_short_path()}]]
 		vim.api.nvim_set_option_value("winbar", winbar, opts_win)
 	end,
