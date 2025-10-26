@@ -4,7 +4,13 @@ return {
 		"nvim-tree/nvim-web-devicons",
 	},
 	keys = {
-		{ "<leader>e", "<cmd>Fyler<cr>" },
+		{
+			"<leader>e",
+			function()
+				local fyler = require("fyler")
+				fyler.toggle()
+			end,
+		},
 		{
 			"<leader>E",
 			function()
