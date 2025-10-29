@@ -84,6 +84,12 @@ return {
 			},
 		})
 
+		vim.lsp.config("ols", {
+			init_options = {
+				odin_command = "odin.cmd",
+			},
+		})
+
 		vim.lsp.config("cssls", {
 			settings = {
 				css = {
@@ -152,6 +158,15 @@ return {
 				end
 				vim.api.nvim_set_option_value("filetype", filetype, { buf = bufnr })
 			end,
+		})
+
+		vim.lsp.config("tailwindcss", {
+			root_dir = function(bufnr, on_dir)
+				local root_markers = { "package-lock.json", "yarn.lock", "pnpm-lock.yaml", "bun.lockb", "bun.lock" }
+				local project_root = vim.fs.root(bufnr, root_markers)
+				on_dir(project_root)
+			end,
+			workspace_required = true,
 		})
 
 		vim.lsp.enable({
