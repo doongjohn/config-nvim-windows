@@ -4,8 +4,8 @@ vim.filetype.add({
 		nim = "nim",
 		nims = "nims",
 		nimble = "nimble",
-		xaml = "xml",
-		axaml = "xml",
+		xaml = "xaml",
+		axaml = "axaml",
 	},
 	filename = {
 		["nimble.lock"] = "json",
@@ -30,7 +30,7 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
--- indent with spaces
+-- indent with 4 spaces
 vim.api.nvim_create_autocmd("FileType", {
 	group = "config",
 	pattern = {
@@ -44,6 +44,9 @@ vim.api.nvim_create_autocmd("FileType", {
 		"python",
 		"glsl",
 		"markdown",
+		"xml",
+		"xaml",
+		"axaml",
 	},
 	callback = function()
 		vim.bo.tabstop = 4
@@ -78,6 +81,8 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.api.nvim_create_autocmd("FileType", {
 	group = "config",
 	pattern = {
+		"xaml",
+		"axaml",
 		"svelte",
 	},
 	callback = function()

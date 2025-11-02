@@ -38,6 +38,16 @@ return {
 			},
 		})
 
+		vim.lsp.config("avalonia_ls", {
+			cmd = { "AvaloniaLanguageServer.cmd" },
+			filetypes = { "axaml" },
+			root_dir = function(bufnr, on_dir)
+				local root_markers = { "*.csproj" }
+				local project_root = vim.fs.root(bufnr, root_markers)
+				on_dir(project_root)
+			end,
+		})
+
 		vim.lsp.config("gopls", {
 			on_attach = function(client, bufnr)
 				lsp_util.default_config.on_attach(client, bufnr)
@@ -177,12 +187,14 @@ return {
 
 			"clangd",
 			"roslyn_ls",
+			"avalonia_ls",
 			"rust_analyzer",
 			"gopls",
 			"nim_langserver",
 			"zls",
 			"ols",
 
+			"lemminx",
 			"jsonls",
 			"html",
 			"cssls",

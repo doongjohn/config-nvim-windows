@@ -3,6 +3,8 @@ return {
 	build = ":TSUpdate",
 	event = "VeryLazy",
 	config = function()
+		vim.treesitter.language.register("xml", { "xml", "xsd", "xsl", "xslt", "svg", "xaml", "axaml" })
+
 		---@diagnostic disable-next-line: missing-fields
 		require("nvim-treesitter.configs").setup({
 			sync_install = false,
@@ -61,6 +63,7 @@ return {
 				"markdown",
 				"rst",
 				-- data
+				"xml",
 				"json",
 				"jsonc",
 				"ini",
@@ -85,6 +88,7 @@ return {
 					"zig",
 					"odin",
 					"lua",
+					"xml",
 					"html",
 					"javascript",
 				},
