@@ -6,6 +6,9 @@ return {
 
 		leap.opts.highlight_unlabeled_phase_one_targets = true
 		leap.opts.safe_labels = {}
+		leap.opts.vim_opts = {
+			["go.ignorecase"] = true,
+		}
 
 		vim.api.nvim_set_hl(0, "LeapBackdrop", { link = "Comment" })
 

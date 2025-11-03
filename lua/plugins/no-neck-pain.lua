@@ -9,7 +9,7 @@ return {
 		local vim_cmd_only = false
 
 		nnp.setup({
-			width = 120,
+			width = 130,
 			autocmds = {
 				enableOnVimEnter = true,
 				enableOnTabEnter = true,
