@@ -15,6 +15,11 @@ return {
 				enableOnTabEnter = true,
 			},
 			callbacks = {
+				preEnable = function()
+					if vim.bo.ft == "NeogitStatus" then
+						nnp.disable()
+					end
+				end,
 				postEnable = function()
 					is_enabled = true
 				end,
@@ -22,8 +27,10 @@ return {
 					is_enabled = false
 					if vim_cmd_only then
 						vim_cmd_only = false
-						vim.cmd("only")
-						nnp.enable()
+						vim.schedule(function()
+							vim.cmd("only")
+							nnp.enable()
+						end)
 					end
 				end,
 			},
