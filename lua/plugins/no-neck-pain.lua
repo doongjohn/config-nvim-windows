@@ -2,26 +2,44 @@ return {
 	"shortcuts/no-neck-pain.nvim",
 	lazy = false,
 	version = "*",
-	init = function()
+	config = function()
 		local nnp = require("no-neck-pain")
-		vim.keymap.set("n", "<c-w>o", function()
-			if nnp.state then
+
+		local is_enabled = false
+		local vim_cmd_only = false
+
+		nnp.setup({
+			width = 120,
+			autocmds = {
+				enableOnVimEnter = true,
+				enableOnTabEnter = true,
+			},
+			callbacks = {
+				postEnable = function()
+					is_enabled = true
+				end,
+				postDisable = function()
+					is_enabled = false
+					if vim_cmd_only then
+						vim_cmd_only = false
+						vim.cmd("only")
+						nnp.enable()
+					end
+				end,
+			},
+		})
+
+		local cwo = function()
+			if is_enabled then
+				vim_cmd_only = true
 				nnp.disable()
-				vim.fn.wait(5000, function()
-					return nnp.state == nil
-				end)
-				vim.cmd("only")
-				nnp.enable()
 			else
 				vim.cmd("only")
 			end
-		end)
+		end
+
+		vim.keymap.set("n", "<c-w>o", cwo, { noremap = true })
+		vim.keymap.set("n", "<c-w><c-o>", cwo, { noremap = true })
 	end,
-	opts = {
-		width = 120,
-		autocmds = {
-			enableOnVimEnter = true,
-			enableOnTabEnter = true,
-		},
-	},
+	opts = {},
 }
