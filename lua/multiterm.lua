@@ -120,7 +120,7 @@ M.show_bg = function(tag)
 
 		local bgfill_opts = {
 			relative = "editor",
-			row = row - 1,
+			row = row,
 			col = col,
 			width = width,
 			height = height + 1,
@@ -192,7 +192,7 @@ M.show_term = function(tag, cmd)
 
 	local win_opts = {
 		relative = "editor",
-		row = row,
+		row = row + 1,
 		col = col,
 		width = width,
 		height = height,
