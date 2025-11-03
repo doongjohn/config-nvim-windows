@@ -47,6 +47,8 @@ local bgfill_win = nil
 
 local term_bufs = {}
 local term_wins = {}
+local term_last_mode = {}
+local term_winview = {}
 local cur_term_tag = nil
 local last_term_tag = 1
 
@@ -79,7 +81,7 @@ M.get_input_term_tag = function()
 	return vim.v.count ~= 0 and vim.v.count or M.get_last_term_tag()
 end
 
-M.show_bg = function()
+M.show_bg = function(tag)
 	if backdrop_buf then
 		return
 	end
@@ -118,12 +120,12 @@ M.show_bg = function()
 
 		local bgfill_opts = {
 			relative = "editor",
-			row = row,
+			row = row - 1,
 			col = col,
 			width = width,
-			height = height,
+			height = height + 1,
 			style = "minimal",
-			border = { " ", " ", " ", " ", "", "", "", " " },
+			border = { "", "", "", " ", "", "", "", " " },
 			focusable = false,
 			zindex = 11,
 		}
@@ -137,6 +139,14 @@ M.show_bg = function()
 		local hl = "NormalFloat:" .. opts.term_hl .. ",FloatBorder:" .. opts.term_hl
 		vim.api.nvim_set_option_value("winhighlight", hl, opts_win)
 		vim.api.nvim_set_option_value("bufhidden", "wipe", opts_buf)
+		vim.api.nvim_set_option_value("winbar", "%#TabLineSel# terminal " .. tag .. " %#Normal#", opts_win)
+	end
+end
+
+M.update_bg_winbar = function(tag)
+	if bgfill_win ~= nil and vim.api.nvim_win_is_valid(bgfill_win) then
+		local opts_win = { scope = "local", win = bgfill_win }
+		vim.api.nvim_set_option_value("winbar", "%#TabLineSel# terminal " .. tag .. " %#Normal#", opts_win)
 	end
 end
 
@@ -197,7 +207,6 @@ M.show_term = function(tag, cmd)
 
 	local hl = "NormalFloat:" .. opts.term_hl .. ",FloatBorder:" .. opts.term_hl
 	vim.api.nvim_set_option_value("winhighlight", hl, opts_win)
-	vim.api.nvim_set_option_value("winbar", "%#TabLineSel# terminal " .. tag .. " %#Normal#", opts_win)
 
 	if start_term then
 		vim.fn.jobstart(cmd, {
@@ -219,18 +228,31 @@ M.show_term = function(tag, cmd)
 
 					pcall(vim.api.nvim_win_close, term_wins[tag], true)
 					term_wins[tag] = nil
+
+					term_last_mode[tag] = "i"
+					term_winview[tag] = nil
 				end
 			end,
 		})
+		term_last_mode[tag] = "i"
 	end
 
-	vim.cmd("startinsert")
+	if term_last_mode[tag] == "i" then
+		vim.cmd("startinsert")
+	end
+
+	if term_winview[tag] then
+		vim.fn.winrestview(term_winview[tag])
+	end
+
 	opts.on_term_show(term_bufs[tag])
 end
 
 M.hide_term = function(tag)
 	tag = tag or cur_term_tag
 	if term_wins[tag] then
+		term_last_mode[tag] = vim.api.nvim_get_mode().mode == "nt" and "n" or "i"
+		term_winview[tag] = vim.fn.winsaveview()
 		pcall(vim.api.nvim_win_close, term_wins[tag], true)
 	end
 end
@@ -240,7 +262,7 @@ M.toggle_term = function(tag)
 		M.hide_bg()
 		M.hide_term()
 	else
-		M.show_bg()
+		M.show_bg(tag)
 		M.show_term(tag)
 	end
 end
@@ -266,6 +288,7 @@ M.next_term = function(ref_tag)
 		if next then
 			M.show_term(next)
 			M.hide_term(ref_tag)
+			M.update_bg_winbar(next)
 			return true
 		end
 	end
@@ -287,6 +310,7 @@ M.prev_term = function(ref_tag)
 		if next then
 			M.show_term(next)
 			M.hide_term(ref_tag)
+			M.update_bg_winbar(next)
 			return true
 		end
 	end
