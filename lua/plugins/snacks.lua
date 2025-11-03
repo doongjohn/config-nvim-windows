@@ -131,6 +131,11 @@ return {
 			},
 			{
 				category = "Editor",
+				label = "Center",
+				cmd = "NoNeckPain",
+			},
+			{
+				category = "Editor",
 				label = "Go to nvim config",
 				callback = function()
 					local config_path = vim.fn.stdpath("config")

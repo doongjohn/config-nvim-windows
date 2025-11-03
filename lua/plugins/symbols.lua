@@ -5,6 +5,7 @@ return {
 		local r = require("symbols.recipes")
 		require("symbols").setup(r.DefaultFilters, r.AsciiSymbols, {
 			sidebar = {
+				open_direction = "left",
 				auto_resize = {
 					enabled = true,
 					min_width = 30,

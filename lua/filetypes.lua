@@ -30,6 +30,16 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
+vim.api.nvim_create_autocmd("BufEnter", {
+	group = "config",
+	pattern = { "*.csproj" },
+	callback = function()
+		vim.bo.tabstop = 2
+		vim.bo.shiftwidth = 2
+		vim.bo.expandtab = true
+	end,
+})
+
 -- indent with 4 spaces
 vim.api.nvim_create_autocmd("FileType", {
 	group = "config",
@@ -44,7 +54,6 @@ vim.api.nvim_create_autocmd("FileType", {
 		"python",
 		"glsl",
 		"markdown",
-		"xml",
 		"xaml",
 		"axaml",
 	},
