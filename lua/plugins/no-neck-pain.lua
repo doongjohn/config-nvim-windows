@@ -12,7 +12,7 @@ return {
 			width = 130,
 			autocmds = {
 				enableOnVimEnter = true,
-				enableOnTabEnter = true,
+				skipEnteringNoNeckPainBuffer = true,
 			},
 			callbacks = {
 				preEnable = function()
