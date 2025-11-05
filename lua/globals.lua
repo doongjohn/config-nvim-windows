@@ -58,6 +58,7 @@ _G.Config.search_get_exclude = function()
 		-- folders
 		".git/",
 		".github/",
+		".jj/",
 		"*cache/",
 		"obj/",
 		".objs/",
