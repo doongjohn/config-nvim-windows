@@ -71,6 +71,7 @@ _G.Config.search_get_exclude = function()
 		"target/",
 		"vendor/",
 		".vs/",
+		".vscode/",
 		".idea/",
 		".gradle/",
 		"gradle/wrapper/",
