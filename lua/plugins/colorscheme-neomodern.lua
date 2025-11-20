@@ -5,7 +5,7 @@ return {
 	config = function()
 		require("neomodern").setup({})
 
-		vim.api.nvim_create_autocmd("ColorScheme", {
+		vim.api.nvim_create_autocmd({ "VimEnter", "ColorScheme" }, {
 			group = "config",
 			callback = function()
 				if vim.g.colors_name == "gyokuro" then
