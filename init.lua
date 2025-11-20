@@ -153,8 +153,8 @@ require("lazy").setup({
 })
 
 -- colorscheme
-vim.o.background = "light"
-vim.cmd("colorscheme gyokuro")
+vim.o.background = "dark"
+vim.cmd("colorscheme kanagawa")
 
 -- neovide
 if vim.g.neovide then
