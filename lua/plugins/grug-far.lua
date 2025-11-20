@@ -2,7 +2,7 @@ return {
 	"magicduck/grug-far.nvim",
 	config = function()
 		local ripgrep_extraArgs = "--no-heading -.n"
-		local exclude = Config.search_get_exclude()
+		local exclude = Config.file.get_exclude()
 		for _, item in ipairs(exclude) do
 			ripgrep_extraArgs = ripgrep_extraArgs .. " -g!" .. item
 		end

@@ -52,7 +52,12 @@ local term_winview = {}
 local cur_term_tag = nil
 local last_term_tag = 1
 
-vim.api.nvim_set_hl(0, "MultitermBackdrop", { bg = "Black" })
+vim.api.nvim_create_autocmd("ColorScheme", {
+	group = "config",
+	callback = function()
+		vim.api.nvim_set_hl(0, "MultitermBackdrop", { bg = "#000000" })
+	end,
+})
 
 vim.api.nvim_create_augroup("multiterm", {})
 

@@ -22,25 +22,25 @@ vim.api.nvim_create_autocmd({ "BufWinEnter", "BufRead", "FileType" }, {
 		end
 
 		if vim.bo.ft == "oil" then
-			local winbar = ""
+			local winbar = "%#Normal#"
 				.. [[%{&modified ? "" : " "} ]]
 				.. [[%#TabLineSel# oil ]]
-				.. [[%#LineNr# %{v:lua.Config.oil_get_path()}]]
+				.. [[%#LineNr# %{v:lua.Config.buf.get_path_oil()}]]
 			vim.api.nvim_set_option_value("winbar", winbar, opts_win)
 			return
 		end
 
 		if vim.bo.ft == "SymbolsSidebar" then
-			local winbar = [[%#TabLineSel# symbols %#Comment#]]
+			local winbar = [[%#TabLineSel# symbols %#Normal#]]
 			vim.api.nvim_set_option_value("winbar", winbar, opts_win)
 			return
 		end
 
 		-- default
-		local winbar = ""
+		local winbar = "%#Normal#"
 			.. [[%{&modified ? "" : " "} ]]
 			.. [[%#TabLineSel# %t ]]
-			.. [[%#LineNr# %{v:lua.Config.buf_get_short_path()}]]
+			.. [[%#LineNr# %{v:lua.Config.buf.get_short_path()}]]
 		vim.api.nvim_set_option_value("winbar", winbar, opts_win)
 	end,
 })

@@ -72,7 +72,7 @@ vim.diagnostic.config({
 vim.g.maplocalleader = ","
 
 -- config augroup
-vim.api.nvim_create_augroup("config", {})
+vim.api.nvim_create_augroup("config", { clear = true })
 
 -- highlight yanked text
 vim.api.nvim_create_autocmd("TextYankPost", {
@@ -94,6 +94,7 @@ vim.api.nvim_create_autocmd("FileType", {
 -- modules
 require("globals")
 require("filetypes")
+require("colorscheme")
 require("winbar")
 require("keymaps")
 require("multiterm")
@@ -151,6 +152,11 @@ require("lazy").setup({
 	},
 })
 
+-- colorscheme
+vim.o.background = "light"
+vim.cmd("colorscheme gyokuro")
+
+-- neovide
 if vim.g.neovide then
 	vim.o.linespace = 7
 	vim.g.neovide_title_background_color =

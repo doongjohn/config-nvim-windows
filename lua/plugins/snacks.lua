@@ -29,7 +29,7 @@ return {
 						cmd = "fd",
 						args = { "--no-ignore-vcs" },
 						hidden = true,
-						exclude = Config.search_get_exclude(),
+						exclude = Config.file.get_exclude(),
 					},
 					lines = {
 						win = {

@@ -1,6 +1,36 @@
-_G.Config = {}
+_G.Config = {
+	color = {},
+	buf = {},
+	file = {},
+}
 
-_G.Config.buf_get_short_path = function()
+_G.Config.color.adjust_brightness = function(color, amount)
+	-- Convert string hex to number if needed
+	if type(color) == "string" then
+		color = tonumber(color:gsub("#", ""), 16) or 0
+	elseif type(color) ~= "number" then
+		color = 0
+	end
+
+	-- Clamp inputs to valid ranges
+	color = math.max(0, math.min(0xFFFFFF, color))
+	amount = math.max(0, math.min(10, amount or 1))
+
+	-- Extract RGB components
+	local r = math.floor(color / 65536) % 256
+	local g = math.floor(color / 256) % 256
+	local b = color % 256
+
+	-- Apply brightness adjustment
+	r = math.min(255, math.floor(r * amount))
+	g = math.min(255, math.floor(g * amount))
+	b = math.min(255, math.floor(b * amount))
+
+	-- Combine back to hex
+	return r * 65536 + g * 256 + b
+end
+
+_G.Config.buf.get_short_path = function()
 	local filepath = vim.fs.normalize(vim.fn.expand("%:.:h"))
 	if not filepath or filepath == "." then
 		return ""
@@ -14,11 +44,11 @@ _G.Config.buf_get_short_path = function()
 	end
 end
 
-_G.Config.oil_get_path = function()
+_G.Config.buf.get_path_oil = function()
 	return vim.api.nvim_buf_get_name(0):sub(7, -1)
 end
 
-_G.Config.search_get_exclude = function()
+_G.Config.file.get_exclude = function()
 	local exclude = {
 		-- binary files
 		"*.a",
