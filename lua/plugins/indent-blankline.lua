@@ -12,7 +12,7 @@ return {
 				if vim.o.background == "dark" then
 					fg = Config.color.adjust_brightness(hl.bg, 1.8)
 				else
-					fg = Config.color.adjust_brightness(hl.bg, 0.85)
+					fg = Config.color.adjust_brightness(hl.bg, 0.9)
 				end
 				vim.api.nvim_set_hl(0, "IblIndent", { fg = fg })
 			else
