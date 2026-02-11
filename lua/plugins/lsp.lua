@@ -187,24 +187,23 @@ return {
 		vim.lsp.enable({
 			"nushell",
 			"lua_ls",
-			"pyright",
+			"pyrefly",
 			"gdscript",
 
 			"clangd",
 			"rust_analyzer",
-			"avalonia_ls",
-			"gopls",
 			"nim_langserver",
+			"gopls",
 			"zls",
 			"ols",
 
+			"avalonia_ls",
 			"lemminx",
 
 			"jsonls",
 			"html",
 			"cssls",
 			"eslint",
-
 			"emmet_language_server",
 			"ts_ls",
 			"denols",
