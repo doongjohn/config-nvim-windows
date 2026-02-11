@@ -14,6 +14,13 @@ return {
 					runtime = {
 						version = "LuaJIT",
 					},
+					workspace = {
+						checkThirdParty = false,
+						library = {
+							vim.env.VIMRUNTIME,
+							"${3rd}/luv/library",
+						},
+					},
 				},
 			},
 		})
@@ -49,9 +56,7 @@ return {
 		})
 
 		vim.lsp.config("gopls", {
-			on_attach = function(client, bufnr)
-				lsp_util.default_config.on_attach(client, bufnr)
-
+			on_attach = function(client, _)
 				-- generate a synthetic semanticTokensProvider (https://github.com/golang/go/issues/54531).
 				if client.name == "gopls" and not client.server_capabilities.semanticTokensProvider then
 					local semantic = client.config.capabilities.textDocument.semanticTokens
