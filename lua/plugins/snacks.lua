@@ -193,7 +193,7 @@ return {
 			{
 				category = "Git",
 				label = "File history",
-				cmd = "DiffviewFileHistory %",
+				cmd = "CodeDiff history %",
 			},
 			{
 				category = "Lsp",

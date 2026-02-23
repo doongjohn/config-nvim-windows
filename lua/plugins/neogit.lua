@@ -7,7 +7,8 @@ return {
 	cmd = "Neogit",
 	opts = {
 		integrations = {
-			diffview = true,
+			codediff = true,
 		},
+		diff_viewer = "codediff",
 	},
 }
