@@ -2,97 +2,96 @@ return {
 	"nvim-treesitter/nvim-treesitter",
 	build = ":TSUpdate",
 	event = "VeryLazy",
-	config = function()
+	init = function()
 		vim.treesitter.language.register("xml", { "xml", "xsd", "xsl", "xslt", "svg", "xaml", "axaml" })
 
-		---@diagnostic disable-next-line: missing-fields
-		require("nvim-treesitter.configs").setup({
-			sync_install = false,
-			ensure_installed = {
-				-- shell
-				"bash",
-				"fish",
-				"nu",
-				"powershell",
-				-- tool
-				"make",
-				"cmake",
-				"ninja",
-				"regex",
-				"vim",
-				"vimdoc",
-				-- compiled lanuage
-				"c",
-				"cpp",
-				"c_sharp",
-				"java",
-				"kotlin",
-				"rust",
-				"zig",
-				"odin",
-				"go",
-				"gomod",
-				"gosum",
-				"gowork",
-				"nim",
-				"nim_format_string",
-				"commonlisp",
-				-- scripting lanuage
-				"python",
-				"ruby",
-				"julia",
-				"lua",
-				"fennel",
-				"gdscript",
-				-- web dev
-				"html",
-				"css",
-				"scss",
-				"javascript",
-				"jsdoc",
-				"typescript",
-				"tsx",
-				"astro",
-				"svelte",
-				"vue",
-				-- shader
-				"wgsl",
-				"glsl",
-				"hlsl",
-				-- markup
-				"markdown",
-				"rst",
-				-- data
-				"xml",
-				"json",
-				"jsonc",
-				"ini",
-				"toml",
-				"yaml",
-				-- git
-				"diff",
-				"gitcommit",
-				"git_rebase",
-				"git_config",
-				"gitignore",
-				"gitattributes",
-			},
-			highlight = {
-				enable = true,
-				additional_vim_regex_highlighting = false,
-			},
-			indent = {
-				enable = true,
-				disable = {
-					"cpp",
-					"zig",
-					"odin",
-					"lua",
-					"xml",
-					"html",
-					"javascript",
-				},
-			},
+		vim.api.nvim_create_autocmd("FileType", {
+			group = "config",
+			callback = function()
+				local bt = vim.bo.bt
+				if bt ~= "" then
+					return
+				end
+
+				local ft = vim.bo.ft
+				local ts_lang = vim.treesitter.language.get_lang(ft)
+				if ts_lang == nil then
+					return
+				end
+
+				if vim.treesitter.language.add(ts_lang) then
+					vim.treesitter.start()
+				end
+			end,
+		})
+	end,
+	config = function()
+		require("nvim-treesitter").install({
+			-- data
+			"xml",
+			"json",
+			"ini",
+			"toml",
+			"yaml",
+			-- git
+			"diff",
+			"gitcommit",
+			"git_rebase",
+			"git_config",
+			"gitignore",
+			"gitattributes",
+			-- markup
+			"markdown",
+			"rst",
+			-- tool
+			"make",
+			"cmake",
+			"ninja",
+			"regex",
+			"vim",
+			"vimdoc",
+			-- shell
+			"bash",
+			"fish",
+			"nu",
+			"powershell",
+			-- programming lanuage
+			"c",
+			"cpp",
+			"c_sharp",
+			"java",
+			"kotlin",
+			"rust",
+			"zig",
+			"odin",
+			"go",
+			"gomod",
+			"gosum",
+			"gowork",
+			"nim",
+			"nim_format_string",
+			"commonlisp",
+			"python",
+			"ruby",
+			"julia",
+			"lua",
+			"fennel",
+			"gdscript",
+			-- web dev
+			"html",
+			"css",
+			"scss",
+			"javascript",
+			"jsdoc",
+			"typescript",
+			"tsx",
+			"astro",
+			"svelte",
+			"vue",
+			-- shader
+			"wgsl",
+			"glsl",
+			"hlsl",
 		})
 	end,
 }

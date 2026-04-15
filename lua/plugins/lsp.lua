@@ -79,26 +79,6 @@ return {
 			},
 		})
 
-		vim.lsp.config("nim_langserver", {
-			handlers = {
-				["window/showMessage"] = function(_, result, _)
-					local log_levels = {
-						vim.log.levels.ERROR, -- Error
-						vim.log.levels.WARN, -- Warning
-						vim.log.levels.INFO, -- Info
-						vim.log.levels.TRACE, -- Log
-						vim.log.levels.DEBUG, -- Debug
-					}
-					vim.notify("[nim langserver]: " .. result.message, log_levels[result.type])
-				end,
-			},
-			settings = {
-				nim = {
-					nimsuggestPath = "~/apps/nim/bin/nimsuggest",
-				},
-			},
-		})
-
 		vim.lsp.config("ols", {
 			init_options = {
 				odin_command = "odin.cmd",
@@ -154,6 +134,7 @@ return {
 				local client = clients[1]
 				local method = "deno/virtualTextDocument"
 				local req_params = { textDocument = { uri = actual_path } }
+				---@diagnostic disable-next-line: param-type-mismatch
 				local response = client:request_sync(method, req_params, 2000, 0)
 				if not response or type(response.result) ~= "string" then
 					return
@@ -192,7 +173,6 @@ return {
 
 			"clangd",
 			"rust_analyzer",
-			"nim_langserver",
 			"gopls",
 			"zls",
 			"ols",

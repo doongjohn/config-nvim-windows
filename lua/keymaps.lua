@@ -38,6 +38,10 @@ vim.keymap.set("n", "<a-k>", "v:move '<-2<cr>", { silent = true })
 vim.keymap.set("v", "<a-j>", ":move '>+1<cr>gv-gv", { silent = true })
 vim.keymap.set("v", "<a-k>", ":move '<-2<cr>gv-gv", { silent = true })
 
+-- incremental selection
+vim.keymap.set("v", "+", "an", { remap = true })
+vim.keymap.set("v", "-", "in", { remap = true })
+
 -- lsp
 vim.keymap.set("n", "<f2>", vim.lsp.buf.rename, { silent = true })
 vim.keymap.set("n", "<s-k>", vim.lsp.buf.hover)
