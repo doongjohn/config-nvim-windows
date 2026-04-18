@@ -41,7 +41,7 @@ vim.api.nvim_create_autocmd({ "BufWinEnter", "BufRead", "FileType" }, {
 		local winbar = ""
 			.. [[%{&modified ? "" : " "} ]]
 			.. [[%#TabLineSel# %t ]]
-			.. [[%#LineNr# %{v:lua.Config.buf.get_short_path()} ]]
+			.. [[%#LineNr# %{v:lua.Config.buf.get_short_path_winbar()} ]]
 			.. [[%#WinBar#]]
 		vim.api.nvim_set_option_value("winbar", winbar, opts_win)
 	end,

@@ -4,6 +4,7 @@ return {
 	event = "VeryLazy",
 	init = function()
 		vim.treesitter.language.register("xml", { "xml", "xsd", "xsl", "xslt", "svg", "xaml", "axaml" })
+		vim.treesitter.language.register("powershell", { "ps1" })
 
 		vim.api.nvim_create_autocmd("FileType", {
 			group = "config",

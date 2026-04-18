@@ -44,6 +44,10 @@ _G.Config.buf.get_short_path = function()
 	end
 end
 
+_G.Config.buf.get_short_path_winbar = function()
+	return "󰉋 " .. Config.buf.get_short_path() .. "/"
+end
+
 _G.Config.buf.get_path_oil = function()
 	return vim.api.nvim_buf_get_name(0):sub(7, -1)
 end
