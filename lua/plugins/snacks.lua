@@ -159,6 +159,13 @@ return {
 			},
 			{
 				category = "Search",
+				label = "Grep",
+				callback = function()
+					Snacks.picker.grep()
+				end,
+			},
+			{
+				category = "Search",
 				label = "Document symbols",
 				callback = function()
 					Snacks.picker.lsp_symbols()
