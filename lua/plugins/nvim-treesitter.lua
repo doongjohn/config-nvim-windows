@@ -1,6 +1,6 @@
 return {
 	"nvim-treesitter/nvim-treesitter",
-	cmd = "TSUpdate",
+	lazy = false,
 	build = ":TSUpdate",
 	init = function()
 		vim.treesitter.language.register("xml", { "xml", "xsd", "xsl", "xslt", "svg", "xaml", "axaml" })
