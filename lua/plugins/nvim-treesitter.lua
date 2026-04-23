@@ -1,10 +1,28 @@
 return {
 	"nvim-treesitter/nvim-treesitter",
+	cmd = "TSUpdate",
 	build = ":TSUpdate",
-	event = "VeryLazy",
 	init = function()
 		vim.treesitter.language.register("xml", { "xml", "xsd", "xsl", "xslt", "svg", "xaml", "axaml" })
 		vim.treesitter.language.register("powershell", { "ps1" })
+		vim.treesitter.language.register("crystal", { "cr" })
+
+		vim.api.nvim_create_autocmd("User", {
+			group = "config",
+			pattern = "TSUpdate",
+			callback = function()
+				---@diagnostic disable-next-line: missing-fields
+				require("nvim-treesitter.parsers").crystal = {
+					---@diagnostic disable-next-line: missing-fields
+					install_info = {
+						url = "https://github.com/crystal-lang-tools/tree-sitter-crystal",
+						generate = false,
+						generate_from_json = false,
+						queries = "queries/nvim",
+					},
+				}
+			end,
+		})
 
 		vim.api.nvim_create_autocmd("FileType", {
 			group = "config",
@@ -71,6 +89,7 @@ return {
 			"gowork",
 			"nim",
 			"nim_format_string",
+			"crystal",
 			"commonlisp",
 			"python",
 			"ruby",

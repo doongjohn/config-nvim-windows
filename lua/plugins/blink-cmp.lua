@@ -1,6 +1,5 @@
 return {
 	"saghen/blink.cmp",
-	enabled = false, -- https://github.com/Saghen/blink.cmp/issues/1770
 	version = "1.*",
 	event = "VeryLazy",
 	---@module "blink.cmp"
@@ -8,16 +7,19 @@ return {
 	opts = {
 		keymap = {
 			preset = "enter",
+			["<C-n>"] = { "select_next", "show" },
 		},
 		completion = {
 			trigger = {
+				show_on_keyword = true,
+				show_on_trigger_character = false, -- https://github.com/Saghen/blink.cmp/issues/1770
 				show_on_accept_on_trigger_character = false,
 			},
 			accept = {
 				auto_brackets = { enabled = false },
 			},
 			documentation = { auto_show = false },
-			ghost_text = { enabled = true },
+			ghost_text = { enabled = false },
 		},
 		sources = {
 			default = { "lazydev", "lsp", "snippets", "buffer", "path" },

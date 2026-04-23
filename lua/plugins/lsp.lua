@@ -1,9 +1,15 @@
 return {
 	"neovim/nvim-lspconfig",
-	lazy = false,
+	event = "VeryLazy",
 	config = function()
 		local lsp_conf = require("lspconfig")
 		local lsp_util = lsp_conf.util
+
+		lsp_util.default_config.capabilities = require("blink.cmp").get_lsp_capabilities()
+
+		vim.lsp.config("powershell_es", {
+			bundle_path = "~/apps/powershell_es",
+		})
 
 		vim.lsp.config("lua_ls", {
 			settings = {
@@ -80,9 +86,15 @@ return {
 		})
 
 		vim.lsp.config("ols", {
-			init_options = {
+			settings = {
 				odin_command = "odin.cmd",
 			},
+		})
+
+		vim.lsp.config("liger", {
+			cmd = { "liger" },
+			filetypes = { "crystal" },
+			root_markers = { "shard.yml" },
 		})
 
 		vim.lsp.config("cssls", {
@@ -166,6 +178,7 @@ return {
 		})
 
 		vim.lsp.enable({
+			"powershell_es",
 			"nushell",
 			"lua_ls",
 			"pyrefly",
@@ -176,6 +189,7 @@ return {
 			"gopls",
 			"zls",
 			"ols",
+			"liger",
 
 			"avalonia_ls",
 			"lemminx",
