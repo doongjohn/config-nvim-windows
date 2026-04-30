@@ -165,13 +165,6 @@ return {
 				end,
 			},
 			{
-				category = "Search",
-				label = "Document symbols",
-				callback = function()
-					Snacks.picker.lsp_symbols()
-				end,
-			},
-			{
 				category = "File",
 				label = "Recent",
 				callback = function()

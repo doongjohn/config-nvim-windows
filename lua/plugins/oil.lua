@@ -1,5 +1,5 @@
 return {
-	"stevearc/oil.nvim",
+	"barrettruth/canola.nvim",
 	dependencies = {
 		"nvim-tree/nvim-web-devicons",
 	},
@@ -18,7 +18,6 @@ return {
 			default_file_explorer = true,
 			win_options = {
 				winhighlight = "OilFileHidden:OilFile,OilDirHidden:OilDir",
-				signcolumn = "yes:2",
 				cursorline = true,
 				scrolloff = 4,
 			},
