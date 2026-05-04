@@ -5,12 +5,7 @@ return {
 	},
 	lazy = false,
 	keys = {
-		{
-			"-",
-			function()
-				require("oil").open()
-			end,
-		},
+		{ "-", "<cmd>Oil<cr>" },
 	},
 	config = function()
 		local oil = require("oil")
