@@ -9,6 +9,8 @@ vim.filetype.add({
 	},
 	filename = {
 		["nimble.lock"] = "json",
+		[".wslconfig"] = "confini",
+		["wsl.conf"] = "confini",
 	},
 })
 
