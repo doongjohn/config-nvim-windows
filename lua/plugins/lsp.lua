@@ -91,12 +91,6 @@ return {
 			},
 		})
 
-		vim.lsp.config("liger", {
-			cmd = { "liger" },
-			filetypes = { "crystal" },
-			root_markers = { "shard.yml" },
-		})
-
 		vim.lsp.config("cssls", {
 			settings = {
 				css = {
@@ -189,7 +183,6 @@ return {
 			"gopls",
 			"zls",
 			"ols",
-			"liger",
 
 			"avalonia_ls",
 			"lemminx",

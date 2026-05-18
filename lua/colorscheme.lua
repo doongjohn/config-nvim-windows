@@ -5,13 +5,19 @@ vim.api.nvim_create_autocmd({ "VimEnter", "ColorScheme" }, {
 		vim.api.nvim_set_hl(0, "@lsp.type.variable", { link = "@variable" })
 		vim.api.nvim_set_hl(0, "@lsp.typemod.function.readonly", { link = "@function" })
 		vim.api.nvim_set_hl(0, "@lsp.typemod.method.readonly", { link = "@function.method" })
+
+		-- zig
 		vim.api.nvim_set_hl(0, "@lsp.type.builtin.zig", { link = "@type.builtin" })
 		vim.api.nvim_set_hl(0, "@lsp.type.keywordLiteral.zig", { link = "@keyword" })
 		vim.api.nvim_set_hl(0, "@lsp.typemod.variable.static.zig", { link = "@variable" })
+
+		-- odin
 		vim.api.nvim_set_hl(0, "@lsp.typemod.namespace.readonly.odin", { link = "@module" })
 		vim.api.nvim_set_hl(0, "@lsp.typemod.type.readonly.odin", { link = "@type" })
 		vim.api.nvim_set_hl(0, "@lsp.typemod.enum.readonly.odin", { link = "@type" })
 		vim.api.nvim_set_hl(0, "@lsp.typemod.struct.readonly.odin", { link = "@type" })
+
+		-- java
 		vim.api.nvim_set_hl(0, "@lsp.type.modifier.java", { link = "@keyword" })
 		vim.api.nvim_set_hl(0, "@lsp.typemod.class.readonly.java", { link = "@type" })
 	end,
