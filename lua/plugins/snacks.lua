@@ -81,11 +81,6 @@ return {
 			},
 			{
 				category = "Editor",
-				label = "Sessions",
-				cmd = "SessionManager available_commands",
-			},
-			{
-				category = "Editor",
 				label = "Messages",
 				callback = function()
 					vim.cmd("split")
