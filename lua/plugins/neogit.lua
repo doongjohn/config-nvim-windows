@@ -2,7 +2,7 @@ return {
 	"neogitorg/neogit",
 	dependencies = {
 		"nvim-lua/plenary.nvim",
-		"sindrets/diffview.nvim",
+		"esmuellert/codediff.nvim",
 	},
 	cmd = "Neogit",
 	opts = {
