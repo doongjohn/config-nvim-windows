@@ -111,6 +111,7 @@ _G.Config.file.get_exclude = function()
 		"gradle/wrapper/",
 		"__pycache__/",
 		"zig-out/",
+		"zig-pkg/",
 		"node_modules/",
 		".svelte-kit/",
 		".godot/",

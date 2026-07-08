@@ -71,6 +71,16 @@ vim.diagnostic.config({
 	},
 })
 
+require("vim._core.ui2").enable({
+	enable = true,
+	msg = {
+		targets = "cmd",
+		msg = {
+			height = 1,
+		},
+	},
+})
+
 -- leader key
 vim.g.maplocalleader = ","
 

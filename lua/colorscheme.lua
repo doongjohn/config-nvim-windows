@@ -20,6 +20,9 @@ vim.api.nvim_create_autocmd({ "VimEnter", "ColorScheme" }, {
 		-- java
 		vim.api.nvim_set_hl(0, "@lsp.type.modifier.java", { link = "@keyword" })
 		vim.api.nvim_set_hl(0, "@lsp.typemod.class.readonly.java", { link = "@type" })
+
+		-- typescript
+		vim.api.nvim_set_hl(0, "@lsp.typemod.variable.local.typescriptreact", { link = "@variable" })
 	end,
 })
 

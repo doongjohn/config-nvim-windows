@@ -41,8 +41,7 @@ return {
 			mode = "n",
 			body = "<leader>G",
 			heads = {
-				{ "n", "<cmd>Gitsigns next_hunk<cr>", { desc = "next hunk" } },
-				{ "N", "<cmd>Gitsigns prev_hunk<cr>", { desc = "prev hunk" } },
+				{ "b", "<cmd>Gitsigns blame_line<cr>", { desc = "blame" } },
 				{ "p", "<cmd>Gitsigns preview_hunk<cr>", { desc = "preview hunk" } },
 				{ "r", "<cmd>Gitsigns reset_hunk<cr>", { desc = "reset hunk" } },
 				{ "q", nil, { desc = "exit", exit = true, nowait = true } },
