@@ -7,6 +7,7 @@ vim.api.nvim_create_autocmd({ "VimEnter", "ColorScheme" }, {
 		vim.api.nvim_set_hl(0, "@lsp.typemod.method.readonly", { link = "@function.method" })
 
 		-- zig
+		vim.api.nvim_set_hl(0, "@lsp.keyword.exception.zig", { link = "@keyword" })
 		vim.api.nvim_set_hl(0, "@lsp.type.builtin.zig", { link = "@type.builtin" })
 		vim.api.nvim_set_hl(0, "@lsp.type.keywordLiteral.zig", { link = "@keyword" })
 		vim.api.nvim_set_hl(0, "@lsp.typemod.variable.static.zig", { link = "@variable" })
