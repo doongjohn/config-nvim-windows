@@ -5,15 +5,10 @@ return {
 	config = function()
 		vim.api.nvim_create_autocmd("BufWinEnter", {
 			group = "config",
-			callback = function(e)
-				local ft = vim.bo[e.buf].ft
-				local lang = vim.treesitter.language.get_lang(ft)
-				local ok, _ = pcall(vim.treesitter.language.inspect, lang)
-				if ok then
-					vim.defer_fn(function()
-						pcall(vim.treesitter.start)
-					end, 0)
-				end
+			callback = function()
+				vim.defer_fn(function()
+					pcall(vim.treesitter.start)
+				end, 0)
 			end,
 		})
 
