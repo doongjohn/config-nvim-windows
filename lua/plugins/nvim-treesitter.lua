@@ -1,23 +1,24 @@
 return {
-	'nvim-treesitter/nvim-treesitter',
+	"nvim-treesitter/nvim-treesitter",
 	lazy = false,
-	build = ':TSUpdate',
+	build = ":TSUpdate",
 	config = function()
-		vim.api.nvim_create_autocmd("FileType", {
+		vim.api.nvim_create_autocmd("BufWinEnter", {
 			group = "config",
-			pattern = "*",
 			callback = function(e)
-				local lang = vim.treesitter.language.get_lang(e.match)
+				local ft = vim.bo[e.buf].ft
+				local lang = vim.treesitter.language.get_lang(ft)
 				local ok, _ = pcall(vim.treesitter.language.inspect, lang)
 				if ok then
-					vim.defer_fn(function ()
-						vim.treesitter.start()
+					vim.print(ft)
+					vim.defer_fn(function()
+						pcall(vim.treesitter.start)
 					end, 0)
 				end
 			end,
 		})
 
-		require('nvim-treesitter').install({
+		require("nvim-treesitter").install({
 			-- markup
 			"markdown",
 			"rst",
