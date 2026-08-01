@@ -10,7 +10,6 @@ return {
 				local lang = vim.treesitter.language.get_lang(ft)
 				local ok, _ = pcall(vim.treesitter.language.inspect, lang)
 				if ok then
-					vim.print(ft)
 					vim.defer_fn(function()
 						pcall(vim.treesitter.start)
 					end, 0)
