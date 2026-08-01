@@ -1,6 +1,6 @@
 return {
 	"nvimtools/hydra.nvim",
-	event = "UIEnter",
+	event = "VeryLazy",
 	config = function()
 		local hydra = require("hydra")
 
