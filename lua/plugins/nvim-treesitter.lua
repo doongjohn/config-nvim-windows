@@ -5,9 +5,9 @@ return {
 	config = function()
 		vim.api.nvim_create_autocmd("BufWinEnter", {
 			group = "config",
-			callback = function()
+			callback = function(e)
 				vim.defer_fn(function()
-					pcall(vim.treesitter.start)
+					pcall(vim.treesitter.start, e.buf)
 				end, 0)
 			end,
 		})
