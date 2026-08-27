@@ -100,15 +100,6 @@ return {
 			},
 		})
 
-		vim.lsp.config("ts_ls", {
-			root_dir = function(bufnr, on_dir)
-				local root_markers = { "package-lock.json", "yarn.lock", "pnpm-lock.yaml", "bun.lockb", "bun.lock" }
-				local project_root = vim.fs.root(bufnr, root_markers)
-				on_dir(project_root)
-			end,
-			workspace_required = true,
-		})
-
 		vim.lsp.config("denols", {
 			root_markers = { "deno.json", "deno.jsonc" },
 			workspace_required = true,
@@ -181,7 +172,7 @@ return {
 			"cssls",
 			"eslint",
 			"emmet_language_server",
-			"ts_ls",
+			"tsc",
 			"denols",
 			"svelte",
 			"tailwindcss",
