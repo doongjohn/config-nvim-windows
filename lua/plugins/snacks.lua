@@ -2,17 +2,6 @@ return {
 	"folke/snacks.nvim",
 	lazy = false,
 	priority = 1000,
-	init = function()
-		vim.api.nvim_create_autocmd("BufWinEnter", {
-			group = "config",
-			callback = function()
-				if #vim.bo.buftype ~= 0 or vim.api.nvim_win_get_config(0).relative ~= "" then
-					return
-				end
-				vim.keymap.set("n", "<space>", Snacks.picker.files, { buffer = true })
-			end,
-		})
-	end,
 	config = function()
 		require("snacks").setup({
 			bigfile = {
