@@ -18,6 +18,7 @@ vim.o.showmode = false
 vim.o.syntax = "on"
 vim.o.sidescrolloff = 10
 vim.o.jumpoptions = "stack,view"
+vim.o.ffs = "unix,dos"
 
 -- disable intro
 vim.opt.shortmess:append("I")
