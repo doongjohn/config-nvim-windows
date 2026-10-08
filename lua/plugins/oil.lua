@@ -1,5 +1,5 @@
 return {
-	"barrettruth/canola.nvim",
+	"https://forge.barrettruth.com/barrettruth/canola.nvim",
 	dependencies = {
 		"nvim-tree/nvim-web-devicons",
 	},
