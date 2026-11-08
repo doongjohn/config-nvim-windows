@@ -20,6 +20,9 @@ vim.o.sidescrolloff = 10
 vim.o.jumpoptions = "stack,view"
 vim.o.ffs = "unix,dos"
 
+-- https://github.com/nvim-telescope/telescope.nvim/issues/2446#issuecomment-4766593245
+vim.o.isfname = vim.o.isfname .. ",(,)"
+
 -- disable intro
 vim.opt.shortmess:append("I")
 
